@@ -35,15 +35,15 @@ bool GameScene::init()
 	std::vector<std::string> m_vecSpriteRun;
 	m_vecSpriteRun.push_back("walk-0001.png");
 
-	m_background = Sprite::create(m_vecSpriteRun[0]);
-	m_background->setPosition(visibleSize.width / 2,
-							  visibleSize.height / 2);
+	//m_background = Sprite::create(m_vecSpriteRun[0]);
+	//m_background->setPosition(visibleSize.width / 2,
+	//						  visibleSize.height / 2);
 	//this->addChild(m_background);
 
-	Breed				temp_breed(150, 100, "run-0001.png");
+	Breed				temp_breed(150, 100, "");
 	InputComponent		inputComponent;
 	GraphicComponent	graphicComponent;
-	m_Heroes = new Monster(temp_breed, inputComponent, graphicComponent);
+	m_Heroes = new Monster(temp_breed, inputComponent, graphicComponent, *this);
 
 	this->addChild(m_Heroes);
 	
@@ -88,8 +88,8 @@ bool GameScene::init()
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-	//this->schedule(schedule_selector(GameScene::update), 20);
-	this->scheduleUpdate();
+	this->schedule(schedule_selector(GameScene::update), 20);
+	//this->scheduleUpdate();
 
 	return true;
 }
@@ -147,15 +147,15 @@ void GameScene::AddHeroes(cocos2d::Ref* ref)
 
 void GameScene::update(float dt)
 {
-	m_Heroes->Run();
-	this->addChild(m_Heroes);
+	//this->addChild(m_Heroes->Run());
+	//this->addChild(m_Heroes);
 	CCLOG("update");
 }
 
 void GameScene::DrawSprite(float interval)
 {
-	if (!m_createHeroes)
-	{
-		return;
-	}
+	//if (!m_createHeroes)
+	//{
+	//	return;
+	//}
 }

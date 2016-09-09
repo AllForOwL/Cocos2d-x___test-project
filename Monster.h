@@ -10,12 +10,13 @@ using namespace cocos2d;
 
 class InputComponent;
 class GraphicComponent;
+class GameScene;
 
-class Monster : public cocos2d::Sprite
+class Monster
 {
 public:
 	Monster();
-	Monster(Breed& breed, InputComponent& inputComponent, GraphicComponent& graphicComponent);
+	Monster(Breed& breed, InputComponent& inputComponent, GraphicComponent& graphicComponent, GameScene& gameScene);
 
 	Breed& GetBreed();
 	void Run();
@@ -28,10 +29,11 @@ public:
 	
 	~Monster();
 
-private:
+public:
 	Breed&					m_heroes;
 	InputComponent& 		m_inputComponent;
 	GraphicComponent&		m_graphicComponent;
+	GameScene&				m_gameScene;
 	int						m_health;
 	int						m_attack;
 	string					m_filename;

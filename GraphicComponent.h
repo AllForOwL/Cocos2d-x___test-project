@@ -7,22 +7,17 @@ using namespace std;
 using namespace cocos2d;
 
 class Monster;
+class GameScene;
 
 class GraphicComponent 
 {
 public:
 	GraphicComponent();	
 
-	void update(Monster& heroes, GraphicComponent& graphicComponent);
+	Monster& update(Monster& heroes, GameScene& gameScene);
 
 	~GraphicComponent();
 private:
-	std::vector<std::string> m_vecSpriteRun;
-	std::vector<std::string> m_vecSpriteFall;
-	std::vector<std::string> m_vecSpriteDizzy;
-	std::vector<std::string> m_vecSpriteWalk;
-	std::vector<std::string> m_vecSpriteAttack;
-	std::vector<std::string> m_vecSpriteDie;
 };
 
 #endif

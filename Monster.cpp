@@ -3,19 +3,20 @@
 #include "GraphicComponent.h"
 #include "GameScene.h"
 
-Monster::Monster(Breed& breed, InputComponent& inputComponent, GraphicComponent& graphicComponent) 
+Monster::Monster(Breed& breed, InputComponent& inputComponent, GraphicComponent& graphicComponent, GameScene& gameScene) 
 							:	m_heroes			(breed), 
 								m_health			(m_heroes.GetHealth()),
 								m_filename			(m_heroes.GetFileName()),
 								m_inputComponent	(inputComponent),
-								m_graphicComponent	(graphicComponent)
+								m_graphicComponent	(graphicComponent),
+								m_gameScene			(gameScene)
 {
-	this->initWithFile(m_filename);
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	this->setScale(visibleSize.width / this->getContentSize().width / 2 / 2,
-					visibleSize.height / this->getContentSize().height / 2);
+	//this->initWithFile(m_filename);
+	//Size visibleSize = Director::getInstance()->getVisibleSize();
+	//this->setScale(visibleSize.width / this->getContentSize().width / 2 / 2,
+	//				visibleSize.height / this->getContentSize().height / 2);
 
-	this->setPosition(visibleSize.width / 2, visibleSize.height / 2 - 50);
+	//->setPosition(visibleSize.width / 2, visibleSize.height / 2 - 50);
 
 	m_countSprite = 0;
 }
@@ -52,13 +53,14 @@ void Monster::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 //	m_inputComponent.update(*this/*, keyCode*/);
 
 	CCLOG("key press");
+	Run();
 }
 
 void Monster::Run()
 {
 	// тут повинні обновляти свій стан усі компоненти
 	m_inputComponent.update(*this);
-	m_graphicComponent.update(*this, m_graphicComponent);
+	m_graphicComponent.update(*this, m_gameScene);
 }
 
 Monster::~Monster()
