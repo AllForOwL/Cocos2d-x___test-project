@@ -11,14 +11,10 @@ Monster::Monster(Breed& breed, InputComponent& inputComponent, GraphicComponent&
 								m_graphicComponent	(graphicComponent),
 								m_gameScene			(gameScene)
 {
-	//this->initWithFile(m_filename);
-	//Size visibleSize = Director::getInstance()->getVisibleSize();
-	//this->setScale(visibleSize.width / this->getContentSize().width / 2 / 2,
-	//				visibleSize.height / this->getContentSize().height / 2);
-
-	//->setPosition(visibleSize.width / 2, visibleSize.height / 2 - 50);
-
-	m_countSprite = 0;
+	m_countSprite	= 7;
+	m_numberSprite	= 0;
+	m_changeKeyCode = false;
+	m_keyCode		= EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
 }
 
 Breed& Monster::GetBreed()
@@ -41,9 +37,29 @@ void Monster::SetCountSprite(int countSprite)
 	m_countSprite = countSprite;
 }
 
+void Monster::SetChangeKeyCode(bool stateKeyCode)
+{
+	m_changeKeyCode = stateKeyCode;
+}
+
+void Monster::SetNumberSprite(int numberSprite)
+{
+	m_numberSprite = numberSprite;
+}
+
+int Monster::GetNumberSprite()
+{
+	return m_numberSprite;
+}
+
 int Monster::GetCountSprite()
 {
 	return m_countSprite;
+}
+
+EventKeyboard::KeyCode Monster::GetKeyCode()
+{
+	return EventKeyboard::KeyCode::KEY_UP_ARROW;
 }
 
 void Monster::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
@@ -53,14 +69,14 @@ void Monster::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 //	m_inputComponent.update(*this/*, keyCode*/);
 
 	CCLOG("key press");
-	Run();
+	Update(m_changeKeyCode);
 }
 
-void Monster::Run()
+void Monster::Update(bool changeKEyCode)
 {
 	// тут повинні обновляти свій стан усі компоненти
-	m_inputComponent.update(*this);
-	m_graphicComponent.update(*this, m_gameScene);
+	m_inputComponent.update		(*this);
+	m_graphicComponent.update	(*this, m_gameScene, m_changeKeyCode);
 }
 
 Monster::~Monster()

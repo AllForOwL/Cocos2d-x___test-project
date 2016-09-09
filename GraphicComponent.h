@@ -14,7 +14,7 @@ class GraphicComponent
 public:
 	GraphicComponent();	
 
-	Monster& update(Monster& heroes, GameScene& gameScene);
+	void update(Monster& heroes, GameScene& gameScene, bool changeKeyCode);
 
 	~GraphicComponent();
 private:

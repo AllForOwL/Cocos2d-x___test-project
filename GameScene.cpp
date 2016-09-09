@@ -46,7 +46,7 @@ bool GameScene::init()
 	m_Heroes = new Monster(temp_breed, inputComponent, graphicComponent, *this);
 
 	this->addChild(m_Heroes);
-	
+
 	/*auto backOrig = Sprite::create("back_3200x2000.png");
 	auto oWidth = backOrig->getContentSize().width;
 	auto oHeight = backOrig->getContentSize().height;
@@ -88,7 +88,7 @@ bool GameScene::init()
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-	this->schedule(schedule_selector(GameScene::update), 20);
+	//this->schedule(schedule_selector(GameScene::update), 20);
 	//this->scheduleUpdate();
 
 	return true;

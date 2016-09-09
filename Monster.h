@@ -3,6 +3,7 @@
 
 #include "cocos2d.h"
 
+
 #include "Breed.h"
 
 using namespace std;
@@ -12,20 +13,24 @@ class InputComponent;
 class GraphicComponent;
 class GameScene;
 
-class Monster
+class Monster : public cocos2d::Sprite
 {
 public:
 	Monster();
 	Monster(Breed& breed, InputComponent& inputComponent, GraphicComponent& graphicComponent, GameScene& gameScene);
 
-	Breed& GetBreed();
-	void Run();
-	int GetAttack();
-	int GetCountSprite();
-	void SetKeyCode(EventKeyboard::KeyCode keyCode);
-	void SetCountSprite(int countSprite);
+	Breed&					GetBreed();
+	void					Update(bool changeKeyCode);
+	int						GetAttack();
+	int						GetCountSprite();
+	EventKeyboard::KeyCode	GetKeyCode();
+	int						GetNumberSprite();
+	void					SetKeyCode(EventKeyboard::KeyCode keyCode);
+	void					SetCountSprite(int countSprite);
+	void					SetChangeKeyCode(bool stateKeyCode);
+	void					SetNumberSprite(int numberSprite);
 
-	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
+	void					onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 	
 	~Monster();
 
@@ -39,6 +44,8 @@ public:
 	string					m_filename;
 	EventKeyboard::KeyCode	m_keyCode;
 	int						m_countSprite;
+	int						m_numberSprite;
+	bool					m_changeKeyCode;
 };
 
 #endif
