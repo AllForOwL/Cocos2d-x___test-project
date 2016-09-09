@@ -1,5 +1,6 @@
 #include "SplashScene.h"
 #include "MainMenuScene.h"
+#include "GameScene.h"
 
 #define DISPLAY_TIME_SPLASH_SCENE	1
 #define TRANSITION_TIME				0.5
@@ -48,7 +49,7 @@ bool SplashScene::init()
 
 void SplashScene::GoToMainMenuScene(float delay)
 {
-	auto mainMenuScene = MainMenuScene::createScene();
+	auto mainMenuScene = GameScene::createScene();
 
 	Director::getInstance()->replaceScene(TransitionFade::create(TRANSITION_TIME, mainMenuScene));
 }

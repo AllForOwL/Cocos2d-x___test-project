@@ -13,7 +13,20 @@ Breed::Breed(Breed& breed)
 	this->m_health	 = breed.GetHealth();
 	this->m_filename = breed.GetFileName();
 }
+int Breed::GetHealth()
+{
+	return m_health;
+}
 
+int Breed::GetAttack()
+{
+	return m_attack;
+}
+
+string Breed::GetFileName()
+{
+	return m_filename;
+}
 Breed::~Breed()
 {
 }

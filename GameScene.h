@@ -5,6 +5,8 @@
 
 #include "Monster.h"
 
+using namespace cocos2d;
+
 class GameScene : public cocos2d::Layer
 {
 public:
@@ -18,6 +20,9 @@ public:
 	
 	void update(float dt);
 	void DrawSprite(float interval);
+
+//	void onKeyPressed(EventKeyboard::KeyCode, Event* event);
+//	void onKeyReleased(EventKeyboard::KeyCode, Event* event);
 
 private:
 	cocos2d::PhysicsWorld* m_sceneWorld;
@@ -34,6 +39,7 @@ private:
 	int			m_ID_WATER_MAN;
 	std::string m_listSprite[9];
 	int			m_count;
+	bool		m_createHeroes;
 
 	cocos2d::Sprite* m_spriteHeroes;
 	cocos2d::Sprite* m_background;

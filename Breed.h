@@ -12,20 +12,9 @@ public:
 
 	Breed(int attack, int health, string filename);
 
-	int GetHealth()
-	{
-		return m_health;
-	}
-
-	int GetAttack()
-	{
-		return m_attack;
-	}
-
-	string GetFileName()
-	{
-		return m_filename;
-	}
+	int GetHealth();
+	int GetAttack();
+	string GetFileName();
 
 	~Breed();
 

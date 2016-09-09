@@ -1,5 +1,6 @@
 #include "GameScene.h"
 #include "constants.h"
+#include "InputComponent.h"
 
 USING_NS_CC;
 
@@ -27,32 +28,29 @@ bool GameScene::init()
 	Size visibleSize   = Director::getInstance()->getVisibleSize();
 	Vec2 visibleOrigin = Director::getInstance()->getVisibleOrigin();
 
-	m_count = 0;
+	m_count			= 0;
+	m_createHeroes	= false;
 
 	m_background = Sprite::create("background.png");
 	m_background->setPosition(visibleSize.width / 2,
 							  visibleSize.height / 2);
 	this->addChild(m_background);
 
-	m_listSprite[0] = "run-0001.png";
-	m_listSprite[1] = "run-0002.png";
-	m_listSprite[2] = "run-0003.png";
-	m_listSprite[3] = "run-0004.png";
-	m_listSprite[4] = "run-0005.png";
-	m_listSprite[5] = "run-0006.png";
-	m_listSprite[6] = "run-0007.png";
-	m_listSprite[7] = "run-0008.png";
-	m_listSprite[8] = "jump.png";
+	Breed temp_breed(150, 100, "run-0001.png");
+	InputComponent inputComponent;
+	m_Heroes = new Monster(temp_breed, inputComponent);
 
-	Breed temp_breed(150, 100, "imageCocosRed.png");
-	m_Heroes = new Monster(temp_breed);
+	this->addChild(m_Heroes);
 
-	m_spriteHeroes = Sprite::create(m_listSprite[0]);
-	m_spriteHeroes->setPosition(visibleSize.width  / 2,
-								visibleSize.height / 2);
-
-
-	auto createHell = MenuItemFont::create("Create Hell",
+	/*auto backOrig = Sprite::create("back_3200x2000.png");
+	auto oWidth = backOrig->getContentSize().width;
+	auto oHeight = backOrig->getContentSize().height;
+	backOrig->setFlippedY(true);
+	backOrig->setScale(vWidth / oWidth, vHeight / oHeight); // backOrig scaled to screen size
+	backOrig->setPosition(vWidth / 2, vHeight / 2);
+	*/
+	
+	/*auto createHell = MenuItemFont::create("Create Hell",
 		CC_CALLBACK_1(GameScene::AddHeroes, this));
 	createHell->setPosition(visibleSize.width / 2,
 		visibleSize.height / 2);
@@ -72,19 +70,29 @@ bool GameScene::init()
 
 	auto menu = Menu::create(createHell, createFireGirl, createWaterMan, NULL);
 	menu->setPosition(Point::ZERO);
+	
+	*/
 
-	this->addChild(m_spriteHeroes);
-	this->addChild(menu);
+	//this->addChild(m_spriteHeroes);
+	//this->addChild(menu);
 
-	this->schedule(schedule_selector(GameScene::DrawSprite), 0.1);
-	this->scheduleUpdate();
+	// creating a keyboard event listener
+	auto listener = EventListenerKeyboard::create();
+	listener->onKeyPressed = CC_CALLBACK_2(Monster::onKeyPressed, m_Heroes);
+//	listener->onKeyReleased = CC_CALLBACK_2(InputComponent::onKeyReleased, inputComponent);
+
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+	//this->schedule(schedule_selector(GameScene::update), 20);
+	//this->scheduleUpdate();
 
 	return true;
 }
 
 void GameScene::AddHeroes(cocos2d::Ref* ref)
 {
-	//this->removeAllChildrenWithCleanup(true);
+	/*m_createHeroes = true;
+	Size visibleSize = Director::getInstance()->getVisibleSize();
 
 	if (ref->_ID == m_ID_HELL)
 	{
@@ -92,49 +100,59 @@ void GameScene::AddHeroes(cocos2d::Ref* ref)
 		Monster* temp_Heroes	= new Monster(hell);
 		m_Heroes				= temp_Heroes;
 		m_spriteHeroes			= Sprite::create(m_listSprite[0]);
-	
-		m_spriteHeroes->setPosition(100, 100);
+
+		m_spriteHeroes->setScale(visibleSize.width / m_spriteHeroes->getContentSize().width / 4,
+			visibleSize.height / m_spriteHeroes->getContentSize().height / 2);
+		m_spriteHeroes->setPosition(visibleSize.width / 2,
+			visibleSize.height / 2);
+		
 		this->addChild(m_spriteHeroes);
 
 		CCLOG("hell");
 	}
 	else if (ref->_ID == m_ID_FIRE_GIRL)
 	{
-		Breed fire_girl(100, 100, "imageCocosYellow.png");
+		Breed fire_girl(100, 100, m_listSprite[0]);
 		Monster* temp_Heroes	= new Monster(fire_girl);
 		m_Heroes				= temp_Heroes;
-		m_spriteHeroes			= Sprite::create("imageCocosYellow.png");
-		
-		m_spriteHeroes->setPosition(100, 100);
+		m_spriteHeroes			= Sprite::create(m_listSprite[0]);
+
+		m_spriteHeroes->setScale(visibleSize.width / m_spriteHeroes->getContentSize().width / 4,
+			visibleSize.height / m_spriteHeroes->getContentSize().height / 2);
+		m_spriteHeroes->setPosition(visibleSize.width / 2,
+			visibleSize.height / 2);
+
 		this->addChild(m_spriteHeroes);
 	}
 	else
 	{
-		Breed water_man(70, 100, "imageCocorRed.png");
+		Breed water_man(70, 100, m_listSprite[0]);
 		Monster* temp_Heroes	= new Monster(water_man);
 		m_Heroes				= temp_Heroes;
-		m_spriteHeroes			= Sprite::create("imageCocosYellow.png");
+		m_spriteHeroes			= Sprite::create(m_listSprite[0]);
 
-		m_spriteHeroes->setPosition(100, 100);
+		m_spriteHeroes->setScale(visibleSize.width / m_spriteHeroes->getContentSize().width / 4,
+			visibleSize.height / m_spriteHeroes->getContentSize().height / 2);
+		m_spriteHeroes->setPosition(visibleSize.width / 2,
+			visibleSize.height / 2);
+
 		this->addChild(m_spriteHeroes);
-	}
+	}*/
 }
 
 void GameScene::update(float dt)
 {
-	auto position = m_background->getPosition();
-	position.x -= 1;
-	m_background->setPosition(position);
-	//this->addChild(m_background);
-
-	
-//	this->addChild(m_spriteHeroes);
-
+//	m_Heroes->Update();
 	CCLOG("update");
 }
 
 void GameScene::DrawSprite(float interval)
 {
+	if (!m_createHeroes)
+	{
+		return;
+	}
+
 	if (m_count < 8)
 	{
 		++m_count;
@@ -144,9 +162,8 @@ void GameScene::DrawSprite(float interval)
 		m_count = 0;
 	}
 
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	m_spriteHeroes->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_listSprite[m_count]));
-	//mySprite->setTexture(CCTextureCache::sharedTextureCache()->addImage("newImage.png"));
-	m_spriteHeroes->setPosition(visibleSize.width / 2,
-		visibleSize.height / 2);
+	//Size visibleSize = Director::getInstance()->getVisibleSize();
+	//m_spriteHeroes->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_listSprite[m_count]));
+	//m_spriteHeroes->setPosition(visibleSize.width  / 2,
+	//							visibleSize.height / 2);
 }
