@@ -1,6 +1,7 @@
 #include "GameScene.h"
 #include "constants.h"
 #include "InputComponent.h"
+#include "GraphicComponent.h"
 
 USING_NS_CC;
 
@@ -31,17 +32,21 @@ bool GameScene::init()
 	m_count			= 0;
 	m_createHeroes	= false;
 
-	m_background = Sprite::create("background.png");
+	std::vector<std::string> m_vecSpriteRun;
+	m_vecSpriteRun.push_back("walk-0001.png");
+
+	m_background = Sprite::create(m_vecSpriteRun[0]);
 	m_background->setPosition(visibleSize.width / 2,
 							  visibleSize.height / 2);
-	this->addChild(m_background);
+	//this->addChild(m_background);
 
-	Breed temp_breed(150, 100, "run-0001.png");
-	InputComponent inputComponent;
-	m_Heroes = new Monster(temp_breed, inputComponent);
+	Breed				temp_breed(150, 100, "run-0001.png");
+	InputComponent		inputComponent;
+	GraphicComponent	graphicComponent;
+	m_Heroes = new Monster(temp_breed, inputComponent, graphicComponent);
 
 	this->addChild(m_Heroes);
-
+	
 	/*auto backOrig = Sprite::create("back_3200x2000.png");
 	auto oWidth = backOrig->getContentSize().width;
 	auto oHeight = backOrig->getContentSize().height;
@@ -84,7 +89,7 @@ bool GameScene::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
 	//this->schedule(schedule_selector(GameScene::update), 20);
-	//this->scheduleUpdate();
+	this->scheduleUpdate();
 
 	return true;
 }
@@ -142,7 +147,8 @@ void GameScene::AddHeroes(cocos2d::Ref* ref)
 
 void GameScene::update(float dt)
 {
-//	m_Heroes->Update();
+	m_Heroes->Run();
+	this->addChild(m_Heroes);
 	CCLOG("update");
 }
 
@@ -152,18 +158,4 @@ void GameScene::DrawSprite(float interval)
 	{
 		return;
 	}
-
-	if (m_count < 8)
-	{
-		++m_count;
-	}
-	else
-	{
-		m_count = 0;
-	}
-
-	//Size visibleSize = Director::getInstance()->getVisibleSize();
-	//m_spriteHeroes->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_listSprite[m_count]));
-	//m_spriteHeroes->setPosition(visibleSize.width  / 2,
-	//							visibleSize.height / 2);
 }
