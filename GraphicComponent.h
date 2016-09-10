@@ -14,7 +14,7 @@ class GraphicComponent
 public:
 	GraphicComponent();	
 
-	void update(Monster& heroes, GameScene& gameScene, bool changeKeyCode);
+	void update(Monster& heroes);
 	int LoadSprites(EventKeyboard::KeyCode keyCode, std::vector<std::string>& vecSprites);
 
 	~GraphicComponent();

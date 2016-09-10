@@ -41,12 +41,6 @@ void Monster::SetKeyCode(EventKeyboard::KeyCode keyCode)
 void Monster::SetCountSprite(int countSprite)
 {
 	m_countSpriteInVector = countSprite;
-
-	/*if (m_countSpriteInVector == 3)
-	{
-		m_changeKeyCode = true;
-		m_keyCode		= EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
-	}*/
 }
 
 void Monster::SetChangeKeyCode(bool stateKeyCode)
@@ -67,19 +61,13 @@ EventKeyboard::KeyCode Monster::GetKeyCode()
 void Monster::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	m_keyCode = keyCode;
-	m_changeKeyCode == true;
-
-//	m_inputComponent.update(*this/*, keyCode*/);
-
-	CCLOG("key press");
-	Update(m_changeKeyCode);
 }
 
 void Monster::Update(float dt)
 {
 	// тут повинні обновляти свій стан усі компоненти
 	//m_inputComponent.update		(*this);
-	m_graphicComponent.update	(*this, m_gameScene, m_changeKeyCode);
+	m_graphicComponent.update	(*this);
 }
 
 Monster::~Monster()

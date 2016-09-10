@@ -3,7 +3,6 @@
 
 #include "cocos2d.h"
 
-
 #include "Breed.h"
 
 using namespace std;

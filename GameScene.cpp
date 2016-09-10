@@ -35,22 +35,17 @@ bool GameScene::init()
 	std::vector<std::string> m_vecSpriteRun;
 	m_vecSpriteRun.push_back("walk-0001.png");
 
-	m_layer = Layer::create();
-	
-
 	m_background = Sprite::create("background.png");
 	m_background->setPosition(visibleSize.width / 2,
 							  visibleSize.height / 2);
 
-	//m_layer->addChild(m_background);
-	//this->addChild(m_background);
+	this->addChild(m_background);
 
 	Breed				temp_breed(150, 100, "");
 	InputComponent		inputComponent;
 	GraphicComponent	graphicComponent;
 	m_Heroes = new Monster(temp_breed, inputComponent, graphicComponent, *this);
-	//this->addChild(m_Heroes->m_sprite);
-
+	
 	/*auto backOrig = Sprite::create("back_3200x2000.png");
 	auto oWidth = backOrig->getContentSize().width;
 	auto oHeight = backOrig->getContentSize().height;
@@ -151,16 +146,25 @@ void GameScene::AddHeroes(cocos2d::Ref* ref)
 
 void GameScene::update(float dt)
 {
-//	int _x = m_background->getPosition().x;
-//	int _y = m_background->getPosition().y;
+	Size _visibleSize = Director::getInstance()->getVisibleSize();
 
-//	m_background->setPosition(--_x, _y);
+	int _x = m_background->getPosition().x;
+	int _y = m_background->getPosition().y;
+
+	if (_x - _visibleSize.width / 2 == m_background->getContentSize().width)
+	{
+		m_background->setPosition(_visibleSize.width / 2,
+								  _visibleSize.height / 2);
+	}
+	else
+	{
+		m_background->setPosition(--_x, _y);
+	}
 }
 
 void GameScene::UpdateHeroes(float dt)
 {
 	m_Heroes->Update(dt);
-	//this->addChild(m_Heroes);
 }
 
 void GameScene::DrawSprite(float interval)

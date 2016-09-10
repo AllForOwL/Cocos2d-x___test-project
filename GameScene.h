@@ -22,9 +22,6 @@ public:
 	void DrawSprite(float interval);
 	void UpdateHeroes(float dt);
 
-//	void onKeyPressed(EventKeyboard::KeyCode, Event* event);
-//	void onKeyReleased(EventKeyboard::KeyCode, Event* event);
-
 private:
 	cocos2d::PhysicsWorld* m_sceneWorld;
 

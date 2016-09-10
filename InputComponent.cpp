@@ -2,7 +2,7 @@
 
 InputComponent::InputComponent()
 {
-	
+	m_keyCode = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
 }
 
 EventKeyboard::KeyCode InputComponent::GetActiveKey()

@@ -7,8 +7,6 @@
 using namespace cocos2d;
 using namespace std;
 
-//class Monster;
-
 class InputComponent
 {
 public:
