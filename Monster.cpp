@@ -11,10 +11,16 @@ Monster::Monster(Breed& breed, InputComponent& inputComponent, GraphicComponent&
 								m_graphicComponent	(graphicComponent),
 								m_gameScene			(gameScene)
 {
-	m_countSprite	= 7;
-	m_numberSprite	= 0;
-	m_changeKeyCode = false;
-	m_keyCode		= EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
+	m_sprite = Sprite::create("walk-0001.png");
+	
+	Size _visibleSize = Director::getInstance()->getVisibleSize();
+	this->m_sprite->setPosition(_visibleSize.width / 2,
+		_visibleSize.height / 2);
+	gameScene.addChild(this->m_sprite);
+
+	m_countSpriteInVector	= 0;
+	m_changeKeyCode			= false;
+	m_keyCode				= EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
 }
 
 Breed& Monster::GetBreed()
@@ -34,7 +40,13 @@ void Monster::SetKeyCode(EventKeyboard::KeyCode keyCode)
 
 void Monster::SetCountSprite(int countSprite)
 {
-	m_countSprite = countSprite;
+	m_countSpriteInVector = countSprite;
+
+	/*if (m_countSpriteInVector == 3)
+	{
+		m_changeKeyCode = true;
+		m_keyCode		= EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
+	}*/
 }
 
 void Monster::SetChangeKeyCode(bool stateKeyCode)
@@ -42,29 +54,20 @@ void Monster::SetChangeKeyCode(bool stateKeyCode)
 	m_changeKeyCode = stateKeyCode;
 }
 
-void Monster::SetNumberSprite(int numberSprite)
-{
-	m_numberSprite = numberSprite;
-}
-
-int Monster::GetNumberSprite()
-{
-	return m_numberSprite;
-}
-
 int Monster::GetCountSprite()
 {
-	return m_countSprite;
+	return m_countSpriteInVector;
 }
 
 EventKeyboard::KeyCode Monster::GetKeyCode()
 {
-	return EventKeyboard::KeyCode::KEY_UP_ARROW;
+	return m_keyCode;
 }
 
 void Monster::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	m_keyCode = keyCode;
+	m_changeKeyCode == true;
 
 //	m_inputComponent.update(*this/*, keyCode*/);
 
@@ -72,10 +75,10 @@ void Monster::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 	Update(m_changeKeyCode);
 }
 
-void Monster::Update(bool changeKEyCode)
+void Monster::Update(float dt)
 {
 	// тут повинні обновляти свій стан усі компоненти
-	m_inputComponent.update		(*this);
+	//m_inputComponent.update		(*this);
 	m_graphicComponent.update	(*this, m_gameScene, m_changeKeyCode);
 }
 

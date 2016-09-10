@@ -20,6 +20,7 @@ public:
 	
 	void update(float dt);
 	void DrawSprite(float interval);
+	void UpdateHeroes(float dt);
 
 //	void onKeyPressed(EventKeyboard::KeyCode, Event* event);
 //	void onKeyReleased(EventKeyboard::KeyCode, Event* event);
@@ -43,6 +44,8 @@ private:
 
 	cocos2d::Sprite* m_spriteHeroes;
 	cocos2d::Sprite* m_background;
+
+	cocos2d::Layer* m_layer;
 };
 
 #endif // __GAME_SCENE_H__

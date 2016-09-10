@@ -13,22 +13,20 @@ class InputComponent;
 class GraphicComponent;
 class GameScene;
 
-class Monster : public cocos2d::Sprite
+class Monster
 {
 public:
 	Monster();
 	Monster(Breed& breed, InputComponent& inputComponent, GraphicComponent& graphicComponent, GameScene& gameScene);
 
 	Breed&					GetBreed();
-	void					Update(bool changeKeyCode);
+	void					Update(float dt);
 	int						GetAttack();
 	int						GetCountSprite();
 	EventKeyboard::KeyCode	GetKeyCode();
-	int						GetNumberSprite();
 	void					SetKeyCode(EventKeyboard::KeyCode keyCode);
 	void					SetCountSprite(int countSprite);
 	void					SetChangeKeyCode(bool stateKeyCode);
-	void					SetNumberSprite(int numberSprite);
 
 	void					onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
 	
@@ -43,9 +41,9 @@ public:
 	int						m_attack;
 	string					m_filename;
 	EventKeyboard::KeyCode	m_keyCode;
-	int						m_countSprite;
-	int						m_numberSprite;
+	int						m_countSpriteInVector;
 	bool					m_changeKeyCode;
+	cocos2d::Sprite*		m_sprite;
 };
 
 #endif
