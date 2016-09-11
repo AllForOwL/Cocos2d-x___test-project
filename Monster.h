@@ -11,30 +11,19 @@ using namespace cocos2d;
 class InputComponent;
 class GraphicComponent;
 class GameScene;
-class Weapon;
 
 class Monster
 {
 public:
-	Monster();
-	Monster(Breed& breed, InputComponent& inputComponent, GraphicComponent& graphicComponent, Weapon& weapon, GameScene& gameScene);
+	Monster::Monster(GraphicComponent* graphicComponent, InputComponent* inputComponent);
 
-	Breed&	GetBreed();
-	void	Update(float dt);
-	int		GetAttack();
-	
+	void Update(GameScene& scene, GraphicComponent& graphic);
+
 	~Monster();
 
-public:
-	Breed&					m_heroes;
-	InputComponent& 		m_inputComponent;
-	GraphicComponent&		m_graphicComponent;
-	Weapon&					m_weapon;
-	GameScene&				m_gameScene;
-	int						m_health;
-	int						m_attack;
-	string					m_filename;
-	cocos2d::Sprite*		m_sprite;
+private:
+	GraphicComponent*	m_graphicComponent;
+	InputComponent*		m_inputComponent
 };
 
 #endif

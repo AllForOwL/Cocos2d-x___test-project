@@ -39,13 +39,13 @@ bool GameScene::init()
 
 	this->addChild(m_background);
 
-	temp_breed = new Breed(150, 100, "walk-0001.png");
-	inputComponent = new InputComponent();
-	graphicComponent = new GraphicComponent();
-	weapon = new Weapon(100, "AK47.png", "sprite_sheet_fire.png");
-	m_Heroes = new Monster(*temp_breed, *inputComponent, *graphicComponent, *weapon, *this);
-	
-	m_Heroes->Update(1);
+	//temp_breed			= new Breed(150, 100, "walk-0001.png");
+	inputComponent		= new InputComponent();
+	graphicComponent	= new GraphicComponent();
+	//weapon				= new Weapon(100, "AK47.png", "sprite_sheet_fire.png");
+	m_Heroes			= new Monster(temp_breed, inputComponent);
+
+	//m_Heroes->Update(1);
 	/*auto backOrig = Sprite::create("back_3200x2000.png");
 	auto oWidth = backOrig->getContentSize().width;
 	auto oHeight = backOrig->getContentSize().height;
@@ -79,6 +79,7 @@ bool GameScene::init()
 
 	//this->addChild(m_spriteHeroes);
 	//this->addChild(menu);
+	
 
 	// creating a keyboard event listener
 	auto listener = EventListenerKeyboard::create();
@@ -87,14 +88,21 @@ bool GameScene::init()
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-//	this->schedule(schedule_selector(GameScene::UpdateHeroes), 0.1);
+	this->schedule(schedule_selector(GameScene::UpdateHeroes), 0.1);
 	//this->scheduleUpdate();
 	
 	return true;
 }
 
+void GameScene::CallGraphicComponent()
+{
+	m_Heroes->Update(1);
+}
+
 void GameScene::AddHeroes(cocos2d::Ref* ref)
 {
+	m_Heroes->Update(1);
+
 	/*m_createHeroes = true;
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 

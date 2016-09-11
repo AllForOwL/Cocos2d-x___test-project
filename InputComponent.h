@@ -7,22 +7,13 @@
 using namespace cocos2d;
 using namespace std;
 
+// intarface for other input classes
 class InputComponent
 {
 public:
-	InputComponent();
+	virtual void Update(Monster& heroes) = 0;
 
-	EventKeyboard::KeyCode& GetActiveKey();
-	void update(Monster& heroes);
-
-	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
-	void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
-	
 	~InputComponent();
-
-private:
-	int						m_countSprite;
-	EventKeyboard::KeyCode	m_keyCode;
 };
 
 #endif

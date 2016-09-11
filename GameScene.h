@@ -31,6 +31,8 @@ private:
 	}
 	bool OnContactBegin(cocos2d::PhysicsContact& contact);
 
+	void CallGraphicComponent();
+
 	Monster*	m_Heroes;
 	int			m_ID_HELL;
 	int			m_ID_FIRE_GIRL;
@@ -44,7 +46,7 @@ private:
 
 	cocos2d::Layer* m_layer;
 
-	Breed*				temp_breed;
+	//Breed*				m_breed;
 	InputComponent*		inputComponent;
 	GraphicComponent*	graphicComponent;
 	Weapon*				weapon;

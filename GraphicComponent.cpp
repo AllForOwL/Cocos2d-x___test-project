@@ -7,83 +7,65 @@ GraphicComponent::GraphicComponent()
 	m_state = STATE_WALK;
 	m_pSprite = Sprite::create("walk-0001.png");
 
-	m_countSpritesInVectorHeroWalk		= 0;
+	m_countSpritesInVectorHeroWalk		= 1;
 	m_countSpritesInVectorHeroAttack	= 0;
 	m_countSpritesInVectorHeroJump		= 0;
 	m_countSpritesInVectorWeaponFire	= 0;
 
 }
 
-void GraphicComponent::update(Monster& heroes)
+void GraphicComponent::update(Monster& heroes, GraphicComponent& graphic)
 {
 
-
-	/*std::vector<std::string> _vecSprites;
-	int _sizeVector = LoadSprites(heroes.GetKeyCode(), _vecSprites);
-	
-	int _countSpriteInVector = heroes.GetCountSprite();
-	if (_countSpriteInVector >= _sizeVector)
-	{
-		heroes.SetKeyCode(EventKeyboard::KeyCode::KEY_RIGHT_ARROW);
-		_countSpriteInVector = 0;
-	}
-
-	Size _visibleSize = Director::getInstance()->getVisibleSize();
-
-	heroes.m_sprite->setTexture(CCTextureCache::sharedTextureCache()->addImage(_vecSprites[_countSpriteInVector]));
-	heroes.m_sprite->setScale(_visibleSize.width / heroes.m_sprite->getContentSize().width / 6,
-		_visibleSize.height / heroes.m_sprite->getContentSize().height / 2);
-	heroes.m_sprite->setPosition(50,
-						 _visibleSize.height / 2 - 80);
-
-	heroes.SetCountSprite(++_countSpriteInVector);
-
-	m_countSpriteInVectorWeapon = 0;
-	*/
 }
 
-void GraphicComponent::Draw(EventKeyboard::KeyCode& keyCode, GameScene& scene, Monster& hero)
+void GraphicComponent::Draw(EventKeyboard::KeyCode& keyCode, GameScene& scene, Monster& hero, GraphicComponent& graphic)
 {
 	int _sizeVector = LoadSprites(keyCode);
-
-	Size _visibleSize = Director::getInstance()->getVisibleSize();
+	Size _size = Director::getInstance()->getVisibleSize();
 
 	switch (m_state)
 	{
 		case STATE_WALK:
 		{
-			Walk();
-
+			//Walk();
+			hero.m_sprite->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesHeroWalk[m_countSpritesInVectorHeroWalk]));
+			hero.m_sprite->setScale(_size.width / hero.m_sprite->getContentSize().width / 6,
+				_size.height / hero.m_sprite->getContentSize().height / 2);
+			hero.m_sprite->setPosition(_size.width / 2,
+				_size.height / 2);
+			if (++m_countSpritesInVectorHeroWalk == 8)
+			{
+				m_countSpritesInVectorHeroWalk = 0;
+			}
 			break;
 		}
 		case STATE_ATTACK:
 		{
-			Attack();
+			//Attack();
 
 			break;
 		}
 		case STATE_JUMP:
 		{
-			Jump();
+			//Jump();
 
 			break;
 		}
 		case STATE_FIRE:
 		{
-			Fire();
+			//Fire();
 
 			break;
 		}
 	}
-
-	hero.m_sprite = m_pSprite;
 	scene.addChild(hero.m_sprite);
 }
 
 void GraphicComponent::Walk()
 {
 	Size _size = Director::getInstance()->getVisibleSize();
-
+	
 	m_pSprite->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesHeroWalk[m_countSpritesInVectorHeroWalk]));
 	m_pSprite->setScale(_size.width / m_pSprite->getContentSize().width / 6,
 		_size.height / m_pSprite->getContentSize().height / 2);
