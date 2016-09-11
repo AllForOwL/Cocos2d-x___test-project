@@ -44,7 +44,6 @@ void GraphicComponent::update(Monster& heroes)
 
 void GraphicComponent::Draw(EventKeyboard::KeyCode& keyCode, GameScene& scene, Monster& hero)
 {
-	m_pSprite	= &sprite;
 	int _sizeVector = LoadSprites(keyCode);
 
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
@@ -77,7 +76,8 @@ void GraphicComponent::Draw(EventKeyboard::KeyCode& keyCode, GameScene& scene, M
 		}
 	}
 
-	scene.addChild(m_pSprite);
+	hero.m_sprite = m_pSprite;
+	scene.addChild(hero.m_sprite);
 }
 
 void GraphicComponent::Walk()
@@ -87,9 +87,12 @@ void GraphicComponent::Walk()
 	m_pSprite->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesHeroWalk[m_countSpritesInVectorHeroWalk]));
 	m_pSprite->setScale(_size.width / m_pSprite->getContentSize().width / 6,
 		_size.height / m_pSprite->getContentSize().height / 2);
-	m_pSprite->setPosition(50,
-							_size.height / 2 - 80);
-	++m_countSpritesInVectorHeroWalk;
+	m_pSprite->setPosition(_size.width / 2,
+						  _size.height / 2);
+	if (++m_countSpritesInVectorHeroWalk == 8)
+	{
+		m_countSpritesInVectorHeroWalk = 0;
+	}
 }
 
 void GraphicComponent::Attack()
@@ -102,7 +105,10 @@ void GraphicComponent::Attack()
 	m_pSprite->setPosition(50,
 		_size.height / 2 - 80);
 
-	++m_countSpritesInVectorHeroAttack;
+	if (++m_countSpritesInVectorHeroAttack == 4)
+	{
+		m_countSpritesInVectorHeroAttack = 0;
+	}
 }
 
 void GraphicComponent::Jump()
@@ -115,7 +121,10 @@ void GraphicComponent::Jump()
 	m_pSprite->setPosition(50,
 		_size.height / 2 - 80);
 
-	++m_countSpritesInVectorHeroJump;
+	if (++m_countSpritesInVectorHeroJump == 3)
+	{
+		m_countSpritesInVectorHeroJump = 0;
+	}
 }
 
 void GraphicComponent::Fire()
@@ -128,7 +137,10 @@ void GraphicComponent::Fire()
 	m_pSprite->setPosition(50,
 		_size.height / 2 - 80);
 
-	++m_countSpritesInVectorWeaponFire;
+	if (++m_countSpritesInVectorWeaponFire == 4)
+	{
+		m_countSpritesInVectorWeaponFire = 0;
+	}
 }
 
 int GraphicComponent::LoadSprites(EventKeyboard::KeyCode& keyCode)

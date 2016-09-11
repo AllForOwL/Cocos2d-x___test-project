@@ -21,7 +21,7 @@ Monster::Monster(Breed& breed, InputComponent& inputComponent, GraphicComponent&
 	this->m_sprite->setScale(_visibleSize.width / this->m_sprite->getContentSize().width / 6,
 		_visibleSize.height / m_sprite->getContentSize().height / 2);
 
-	gameScene.addChild(this->m_sprite);
+	m_gameScene.addChild(this->m_sprite);
 	//gameScene.addChild(m_weapon.m_sprite);
 }
 
@@ -37,8 +37,12 @@ int Monster::GetAttack()
 
 void Monster::Update(float dt)
 {
+
+//	m_gameScene->addChild(Sprite::create("walk-0003.png"));
+
 	// тут повинні обновляти свій стан усі компоненти
 	//m_inputComponent.update		(*this);
+	//m_gameScene->addChild(m_graphicComponent.Draw(m_inputComponent.GetActiveKey(), m_gameScene, *this));
 	m_graphicComponent.Draw(m_inputComponent.GetActiveKey(), m_gameScene, *this);
 }
 

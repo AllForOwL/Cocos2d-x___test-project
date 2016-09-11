@@ -17,7 +17,7 @@ class Monster
 {
 public:
 	Monster();
-	Monster(Breed& breed, InputComponent& inputComponent, GraphicComponent& graphicComponent, Weapon& weapon,GameScene& gameScene);
+	Monster(Breed& breed, InputComponent& inputComponent, GraphicComponent& graphicComponent, Weapon& weapon, GameScene& gameScene);
 
 	Breed&	GetBreed();
 	void	Update(float dt);

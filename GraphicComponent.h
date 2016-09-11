@@ -44,8 +44,6 @@ private:
 	std::vector<std::string> m_vecSpritesHeroAttack;
 	std::vector<std::string> m_vecSpritesHeroJump;
 	std::vector<std::string> m_vecSpritesWeaponFire;
-
-
 };
 
 #endif
