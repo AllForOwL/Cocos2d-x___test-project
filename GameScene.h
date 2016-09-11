@@ -43,6 +43,12 @@ private:
 	cocos2d::Sprite* m_background;
 
 	cocos2d::Layer* m_layer;
+
+	Breed*				temp_breed;
+	InputComponent*		inputComponent;
+	GraphicComponent*	graphicComponent;
+	Weapon*				weapon;
+
 };
 
 #endif // __GAME_SCENE_H__

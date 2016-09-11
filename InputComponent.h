@@ -12,7 +12,7 @@ class InputComponent
 public:
 	InputComponent();
 
-	EventKeyboard::KeyCode GetActiveKey();
+	EventKeyboard::KeyCode& GetActiveKey();
 	void update(Monster& heroes);
 
 	void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
@@ -23,7 +23,6 @@ public:
 private:
 	int						m_countSprite;
 	EventKeyboard::KeyCode	m_keyCode;
-	bool					m_GoToRight;
 };
 
 #endif

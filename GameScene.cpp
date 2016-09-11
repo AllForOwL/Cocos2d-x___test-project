@@ -2,6 +2,7 @@
 #include "constants.h"
 #include "InputComponent.h"
 #include "GraphicComponent.h"
+#include "Weapon.h"
 
 USING_NS_CC;
 
@@ -32,20 +33,19 @@ bool GameScene::init()
 	m_count			= 0;
 	m_createHeroes	= false;
 
-	std::vector<std::string> m_vecSpriteRun;
-	m_vecSpriteRun.push_back("walk-0001.png");
-
 	m_background = Sprite::create("background.png");
 	m_background->setPosition(visibleSize.width / 2,
 							  visibleSize.height / 2);
 
 	this->addChild(m_background);
 
-	Breed				temp_breed(150, 100, "");
-	InputComponent		inputComponent;
-	GraphicComponent	graphicComponent;
-	m_Heroes = new Monster(temp_breed, inputComponent, graphicComponent, *this);
+	temp_breed = new Breed(150, 100, "walk-0001.png");
+	inputComponent = new InputComponent();
+	graphicComponent = new GraphicComponent();
+	weapon = new Weapon(100, "AK47.png", "sprite_sheet_fire.png");
+	m_Heroes = new Monster(*temp_breed, *inputComponent, *graphicComponent, *weapon, *this);
 	
+	m_Heroes->Update(1);
 	/*auto backOrig = Sprite::create("back_3200x2000.png");
 	auto oWidth = backOrig->getContentSize().width;
 	auto oHeight = backOrig->getContentSize().height;
@@ -82,13 +82,13 @@ bool GameScene::init()
 
 	// creating a keyboard event listener
 	auto listener = EventListenerKeyboard::create();
-	listener->onKeyPressed = CC_CALLBACK_2(Monster::onKeyPressed, m_Heroes);
-//	listener->onKeyReleased = CC_CALLBACK_2(InputComponent::onKeyReleased, inputComponent);
+	listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, inputComponent);
+	listener->onKeyReleased = CC_CALLBACK_2(InputComponent::onKeyReleased, inputComponent);
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 
-	this->schedule(schedule_selector(GameScene::UpdateHeroes), 0.1);
-	this->scheduleUpdate();
+//	this->schedule(schedule_selector(GameScene::UpdateHeroes), 0.1);
+	//this->scheduleUpdate();
 	
 	return true;
 }
