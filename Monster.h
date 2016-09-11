@@ -2,8 +2,7 @@
 #define __MONSTER_H__
 
 #include "cocos2d.h"
-
-#include "Breed.h"
+#include "GraphicComponent.h"
 
 using namespace std;
 using namespace cocos2d;
@@ -23,7 +22,7 @@ public:
 
 private:
 	GraphicComponent*	m_graphicComponent;
-	InputComponent*		m_inputComponent
+	InputComponent*		m_inputComponent;
 };
 
 #endif

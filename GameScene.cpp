@@ -30,14 +30,24 @@ bool GameScene::init()
 	Size visibleSize   = Director::getInstance()->getVisibleSize();
 	Vec2 visibleOrigin = Director::getInstance()->getVisibleOrigin();
 
-	m_count			= 0;
-	m_createHeroes	= false;
-
 	m_background = Sprite::create("background.png");
 	m_background->setPosition(visibleSize.width / 2,
 							  visibleSize.height / 2);
 
 	this->addChild(m_background);
 	
+	m_graphicComponent	= new HellGraphicComponent();
+	m_inputComponent	= new PlayerInputComponent();
+	m_hero				= new Monster(m_graphicComponent, m_inputComponent);
+
+	m_hero->Update(*this, *m_graphicComponent);
+
+	this->scheduleUpdate();
+
 	return true;
+}
+
+void GameScene::update(float dt)
+{
+
 }

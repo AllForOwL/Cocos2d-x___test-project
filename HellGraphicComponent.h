@@ -10,9 +10,9 @@ using namespace cocos2d;
 class HellGraphicComponent : public GraphicComponent
 {
 public:
-	HellGraphicComponent();
-	virtual void Update(Monster& hero, GraphicComponent& graphic);
-
+	virtual void Update(Monster& hero, GraphicComponent& graphic, GameScene& gameScene);
+	virtual bool initWithFile(const std::string& filename);
+	//virtual void setTexture(const std::string &filename);
 	~HellGraphicComponent();
 
 private:

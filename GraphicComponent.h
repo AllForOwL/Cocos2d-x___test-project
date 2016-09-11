@@ -6,15 +6,17 @@
 using namespace std;
 using namespace cocos2d;
 
+class GameScene;
 class Monster;
 
 // interface for other graphics classes
-class GraphicComponent 
+class GraphicComponent  : public cocos2d::Sprite
 {
 public:
-	virtual void Update(Monster& hero, GraphicComponent& graphic);
-
-	~GraphicComponent();
+	virtual void Update(Monster& hero, GraphicComponent& graphic, GameScene& gameScene)	= 0;
+	virtual bool initWithFile(const std::string& filename)			= 0;
+	//virtual void setTexture(const std::string &filename)			= 0;
+	virtual ~GraphicComponent() {};
 };
 
 #endif

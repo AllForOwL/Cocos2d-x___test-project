@@ -13,7 +13,7 @@ class InputComponent
 public:
 	virtual void Update(Monster& heroes) = 0;
 
-	~InputComponent();
+	virtual ~InputComponent() {};
 };
 
 #endif
