@@ -5,55 +5,78 @@
 
 HellGraphicComponent::HellGraphicComponent()
 {
-	this->initWithFile("walk-0001.png");
+	m_vecSpritesWalk.push_back("walk-0001.png");
+	m_vecSpritesWalk.push_back("walk-0002.png");
+	m_vecSpritesWalk.push_back("walk-0003.png");
+	m_vecSpritesWalk.push_back("walk-0004.png");
+	m_vecSpritesWalk.push_back("walk-0005.png");
+	m_vecSpritesWalk.push_back("walk-0006.png");
+	m_vecSpritesWalk.push_back("walk-0007.png");
+	m_vecSpritesWalk.push_back("walk-0007.png");
+
+	m_vecSpritesAttack.push_back("attack-0001.png");
+	m_vecSpritesAttack.push_back("attack-0002.png");
+	m_vecSpritesAttack.push_back("attack-0003.png");
+	m_vecSpritesAttack.push_back("attack-0004.png");
+
+	m_vecSpritesRun.push_back("run-0001.png");
+	m_vecSpritesRun.push_back("run-0002.png");
+	m_vecSpritesRun.push_back("run-0003.png");
+	m_vecSpritesRun.push_back("run-0004.png");
+	m_vecSpritesRun.push_back("run-0005.png");
+	m_vecSpritesRun.push_back("run-0006.png");
+	m_vecSpritesRun.push_back("run-0007.png");
+	m_vecSpritesRun.push_back("run-0008.png");
+
+	m_vecSpritesDie.push_back("die-0001.png");
+	m_vecSpritesDie.push_back("die-0002.png");
+	m_vecSpritesDie.push_back("die-0003.png");
+	m_vecSpritesDie.push_back("die-0004.png");
+
+	m_vecSpritesDizzy.push_back("dizzy-0001.png");
+	m_vecSpritesDizzy.push_back("dizzy-0002.png");
+	m_vecSpritesDizzy.push_back("dizzy-0003.png");
+
+	m_countSpriteInVector = 0;
+
+	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVector]);
 }
 
-/*virtual*/void HellGraphicComponent::Update(Monster& hero, cocos2d::Sprite* _hero, GameScene& gameScene)
+/*virtual*/void HellGraphicComponent::Update(Monster& hero)
 {
-	Size _size = Director::getInstance()->getVisibleSize();
-	//GraphicComponent* _graphic = new HellGraphicComponent();
-	this->LoadSprites(EventKeyboard::KeyCode::KEY_RIGHT_ARROW);
-	
-	cocos2d::Sprite* m_hero = _hero;
-	m_hero->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesWalk[m_countSpriteInVector]));
-	m_hero->setScale(_size.width / m_hero->getContentSize().width / 6,
-					_size.height / m_hero->getContentSize().height / 2);
-	m_hero->setPosition(_size.width / m_hero->getContentSize().width + 100,
-	_size.height / m_hero->getContentSize().height + 100);
-
-	//graphic = m_hero;
-	//_hero->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesWalk[m_countSpriteInVector]));
-	
-	if (++m_countSpriteInVector == 8)
+	switch (hero.m_state)
 	{
-		m_countSpriteInVector = 0;
-	}
-
-	_hero = m_hero;
-
-	gameScene.addChild(_hero);
-}
-
-/*virtual*/ void HellGraphicComponent::LoadSprites(EventKeyboard::KeyCode keyCode)
-{
-	switch (keyCode)
-	{
-	case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
-	{
-													m_vecSpritesWalk.push_back("walk-0001.png");
-													m_vecSpritesWalk.push_back("walk-0002.png");
-													m_vecSpritesWalk.push_back("walk-0003.png");
-													m_vecSpritesWalk.push_back("walk-0004.png");
-													m_vecSpritesWalk.push_back("walk-0005.png");
-													m_vecSpritesWalk.push_back("walk-0006.png");
-													m_vecSpritesWalk.push_back("walk-0007.png");
-													m_vecSpritesWalk.push_back("walk-0007.png");
-
-													break;
-	}
+		case Monster::State::STATE_WALK:
+		{
+			if (++m_countSpriteInVector >= 8)
+			{
+				m_countSpriteInVector = 0;
+			}
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesWalk[m_countSpriteInVector]));
+			break;
+		}
+		case Monster::State::STATE_ATTACK:
+		{
+			if (++m_countSpriteInVector >= 4)
+			{
+				m_countSpriteInVector = 0;
+				hero.m_state = Monster::State::STATE_WALK;
+			}
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesAttack[m_countSpriteInVector]));
+			break;
+		}
+		case Monster::State::STATE_JUMP:
+		{
+			if (++m_countSpriteInVector >= 3)
+			{
+				m_countSpriteInVector = 0;
+				hero.m_state = Monster::State::STATE_WALK;
+			}
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesFall[m_countSpriteInVector]));
+			break;
+		}
 	}
 }
-
 
 HellGraphicComponent::~HellGraphicComponent()
 {

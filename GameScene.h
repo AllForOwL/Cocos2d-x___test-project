@@ -4,7 +4,7 @@
 #include "cocos2d.h"
 
 #include "Monster.h"
-#include "HellGraphicComponent.h"
+#include "GraphicComponent.h"
 #include "PlayerInputComponent.h"
 
 using namespace cocos2d;

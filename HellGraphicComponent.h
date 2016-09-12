@@ -7,16 +7,12 @@
 using namespace std;
 using namespace cocos2d;
 
-
 class HellGraphicComponent : public GraphicComponent
 {
 public:
 	HellGraphicComponent();
 
-	virtual void Update(Monster& hero, cocos2d::Sprite* _hero, GameScene& gameScene);
-	//virtual void setTexture(const std::string &filename);
-
-	virtual void LoadSprites(EventKeyboard::KeyCode keyCode);
+	virtual void Update(Monster& hero);
 
 	~HellGraphicComponent();
 
@@ -27,6 +23,8 @@ public:
 	std::vector<std::string> m_vecSpritesFall;
 	std::vector<std::string> m_vecSpritesRun;
 	std::vector<std::string> m_vecSpritesAttack;
+	std::vector<std::string> m_vecSpritesDie;
+	std::vector<std::string> m_vecSpritesDizzy;
 
 	int m_countSpriteInVector;
 };

@@ -2,6 +2,7 @@
 #include "constants.h"
 #include "InputComponent.h"
 #include "GraphicComponent.h"
+#include "HellGraphicComponent.h"
 #include "Weapon.h"
 
 USING_NS_CC;
@@ -30,15 +31,6 @@ bool GameScene::init()
 	Size visibleSize   = Director::getInstance()->getVisibleSize();
 	Vec2 visibleOrigin = Director::getInstance()->getVisibleOrigin();
 
-	m_vecSpritesWalk.push_back("walk-0001.png");
-	m_vecSpritesWalk.push_back("walk-0002.png");
-	m_vecSpritesWalk.push_back("walk-0003.png");
-	m_vecSpritesWalk.push_back("walk-0004.png");
-	m_vecSpritesWalk.push_back("walk-0005.png");
-	m_vecSpritesWalk.push_back("walk-0006.png");
-	m_vecSpritesWalk.push_back("walk-0007.png");
-	m_vecSpritesWalk.push_back("walk-0007.png");
-
 	m_countSpriteInVector = 0;
 
 	m_background = Sprite::create("background.png");
@@ -46,9 +38,6 @@ bool GameScene::init()
 							  visibleSize.height / 2);
 
 	this->addChild(m_background);
-	
-	//m_spriteHero = Sprite::create("walk-0001.png"); 
-	//this->addChild(m_spriteHero);
 	
 	m_graphicComponent	= new HellGraphicComponent();
 	m_graphicComponent->setScale(visibleSize.width / m_graphicComponent->getContentSize().width / 6,
@@ -58,8 +47,18 @@ bool GameScene::init()
 									
 	this->addChild(m_graphicComponent);
 
-	//m_inputComponent	= new PlayerInputComponent();
-	//m_hero				= new Monster(m_graphicComponent, m_inputComponent);
+	m_inputComponent	= new PlayerInputComponent();
+	m_hero				= new Monster(m_graphicComponent, m_inputComponent);
+
+
+	auto listener = EventListenerKeyboard::create();
+	listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);
+	//listener->onKeyReleased = CC_CALLBACK_2(InputComponent::onKeyReleased, inputComponent);
+	
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	
+	this->schedule(schedule_selector(GameScene::update), 4.8);
+	//this->scheduleUpdate();
 
 	this->scheduleUpdate();
 
@@ -68,10 +67,5 @@ bool GameScene::init()
 
 void GameScene::update(float dt)
 {
-	m_graphicComponent->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesWalk[m_countSpriteInVector]));
-	
-	if (++m_countSpriteInVector == 8)
-	{
-		m_countSpriteInVector = 0;
-	}
+	m_hero->Update();
 }

@@ -8,13 +8,13 @@ Monster::Monster(GraphicComponent* graphicComponent, InputComponent* inputCompon
 							:	m_graphicComponent(graphicComponent),
 								m_inputComponent  (inputComponent)
 {
-
+	m_state = STATE_WALK;
 }
 
-void Monster::Update(GameScene& scene, GraphicComponent& graphic)
+void Monster::Update()
 {
-	m_inputComponent->Update(*this);
-//	m_graphicComponent->Update(*this, graphic, scene);
+	m_inputComponent->Update	(*this);
+	m_graphicComponent->Update	(*this);
 }
 
 Monster::~Monster()
@@ -25,6 +25,6 @@ Monster::~Monster()
 
 /*  GraphicComponent	- тільки малює спрайти 
 	PhysicsComponent	- виявлє зіткнення героя
-	InputComponent		- приймає діна з клавіатури
+	InputComponent		- приймає дії з клавіатури
 	Monster				- контейнер для цих компонентів
 */
