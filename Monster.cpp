@@ -14,7 +14,7 @@ Monster::Monster(GraphicComponent* graphicComponent, InputComponent* inputCompon
 void Monster::Update(GameScene& scene, GraphicComponent& graphic)
 {
 	m_inputComponent->Update(*this);
-	m_graphicComponent->Update(*this, graphic, scene);
+//	m_graphicComponent->Update(*this, graphic, scene);
 }
 
 Monster::~Monster()

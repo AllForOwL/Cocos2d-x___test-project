@@ -29,11 +29,15 @@ private:
 
 	cocos2d::Sprite* m_background;
 
+	cocos2d::Sprite* m_spriteHero;
 	cocos2d::Layer* m_layer;
 
 	Monster*			m_hero;
 	GraphicComponent*	m_graphicComponent;
 	InputComponent*		m_inputComponent;
+
+	std::vector<std::string> m_vecSpritesWalk;
+	int m_countSpriteInVector;
 
 };
 

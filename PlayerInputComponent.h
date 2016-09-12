@@ -12,6 +12,9 @@ class PlayerInputComponent : public InputComponent
 {
 public:
 	virtual void Update(Monster& hero);
+	
+	virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
+	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
 
 	PlayerInputComponent();
 	~PlayerInputComponent();

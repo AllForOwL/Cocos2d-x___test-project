@@ -13,6 +13,9 @@ class InputComponent
 public:
 	virtual void Update(Monster& heroes) = 0;
 
+	virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event) = 0;
+	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) = 0;
+
 	virtual ~InputComponent() {};
 };
 
