@@ -2,7 +2,7 @@
 
 PlayerInputComponent::PlayerInputComponent()
 {
-	m_keyCode = EventKeyboard::KeyCode::KEY_A;
+	m_keyCode = EventKeyboard::KeyCode::KEY_RIGHT_ARROW;
 }
 
 /*virtual*/ void PlayerInputComponent::Update(Monster& hero)
@@ -24,6 +24,11 @@ PlayerInputComponent::PlayerInputComponent()
 			hero.m_state = Monster::State::STATE_ATTACK;
 			break;
 		}
+		case EventKeyboard::KeyCode::KEY_R:
+		{
+			hero.m_state = Monster::State::STATE_RUN;
+			break;
+		}
 	}
 }
 
@@ -41,7 +46,6 @@ PlayerInputComponent::~PlayerInputComponent()
 {
 
 }
-
 
 /*  GraphicComponent	- тільки малює спрайти 
 	PhysicsComponent	- виявлє зіткнення героя

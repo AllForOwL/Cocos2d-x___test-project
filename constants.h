@@ -1,3 +1,5 @@
-const int CNT_HELL		= 1;
-const int CNT_FIRE_GIRL = 2;
-const int CNT_WATER_MAN = 3;
+const int CNT_NUMBER_SPRITES_WALK	= 8;
+const int CNT_NUMBER_SPRITES_RUN	= 7;
+const int CNT_NUMBER_SPRITES_ATTACK = 4;
+const int CNT_NUMBER_SPRITES_DIE	= 4;
+const int CNT_NUMBER_SPRITES_DIZZY	= 3;

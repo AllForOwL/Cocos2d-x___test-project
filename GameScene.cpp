@@ -57,7 +57,7 @@ bool GameScene::init()
 	
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	
-	this->schedule(schedule_selector(GameScene::update), 4.8);
+	this->schedule(schedule_selector(GameScene::update), 50);
 	//this->scheduleUpdate();
 
 	this->scheduleUpdate();
@@ -67,5 +67,8 @@ bool GameScene::init()
 
 void GameScene::update(float dt)
 {
+	auto position = m_background->getPosition();
+	m_background->setPosition(--position.x, position.y);
+
 	m_hero->Update();
 }

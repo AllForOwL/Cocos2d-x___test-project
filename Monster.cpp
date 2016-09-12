@@ -22,7 +22,6 @@ Monster::~Monster()
 
 }
 
-
 /*  GraphicComponent	- тільки малює спрайти 
 	PhysicsComponent	- виявлє зіткнення героя
 	InputComponent		- приймає дії з клавіатури

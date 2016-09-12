@@ -2,6 +2,7 @@
 #include "Monster.h"
 #include "GraphicComponent.h"
 #include "GameScene.h"
+#include "constants.h"
 
 HellGraphicComponent::HellGraphicComponent()
 {
@@ -37,9 +38,11 @@ HellGraphicComponent::HellGraphicComponent()
 	m_vecSpritesDizzy.push_back("dizzy-0002.png");
 	m_vecSpritesDizzy.push_back("dizzy-0003.png");
 
-	m_countSpriteInVector = 0;
+	m_countSpriteInVectorWalk		= 0;
+	m_countSpriteInVectorAttack		= 0;
+	m_countSpriteInVectorRun		= 0;
 
-	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVector]);
+	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVectorWalk]);
 }
 
 /*virtual*/void HellGraphicComponent::Update(Monster& hero)
@@ -48,31 +51,31 @@ HellGraphicComponent::HellGraphicComponent()
 	{
 		case Monster::State::STATE_WALK:
 		{
-			if (++m_countSpriteInVector >= 8)
+			if (++m_countSpriteInVectorWalk >= CNT_NUMBER_SPRITES_WALK)
 			{
-				m_countSpriteInVector = 0;
+				m_countSpriteInVectorWalk = 0;
 			}
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesWalk[m_countSpriteInVector]));
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesWalk[m_countSpriteInVectorWalk]));
 			break;
 		}
 		case Monster::State::STATE_ATTACK:
 		{
-			if (++m_countSpriteInVector >= 4)
+			if (++m_countSpriteInVectorAttack >= CNT_NUMBER_SPRITES_ATTACK)
 			{
-				m_countSpriteInVector = 0;
+				m_countSpriteInVectorAttack = 0;
 				hero.m_state = Monster::State::STATE_WALK;
 			}
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesAttack[m_countSpriteInVector]));
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesAttack[m_countSpriteInVectorAttack]));
 			break;
 		}
-		case Monster::State::STATE_JUMP:
+		case Monster::State::STATE_RUN:
 		{
-			if (++m_countSpriteInVector >= 3)
+			if (++m_countSpriteInVectorRun >= CNT_NUMBER_SPRITES_RUN)
 			{
-				m_countSpriteInVector = 0;
+				m_countSpriteInVectorRun = 0;
 				hero.m_state = Monster::State::STATE_WALK;
 			}
-			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesFall[m_countSpriteInVector]));
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesRun[m_countSpriteInVectorRun]));
 			break;
 		}
 	}
