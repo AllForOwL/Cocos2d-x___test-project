@@ -21,7 +21,7 @@ public:
 
 	~GameScene();
 
-private:
+public:
 	cocos2d::PhysicsWorld* m_sceneWorld;
 
 	void SetPhysicsWorld(cocos2d::PhysicsWorld* world)
@@ -32,11 +32,12 @@ private:
 	cocos2d::Sprite* m_background;
 
 	cocos2d::Sprite* m_spriteHero;
-	cocos2d::Layer* m_layer;
+	cocos2d::Layer*  m_layer;
 
 	Monster*			m_hero;
-	GraphicComponent*	m_graphicComponentWeapon;
 	GraphicComponent*	m_graphicComponentHero;
+	GraphicComponent*	m_graphicComponentWeapon;
+	GraphicComponent*	m_graphicComponentBullet;
 	InputComponent*		m_inputComponent;
 
 	std::vector<std::string> m_vecSpritesWalk;

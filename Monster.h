@@ -27,7 +27,8 @@ public:
 		STATE_REST
 	};
 
-	Monster::Monster(GraphicComponent* graphicComponentHero, GraphicComponent* graphiComponentWeapon, InputComponent* inputComponent);
+	Monster::Monster(GraphicComponent* graphicComponentHero, GraphicComponent* graphiComponentWeapon, 
+		GraphicComponent* m_graphicComponentBullet, InputComponent* inputComponent);
 
 	void Update();
 
@@ -36,6 +37,7 @@ public:
 public:
 	GraphicComponent*	m_graphicComponentHero;
 	GraphicComponent*	m_graphicComponentWeapon;
+	GraphicComponent*	m_graphiComponentBullet;
 	InputComponent*		m_inputComponent;
 	StateHero			m_stateHero;
 	StateWeapon			m_stateWeapon;

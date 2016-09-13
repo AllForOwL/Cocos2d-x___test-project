@@ -4,9 +4,11 @@
 #include "GameScene.h"
 #include "AK47GraphicComponent.h"
 
-Monster::Monster(GraphicComponent* graphicComponentHero, GraphicComponent* graphicComponentWeapon, InputComponent* inputComponent) 
+Monster::Monster(GraphicComponent* graphicComponentHero, GraphicComponent* graphicComponentWeapon,
+				GraphicComponent* graphicComponentBullet, InputComponent* inputComponent) 
 							:	m_graphicComponentHero	(graphicComponentHero),
 								m_graphicComponentWeapon(graphicComponentWeapon),
+								m_graphiComponentBullet (graphicComponentBullet),
 								m_inputComponent		(inputComponent)
 {
 	m_stateHero		= STATE_WALK;
@@ -18,6 +20,7 @@ void Monster::Update()
 	m_inputComponent->Update		(*this);
 	m_graphicComponentHero->Update	(*this);
 	m_graphicComponentWeapon->Update(*this);
+	m_graphiComponentBullet->Update (*this);
 }
 
 Monster::~Monster()

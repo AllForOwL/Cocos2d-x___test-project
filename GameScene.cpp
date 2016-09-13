@@ -4,6 +4,7 @@
 #include "GraphicComponent.h"
 #include "HellGraphicComponent.h"
 #include "AK47GraphicComponent.h"
+#include "BulletGraphicComponent.h"
 
 USING_NS_CC;
 
@@ -51,9 +52,12 @@ bool GameScene::init()
 									   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 2);
 	this->addChild(m_graphicComponentWeapon);
 
+	m_graphicComponentBullet = new BulletGraphicComponent();
+	this->addChild(m_graphicComponentBullet);
+
 	m_inputComponent	= new PlayerInputComponent();
 
-	m_hero				= new Monster(m_graphicComponentHero, m_graphicComponentWeapon, m_inputComponent);
+	m_hero				= new Monster(m_graphicComponentHero, m_graphicComponentWeapon, m_graphicComponentBullet, m_inputComponent);
 
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);
