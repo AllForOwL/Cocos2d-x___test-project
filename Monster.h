@@ -13,7 +13,7 @@ class GraphicComponent;
 class Monster
 {
 public:
-	enum State
+	enum StateHero
 	{
 		STATE_WALK,
 		STATE_ATTACK,
@@ -21,16 +21,24 @@ public:
 		STATE_JUMP
 	};
 
-	Monster::Monster(GraphicComponent* graphicComponent, InputComponent* inputComponent);
+	enum StateWeapon
+	{
+		STATE_FIRE,
+		STATE_REST
+	};
+
+	Monster::Monster(GraphicComponent* graphicComponentHero, GraphicComponent* graphiComponentWeapon, InputComponent* inputComponent);
 
 	void Update();
 
 	~Monster();
 
 public:
-	GraphicComponent*	m_graphicComponent;
+	GraphicComponent*	m_graphicComponentHero;
+	GraphicComponent*	m_graphicComponentWeapon;
 	InputComponent*		m_inputComponent;
-	State				m_state;
+	StateHero			m_stateHero;
+	StateWeapon			m_stateWeapon;
 };
 
 #endif

@@ -47,9 +47,9 @@ HellGraphicComponent::HellGraphicComponent()
 
 /*virtual*/void HellGraphicComponent::Update(Monster& hero)
 {
-	switch (hero.m_state)
+	switch (hero.m_stateHero)
 	{
-		case Monster::State::STATE_WALK:
+		case Monster::StateHero::STATE_WALK:
 		{
 			if (++m_countSpriteInVectorWalk >= CNT_NUMBER_SPRITES_WALK)
 			{
@@ -58,22 +58,22 @@ HellGraphicComponent::HellGraphicComponent()
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesWalk[m_countSpriteInVectorWalk]));
 			break;
 		}
-		case Monster::State::STATE_ATTACK:
+		case Monster::StateHero::STATE_ATTACK:
 		{
 			if (++m_countSpriteInVectorAttack >= CNT_NUMBER_SPRITES_ATTACK)
 			{
 				m_countSpriteInVectorAttack = 0;
-				hero.m_state = Monster::State::STATE_WALK;
+				hero.m_stateHero = Monster::StateHero::STATE_WALK;
 			}
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesAttack[m_countSpriteInVectorAttack]));
 			break;
 		}
-		case Monster::State::STATE_RUN:
+		case Monster::StateHero::STATE_RUN:
 		{
 			if (++m_countSpriteInVectorRun >= CNT_NUMBER_SPRITES_RUN)
 			{
 				m_countSpriteInVectorRun = 0;
-				hero.m_state = Monster::State::STATE_WALK;
+				hero.m_stateHero = Monster::StateHero::STATE_WALK;
 			}
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesRun[m_countSpriteInVectorRun]));
 			break;

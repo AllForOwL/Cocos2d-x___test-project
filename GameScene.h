@@ -19,6 +19,8 @@ public:
 
 	CREATE_FUNC(GameScene);
 
+	~GameScene();
+
 private:
 	cocos2d::PhysicsWorld* m_sceneWorld;
 
@@ -33,7 +35,8 @@ private:
 	cocos2d::Layer* m_layer;
 
 	Monster*			m_hero;
-	GraphicComponent*	m_graphicComponent;
+	GraphicComponent*	m_graphicComponentWeapon;
+	GraphicComponent*	m_graphicComponentHero;
 	InputComponent*		m_inputComponent;
 
 	std::vector<std::string> m_vecSpritesWalk;
