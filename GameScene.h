@@ -6,6 +6,7 @@
 #include "Monster.h"
 #include "GraphicComponent.h"
 #include "PlayerInputComponent.h"
+#include "GameObjectMonster.h"
 
 using namespace cocos2d;
 
@@ -39,6 +40,8 @@ public:
 	GraphicComponent*	m_graphicComponentWeapon;
 	GraphicComponent*	m_graphicComponentBullet;
 	InputComponent*		m_inputComponent;
+	GameObjectMonster*	m_gameObjectMonster;
+	GraphicComponent*	m_objectMonster;
 
 	std::vector<std::string> m_vecSpritesWalk;
 	int m_countSpriteInVector;

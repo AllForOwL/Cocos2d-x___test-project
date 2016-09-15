@@ -5,6 +5,7 @@
 #include "HellGraphicComponent.h"
 #include "AK47GraphicComponent.h"
 #include "BulletGraphicComponent.h"
+#include "BreedGraphicComponent.h"
 
 USING_NS_CC;
 
@@ -56,17 +57,27 @@ bool GameScene::init()
 	this->addChild(m_graphicComponentBullet);
 
 	m_inputComponent	= new PlayerInputComponent();
+	
+	m_gameObjectMonster = new GameObjectMonster();
+	m_hero				= new Monster(m_graphicComponentHero, m_graphicComponentWeapon, m_graphicComponentBullet, m_gameObjectMonster, m_inputComponent);
 
-	m_hero				= new Monster(m_graphicComponentHero, m_graphicComponentWeapon, m_graphicComponentBullet, m_inputComponent);
+	//m_objectMonster = new BreedGraphicComponent(100, 150, std::string("darksaber_attack0077.png"));
+	//m_objectMonster->setPosition(200, 250);
+	//this->addChild(m_objectMonster);
 
-	auto listener = EventListenerKeyboard::create();
-	listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);
+	
+	m_hero->Update(*this);
+
+	//m_gameObjectMonster->Update(*m_hero, *this);
+
+	//auto listener = EventListenerKeyboard::create();
+	//listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);
 	//listener->onKeyReleased = CC_CALLBACK_2(InputComponent::onKeyReleased, inputComponent);
 	
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	//_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	
-	this->schedule(schedule_selector(GameScene::update), 50);
-	this->scheduleUpdate();
+	//this->schedule(schedule_selector(GameScene::update), 50);
+	//this->scheduleUpdate();
 
 	return true;
 }
@@ -76,7 +87,7 @@ void GameScene::update(float dt)
 	auto position = m_background->getPosition();
 	m_background->setPosition(--position.x, position.y);
 
-	m_hero->Update();
+	m_hero->Update(*this);
 }
 
 GameScene::~GameScene()

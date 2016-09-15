@@ -9,6 +9,7 @@ using namespace cocos2d;
 
 class InputComponent;
 class GraphicComponent;
+class GameObjectMonster;
 
 class Monster
 {
@@ -28,9 +29,9 @@ public:
 	};
 
 	Monster::Monster(GraphicComponent* graphicComponentHero, GraphicComponent* graphiComponentWeapon, 
-		GraphicComponent* m_graphicComponentBullet, InputComponent* inputComponent);
+		GraphicComponent* graphicComponentBullet, GameObjectMonster* objectMonster, InputComponent* inputComponent);
 
-	void Update();
+	void Update(GameScene& scene);
 
 	~Monster();
 
@@ -38,6 +39,7 @@ public:
 	GraphicComponent*	m_graphicComponentHero;
 	GraphicComponent*	m_graphicComponentWeapon;
 	GraphicComponent*	m_graphiComponentBullet;
+	GameObjectMonster*	m_objectMonster;
 	InputComponent*		m_inputComponent;
 	StateHero			m_stateHero;
 	StateWeapon			m_stateWeapon;

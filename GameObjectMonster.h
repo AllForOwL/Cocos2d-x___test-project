@@ -7,15 +7,23 @@ using namespace std;
 using namespace cocos2d;
 
 class GameScene;
+class BreedGraphicComponent;
 class Monster;
+class GraphicComponent;
 
 // interface for other graphics classes
 class GameObjectMonster
 {
 public:
-	void Update(Monster& hero);
+	GameObjectMonster();
+
+	void Update(Monster& hero, GameScene& scene);
+	BreedGraphicComponent* CreateNewMonster();
 
 	~GameObjectMonster();
+
+private:
+	GraphicComponent* m_monsterComponent;
 };
 
 #endif
