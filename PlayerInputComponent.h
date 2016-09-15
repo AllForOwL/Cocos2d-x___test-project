@@ -19,7 +19,7 @@ public:
 	PlayerInputComponent();
 	~PlayerInputComponent();
 
-private:
+public:
 	EventKeyboard::KeyCode m_keyCode;
 };
 

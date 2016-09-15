@@ -42,7 +42,6 @@ public:
 
 	std::vector<std::string> m_vecSpritesWalk;
 	int m_countSpriteInVector;
-
 };
 
 #endif // __GAME_SCENE_H__

@@ -17,6 +17,9 @@ public:
 	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event) = 0;
 
 	virtual ~InputComponent() {};
+
+public:
+	EventKeyboard::KeyCode m_keyCode;
 };
 
 #endif

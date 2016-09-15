@@ -1,5 +1,6 @@
 #include "Monster.h"
 #include "BulletGraphicComponent.h"
+#include "PlayerInputComponent.h"
 
 BulletGraphicComponent::BulletGraphicComponent()
 {
