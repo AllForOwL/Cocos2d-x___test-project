@@ -16,16 +16,24 @@ class Monster
 public:
 	enum StateHero
 	{
-		STATE_WALK,
-		STATE_ATTACK,
-		STATE_RUN,
-		STATE_JUMP
+		HERO_STATE_WALK,
+		HERO_STATE_ATTACK,
+		HERO_STATE_RUN,
+		HERO_STATE_JUMP
 	};
 
 	enum StateWeapon
 	{
-		STATE_FIRE,
-		STATE_REST
+		WEAPON_STATE_FIRE,
+		WEAPON_STATE_REST
+	};
+
+	enum StateEnemy
+	{
+		ENEMY_STATE_ATTACK,
+		ENEMY_STATE_FIRE,
+		ENEMY_STATE_REST,
+		ENEMY_STATE_DEAD
 	};
 
 	Monster::Monster(GraphicComponent* graphicComponentHero, GraphicComponent* graphiComponentWeapon, 
@@ -43,6 +51,7 @@ public:
 	InputComponent*		m_inputComponent;
 	StateHero			m_stateHero;
 	StateWeapon			m_stateWeapon;
+	StateEnemy			m_stateEnemy;
 };
 
 #endif

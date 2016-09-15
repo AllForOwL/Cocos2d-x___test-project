@@ -13,8 +13,9 @@ Monster::Monster(GraphicComponent* graphicComponentHero, GraphicComponent* graph
 								m_objectMonster			(objectMonster),
 								m_inputComponent		(inputComponent)
 {
-	m_stateHero		= STATE_WALK;
-	m_stateWeapon	= STATE_REST;
+	m_stateHero		= Monster::StateHero::HERO_STATE_WALK;
+	m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_REST;
+	m_stateEnemy	= Monster::StateEnemy::ENEMY_STATE_REST;
 }
 
 void Monster::Update(GameScene& scene)

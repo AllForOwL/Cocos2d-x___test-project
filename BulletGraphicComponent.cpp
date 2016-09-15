@@ -13,7 +13,7 @@ BulletGraphicComponent::BulletGraphicComponent()
 {
 	switch (hero.m_stateWeapon)
 	{
-		case Monster::StateWeapon::STATE_FIRE:
+		case Monster::StateWeapon::WEAPON_STATE_FIRE:
 		{
 			if (m_position == cocos2d::Point::ZERO)
 			{
@@ -26,7 +26,7 @@ BulletGraphicComponent::BulletGraphicComponent()
 			else
 			{
 				m_position = Point::ZERO;
-				hero.m_stateWeapon = Monster::StateWeapon::STATE_REST;
+				hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_REST;
 			}
 			setPosition(m_position);
 			break;

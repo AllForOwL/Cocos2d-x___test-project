@@ -60,23 +60,14 @@ bool GameScene::init()
 	
 	m_gameObjectMonster = new GameObjectMonster();
 	m_hero				= new Monster(m_graphicComponentHero, m_graphicComponentWeapon, m_graphicComponentBullet, m_gameObjectMonster, m_inputComponent);
-
-	//m_objectMonster = new BreedGraphicComponent(100, 150, std::string("darksaber_attack0077.png"));
-	//m_objectMonster->setPosition(200, 250);
-	//this->addChild(m_objectMonster);
-
 	
-	m_hero->Update(*this);
-
-	//m_gameObjectMonster->Update(*m_hero, *this);
-
-	//auto listener = EventListenerKeyboard::create();
-	//listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);
+	auto listener = EventListenerKeyboard::create();
+	listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);
 	//listener->onKeyReleased = CC_CALLBACK_2(InputComponent::onKeyReleased, inputComponent);
 	
-	//_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	
-	//this->schedule(schedule_selector(GameScene::update), 50);
+	this->schedule(schedule_selector(GameScene::update), 0.1);
 	//this->scheduleUpdate();
 
 	return true;

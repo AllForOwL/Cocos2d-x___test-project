@@ -21,9 +21,10 @@ public:
 	BreedGraphicComponent* CreateNewMonster();
 
 	~GameObjectMonster();
-
 private:
-	GraphicComponent* m_monsterComponent;
+	std::vector<GraphicComponent*> m_monsterComponent;
+	std::vector<std::string> m_vecDieBoy;
+	int						 m_countInVector;
 };
 
 #endif
