@@ -19,12 +19,14 @@ public:
 
 	void Update(Monster& hero, GameScene& scene);
 	BreedGraphicComponent* CreateNewMonster();
+	void Spawner(GameScene& scene);
 
 	~GameObjectMonster();
 private:
-	std::vector<GraphicComponent*> m_monsterComponent;
-	std::vector<std::string> m_vecDieBoy;
-	int						 m_countInVector;
+	std::vector<GraphicComponent*>	m_monsterComponent;
+	GraphicComponent*				m_monster;
+	std::vector<std::string>		m_vecDieBoy;
+	int								m_countInVector;
 };
 
 #endif

@@ -68,6 +68,7 @@ bool GameScene::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
 	
 	this->schedule(schedule_selector(GameScene::update), 0.1);
+	this->schedule(schedule_selector(GameScene::Spawn), 5);
 	//this->scheduleUpdate();
 
 	return true;
@@ -79,6 +80,11 @@ void GameScene::update(float dt)
 	m_background->setPosition(--position.x, position.y);
 
 	m_hero->Update(*this);
+}
+
+void GameScene::Spawn(float dt)
+{
+	m_gameObjectMonster->Spawner(*this);
 }
 
 GameScene::~GameScene()
