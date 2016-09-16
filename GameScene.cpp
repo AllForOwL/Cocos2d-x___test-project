@@ -6,6 +6,7 @@
 #include "AK47GraphicComponent.h"
 #include "BulletGraphicComponent.h"
 #include "BreedGraphicComponent.h"
+#include "BotInputComponent.h"
 
 USING_NS_CC;
 
@@ -59,7 +60,8 @@ bool GameScene::init()
 	m_inputComponent	= new PlayerInputComponent();
 	
 	m_gameObjectMonster = new GameObjectMonster();
-	m_hero				= new Monster(m_graphicComponentHero, m_graphicComponentWeapon, m_graphicComponentBullet, m_gameObjectMonster, m_inputComponent);
+	m_botInputComponent = new BotInputComponent();
+	m_hero				= new Monster(m_graphicComponentHero, m_graphicComponentWeapon, m_graphicComponentBullet, m_gameObjectMonster, m_inputComponent, m_botInputComponent);
 	
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);

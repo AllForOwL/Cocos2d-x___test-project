@@ -37,7 +37,7 @@ public:
 	};
 
 	Monster::Monster(GraphicComponent* graphicComponentHero, GraphicComponent* graphiComponentWeapon, 
-		GraphicComponent* graphicComponentBullet, GameObjectMonster* objectMonster, InputComponent* inputComponent);
+		GraphicComponent* graphicComponentBullet, GameObjectMonster* objectMonster, InputComponent* inputComponent, InputComponent* botInputComponent);
 
 	void Update(GameScene& scene);
 
@@ -49,6 +49,7 @@ public:
 	GraphicComponent*	m_graphiComponentBullet;
 	GameObjectMonster*	m_objectMonster;
 	InputComponent*		m_inputComponent;
+	InputComponent*		m_botInputComponent;
 	StateHero			m_stateHero;
 	StateWeapon			m_stateWeapon;
 	StateEnemy			m_stateEnemy;

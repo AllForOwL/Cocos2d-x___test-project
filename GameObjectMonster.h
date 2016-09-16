@@ -22,7 +22,7 @@ public:
 	void Spawner(GameScene& scene);
 
 	~GameObjectMonster();
-private:
+public:
 	std::vector<GraphicComponent*>	m_monsterComponent;
 	GraphicComponent*				m_monster;
 	std::vector<std::string>		m_vecDieBoy;

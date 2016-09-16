@@ -51,6 +51,14 @@ void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 				m_countInVector = 0;
 			}
 			*/
+			
+			if (m_monsterComponent.size() > 0)
+			{
+				int _x = m_monsterComponent[0]->getPosition().x;
+				int	_y = m_monsterComponent[0]->getPosition().y;
+
+				m_monsterComponent[0]->setPosition(_x - 5, _y);
+			}
 			break;
 		}
 		case Monster::StateEnemy::ENEMY_STATE_FIRE:
@@ -60,17 +68,12 @@ void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 		}
 		case Monster::StateEnemy::ENEMY_STATE_REST:
 		{
-			if (m_monster->getTag() == 2)
-			{
-				scene.addChild(m_monster);
-			}
-
+			
 			/*for (int i = 0; i < CNT_COUNT_OBJECT; i++)
 			{
 				scene.addChild(m_monsterComponent[i]);
 			}*/
-			hero.m_stateEnemy = Monster::StateEnemy::ENEMY_STATE_ATTACK;
-			
+						
 			break;
 		}
 		case Monster::StateEnemy::ENEMY_STATE_DEAD:

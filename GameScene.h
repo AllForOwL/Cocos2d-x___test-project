@@ -43,6 +43,7 @@ public:
 	InputComponent*		m_inputComponent;
 	GameObjectMonster*	m_gameObjectMonster;
 	GraphicComponent*	m_objectMonster;
+	InputComponent*		m_botInputComponent;
 
 	std::vector<std::string> m_vecSpritesWalk;
 	int m_countSpriteInVector;

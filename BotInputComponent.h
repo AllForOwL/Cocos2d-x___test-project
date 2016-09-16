@@ -8,10 +8,16 @@
 using namespace std;
 using namespace cocos2d;
 
-class BotInputComponent
+class BotInputComponent : public InputComponent
 {
 public:
 	BotInputComponent();
+
+	virtual void Update(Monster& heroes);
+
+	virtual void onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
+	virtual void onKeyReleased(EventKeyboard::KeyCode keyCode, Event* event);
+
 	~BotInputComponent();
 };
 
