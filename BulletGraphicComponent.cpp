@@ -1,10 +1,18 @@
 #include "Monster.h"
 #include "BulletGraphicComponent.h"
 #include "PlayerInputComponent.h"
+#include "constants.h"
 
 BulletGraphicComponent::BulletGraphicComponent()
 {
 	this->initWithFile("shuriken.png");
+	
+	auto physicBody = PhysicsBody::createBox(this->getContentSize());
+	//physicBody->setDynamic(false);
+	physicBody->setContactTestBitmask(true);
+	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+
+	this->setPhysicsBody(physicBody);
 	
 	m_position = cocos2d::Point::ZERO;
 }
@@ -18,6 +26,7 @@ BulletGraphicComponent::BulletGraphicComponent()
 			if (m_position == cocos2d::Point::ZERO)
 			{
 				m_position = hero.m_graphicComponentWeapon->getPosition();
+				//m_position.x = 6;
 			}
 			else if (m_position < Director::getInstance()->getVisibleSize())
 			{
@@ -26,7 +35,7 @@ BulletGraphicComponent::BulletGraphicComponent()
 			else
 			{
 				m_position = Point::ZERO;
-				hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_REST;
+				//hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_REST;
 			}
 			setPosition(m_position);
 			break;

@@ -54,10 +54,10 @@ void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 			
 			if (m_monsterComponent.size() > 0)
 			{
-				int _x = m_monsterComponent[0]->getPosition().x;
+				/*int _x = m_monsterComponent[0]->getPosition().x;
 				int	_y = m_monsterComponent[0]->getPosition().y;
 
-				m_monsterComponent[0]->setPosition(_x - 5, _y);
+				m_monsterComponent[0]->setPosition(_x - 5, _y);*/
 			}
 			break;
 		}
@@ -94,7 +94,7 @@ void GameObjectMonster::Spawner(GameScene& scene)
 	m_monster = new BreedGraphicComponent(*CreateNewMonster());
 	m_monster->setScale(_visibleSize.width / m_monster->getContentSize().width / 6,
 		_visibleSize.height / m_monster->getContentSize().height / 4);
-	m_monster->setPosition(200 + m_monsterComponent.size(), 50);
+	m_monster->setPosition(250 + m_monsterComponent.size(), 50);
 	m_monster->setTag(m_monsterComponent.size());
 	m_monsterComponent.push_back(m_monster);
 	
@@ -103,4 +103,5 @@ void GameObjectMonster::Spawner(GameScene& scene)
 
 GameObjectMonster::~GameObjectMonster()
 {
+
 }

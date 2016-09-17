@@ -36,7 +36,7 @@ PlayerInputComponent::PlayerInputComponent()
 		}
 	}
 }
-
+	
 /*virtual*/ void PlayerInputComponent::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
 {
 	m_keyCode = keyCode;

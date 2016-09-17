@@ -10,6 +10,7 @@ using namespace cocos2d;
 class InputComponent;
 class GraphicComponent;
 class GameObjectMonster;
+class PhysicComponent;
 
 class Monster
 {
@@ -36,8 +37,18 @@ public:
 		ENEMY_STATE_DEAD
 	};
 
-	Monster::Monster(GraphicComponent* graphicComponentHero, GraphicComponent* graphiComponentWeapon, 
-		GraphicComponent* graphicComponentBullet, GameObjectMonster* objectMonster, InputComponent* inputComponent, InputComponent* botInputComponent);
+	enum StatePhysic
+	{
+		PHYSIC_NOTHING,
+		PHYSIC_KILL_ENEMY,
+		PHYSIC_KILL_HERO
+	};
+
+	Monster::Monster(
+		GraphicComponent* graphicComponentHero, GraphicComponent* graphiComponentWeapon, 
+		GraphicComponent* graphicComponentBullet, GameObjectMonster* objectMonster, 
+		InputComponent* inputComponent, InputComponent* botInputComponent,
+		PhysicComponent* physicComponent);
 
 	void Update(GameScene& scene);
 
@@ -50,9 +61,11 @@ public:
 	GameObjectMonster*	m_objectMonster;
 	InputComponent*		m_inputComponent;
 	InputComponent*		m_botInputComponent;
+	PhysicComponent*	m_physicComponent;
 	StateHero			m_stateHero;
 	StateWeapon			m_stateWeapon;
 	StateEnemy			m_stateEnemy;
+	StatePhysic			m_statePhysic;
 };
 
 #endif
