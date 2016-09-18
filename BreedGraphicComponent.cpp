@@ -8,7 +8,7 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, std::string
 											  m_filename(filename)
 {
 	this->initWithFile(m_filename);
-
+									
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
 	//physicsBody->setDynamic(false);
 	physicsBody->setCollisionBitmask(ENEMY_COLLISION_BITMASK);

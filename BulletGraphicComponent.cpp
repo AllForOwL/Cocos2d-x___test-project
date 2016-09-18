@@ -8,7 +8,7 @@ BulletGraphicComponent::BulletGraphicComponent()
 	this->initWithFile("shuriken.png");
 	
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
-	//physicBody->setDynamic(false);
+//	physicBody->setDynamic(false);
 	physicBody->setContactTestBitmask(true);
 	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
 
@@ -26,7 +26,6 @@ BulletGraphicComponent::BulletGraphicComponent()
 			if (m_position == cocos2d::Point::ZERO)
 			{
 				m_position = hero.m_graphicComponentWeapon->getPosition();
-				//m_position.x = 6;
 			}
 			else if (m_position < Director::getInstance()->getVisibleSize())
 			{
