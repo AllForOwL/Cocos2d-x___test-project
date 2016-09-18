@@ -12,7 +12,7 @@ class HellGraphicComponent : public GraphicComponent
 public:
 	HellGraphicComponent();
 
-	virtual void Update(Monster& hero);
+	virtual void Update(Monster& hero, GameScene& scene);
 
 	~HellGraphicComponent();
 

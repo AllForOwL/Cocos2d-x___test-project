@@ -6,7 +6,7 @@
 PhysicComponent::PhysicComponent()
 {
 	m_statePhysic = PHYSIC_NOTHING;
-	//m_vecSprites.reserve(0);
+	m_vecSprites.reserve(5);
 	m_countElementInVector = 0;
 }
 
@@ -30,18 +30,25 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			m_vecSprites.push_back(Sprite::createWithSpriteFrameName("13_4.png"));
 			m_vecSprites.push_back(Sprite::createWithSpriteFrameName("13_5.png"));
 			
-			for (int i = 0; i < 5; i++)
-			{
-				m_vecSprites[i]->setPosition(m_positionCollision.x, m_positionCollision.y);
-			}
-		
-			scene.addChild(m_vecSprites[m_countElementInVector]);
-			
+		//	for (int i = 0; i < 5; i++)
+		//	{
+		//		m_vecSprites[i]->setPosition(m_positionCollision.x + i, m_positionCollision.y);
+		//	}
+
+		//	scene.addChild(m_vecSprites[m_countElementInVector]);
+			scene.removeChildByName("bullet");
+			scene.removeChildByName("monster");
+
+			hero.m_stateEnemy	= Monster::StateEnemy::ENEMY_STATE_DEAD;
+			hero.m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_DEAD;
+
 			if (++m_countElementInVector == 5)
 			{
 				m_statePhysic = PhysicComponent::StatePhysic::PHYSIC_NOTHING;
 				m_countElementInVector = 0;
 			}
+
+			m_statePhysic = StatePhysic::PHYSIC_NOTHING;
 
 			break;
 		}
@@ -67,9 +74,6 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 	{
 		m_statePhysic = PHYSIC_KILL_ENEMY;
 		m_positionCollision = _a->getPosition();
-		_a->removeFromWorld();
-		_b->removeFromWorld();
-
 		CCLOG("Collision");
 	}
 

@@ -45,7 +45,7 @@ HellGraphicComponent::HellGraphicComponent()
 	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVectorWalk]);
 }
 
-/*virtual*/void HellGraphicComponent::Update(Monster& hero)
+/*virtual*/void HellGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 	switch (hero.m_stateHero)
 	{

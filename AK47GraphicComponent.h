@@ -12,7 +12,7 @@ class AK47GraphicComponent : public GraphicComponent
 public:
 	AK47GraphicComponent();
 
-	virtual void Update(Monster& hero);
+	virtual void Update(Monster& hero, GameScene& scene);
 
 	~AK47GraphicComponent();
 

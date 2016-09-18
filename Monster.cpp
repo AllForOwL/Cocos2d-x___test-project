@@ -29,12 +29,12 @@ Monster::Monster(
 void Monster::Update(GameScene& scene)
 {
 	m_inputComponent->Update		(*this);
-	m_graphicComponentHero->Update	(*this);
-	m_graphicComponentWeapon->Update(*this);
+	m_graphicComponentHero->Update	(*this, scene);
+	m_graphicComponentWeapon->Update(*this, scene);
 	m_botInputComponent->Update		(*this);
 	m_objectMonster->Update			(*this, scene);
-	m_graphiComponentBullet->Update (*this);
 	m_physicComponent->Update		(*this, scene);
+	m_graphiComponentBullet->Update (*this, scene);
 }
 
 Monster::~Monster()

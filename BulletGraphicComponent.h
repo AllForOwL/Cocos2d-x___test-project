@@ -12,7 +12,7 @@ class BulletGraphicComponent : public GraphicComponent
 public:
 	BulletGraphicComponent();
 
-	virtual void Update(Monster& hero);
+	virtual void Update(Monster& hero, GameScene& scene);
 
 	~BulletGraphicComponent();
 

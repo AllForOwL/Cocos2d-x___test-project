@@ -26,7 +26,8 @@ public:
 	enum StateWeapon
 	{
 		WEAPON_STATE_FIRE,
-		WEAPON_STATE_REST
+		WEAPON_STATE_REST,
+		WEAPON_STATE_DEAD
 	};
 
 	enum StateEnemy

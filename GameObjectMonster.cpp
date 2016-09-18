@@ -97,7 +97,8 @@ void GameObjectMonster::Spawner(GameScene& scene)
 	m_monster->setPosition(250 + m_monsterComponent.size(), 50);
 	m_monster->setTag(m_monsterComponent.size());
 	m_monsterComponent.push_back(m_monster);
-	
+	m_monster->setName("monster");
+
 	scene.addChild(m_monster);
 }
 

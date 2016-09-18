@@ -13,7 +13,7 @@ class Monster;
 class GraphicComponent : public cocos2d::Sprite
 {
 public:
-	virtual void Update(Monster& hero)	= 0;
+	virtual void Update(Monster& hero, GameScene& scene)	= 0;
 
 	virtual ~GraphicComponent() {};
 };

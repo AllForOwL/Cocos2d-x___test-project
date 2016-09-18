@@ -35,6 +35,8 @@ PlayerInputComponent::PlayerInputComponent()
 			break;
 		}
 	}
+
+	m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;
 }
 	
 /*virtual*/ void PlayerInputComponent::onKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)

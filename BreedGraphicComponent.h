@@ -15,7 +15,7 @@ public:
 	BreedGraphicComponent(int attack, int health, std::string& filename);
 	BreedGraphicComponent(BreedGraphicComponent& breed);
 
-	virtual void Update(Monster& hero);
+	virtual void Update(Monster& hero, GameScene& scene);
 
 	int			GetAttack()   const;
 	int			GetHealth()   const;

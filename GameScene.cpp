@@ -60,7 +60,7 @@ bool GameScene::init()
 									 _visibleSize.height / m_graphicComponentHero->getContentSize().height / 2);
 	
 	this->addChild(m_graphicComponentHero);
-
+	
 	m_graphicComponentWeapon = new AK47GraphicComponent();
 	m_graphicComponentWeapon->setPosition(100, 50);
 	m_graphicComponentWeapon->setScale(_visibleSize.width / m_graphicComponentWeapon->getContentSize().width / 6,
@@ -69,6 +69,7 @@ bool GameScene::init()
 	this->addChild(m_graphicComponentWeapon);
 
 	m_graphicComponentBullet	= new BulletGraphicComponent();
+	m_graphicComponentBullet->setName("bullet");
 	this->addChild(m_graphicComponentBullet);
 
 	m_inputComponent			= new PlayerInputComponent();

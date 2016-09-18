@@ -5,7 +5,7 @@ AK47GraphicComponent::AK47GraphicComponent()
 	this->initWithFile("AK47.png");
 }
 
-/*virtual*/ void AK47GraphicComponent::Update(Monster& hero)
+/*virtual*/ void AK47GraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 	
 }

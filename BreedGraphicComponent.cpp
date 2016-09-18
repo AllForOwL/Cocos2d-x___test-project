@@ -33,7 +33,7 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 	this->setPhysicsBody(physicsBody);
 }
 
-/*virtual*/ void BreedGraphicComponent::Update(Monster& hero)
+/*virtual*/ void BreedGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 
 }
