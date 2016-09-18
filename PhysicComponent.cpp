@@ -6,6 +6,8 @@
 PhysicComponent::PhysicComponent()
 {
 	m_statePhysic = PHYSIC_NOTHING;
+	//m_vecSprites.reserve(0);
+	m_countElementInVector = 0;
 }
 
 void PhysicComponent::Update(Monster& hero, GameScene& scene)
@@ -18,27 +20,28 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			auto spritecache = SpriteFrameCache::getInstance();
 
 			// the .plist file can be generated with any of the tools mentioned below
-			spritecache->addSpriteFramesWithFile("cross.plist");
+			spritecache->addSpriteFramesWithFile("explosion_bullet.plist");
 
-			auto mysprite = Sprite::createWithSpriteFrameName("7.png");
+//			m_vecSprites.resize(5);
+
+			m_vecSprites.push_back(Sprite::createWithSpriteFrameName("13_1.png"));
+			m_vecSprites.push_back(Sprite::createWithSpriteFrameName("13_2.png"));
+			m_vecSprites.push_back(Sprite::createWithSpriteFrameName("13_3.png"));
+			m_vecSprites.push_back(Sprite::createWithSpriteFrameName("13_4.png"));
+			m_vecSprites.push_back(Sprite::createWithSpriteFrameName("13_5.png"));
 			
+			for (int i = 0; i < 5; i++)
+			{
+				m_vecSprites[i]->setPosition(m_positionCollision.x, m_positionCollision.y);
+			}
+		
+			scene.addChild(m_vecSprites[m_countElementInVector]);
 			
-			//mysprite->setContentSize(mysprite->getContentSize().width / 4, mysprite->getContentSize().height);
-
-			//auto sprite = mysprite->getContentSize();
-
-			//auto newspriteFrame = SpriteFrameCache::getInstance()->getSpriteFrameByName("13 - Copie.png");
-			//auto newSprite = Sprite::createWithSpriteFrame(newspriteFrame);
-
-
-			// create the animation out of the frames
-			//Animation* animation = Animation::createWithSpriteFrames(newspriteFrame, 0.1f);
-			//Animate* animate = Animate::create(animation);
-
-			// run it and repeat it forever
-			//mysprite->runAction(RepeatForever::create(animate));
-
-			scene.addChild(mysprite);
+			if (++m_countElementInVector == 5)
+			{
+				m_statePhysic = PhysicComponent::StatePhysic::PHYSIC_NOTHING;
+				m_countElementInVector = 0;
+			}
 
 			break;
 		}
@@ -63,6 +66,10 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 		)
 	{
 		m_statePhysic = PHYSIC_KILL_ENEMY;
+		m_positionCollision = _a->getPosition();
+		_a->removeFromWorld();
+		_b->removeFromWorld();
+
 		CCLOG("Collision");
 	}
 
