@@ -19,7 +19,8 @@ public:
 
 	void Update(Monster& hero, GameScene& scene);
 	BreedGraphicComponent* CreateNewMonster(int attack, int health, std::string& filename);
-	bool LoadSprites(std::string& filename);
+	void GoesAirplanes(std::string& filename);
+	void GoesBoy(std::string& filename);
 	void Spawner(GameScene& scene);
 
 	~GameObjectMonster();
@@ -35,7 +36,10 @@ public:
 	std::vector<std::string>		m_vecSpritesAirplanesDead;
 	int								m_countSpriteInVectorAirplanesDead;
 
-	
+	std::vector<std::string>		m_vecSpritesBoyWalk;
+	int								m_countInVectorBoyWalk;
+	std::vector<std::string>		m_vecSpritesBoyDeath;
+	int								m_countInVectorBoyDeath;
 };
 
 #endif
