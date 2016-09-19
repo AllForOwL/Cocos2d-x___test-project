@@ -27,8 +27,15 @@ public:
 	{
 		WEAPON_STATE_FIRE,
 		WEAPON_STATE_FIRE_UP,
-		WEAPON_STATE_REST,
-		WEAPON_STATE_DEAD
+		WEAPON_STATE_REST
+	};
+
+	enum StateBullet
+	{
+		BULLET_STATE_FIRE,
+		BULLET_STATE_FIRE_UP,
+		BULLET_STATE_REST,
+		BULLET_STATE_DEAD
 	};
 
 	enum StateEnemy
@@ -68,6 +75,7 @@ public:
 	PhysicComponent*	m_physicComponent;
 	StateHero			m_stateHero;
 	StateWeapon			m_stateWeapon;
+	StateBullet			m_stateBullet;
 	StateEnemy			m_stateEnemy;
 	StatePhysic			m_statePhysic;
 };

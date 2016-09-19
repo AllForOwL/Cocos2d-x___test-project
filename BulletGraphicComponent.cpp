@@ -4,9 +4,10 @@
 #include "GameScene.h"
 #include "constants.h"
 
-BulletGraphicComponent::BulletGraphicComponent()
+BulletGraphicComponent::BulletGraphicComponent(std::string& filename)
+												: m_filename(filename)
 {
-	this->initWithFile("shuriken.png");
+	this->initWithFile(m_filename);
 	this->setTag(CNT_TAG_BULLET);
 
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
@@ -19,11 +20,31 @@ BulletGraphicComponent::BulletGraphicComponent()
 	m_position = cocos2d::Point::ZERO;
 }
 
+BulletGraphicComponent::BulletGraphicComponent(BulletGraphicComponent& bullet)
+{
+	this->setTag(CNT_TAG_BULLET);
+
+	auto physicBody = PhysicsBody::createBox(this->getContentSize());
+	physicBody->setContactTestBitmask(true);
+	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+	
+	this->m_filename = bullet.GetFilename();
+	this->m_position = bullet.getPosition();
+
+	this->setPhysicsBody(physicBody);
+	this->initWithFile(m_filename);
+}
+
+std::string BulletGraphicComponent::GetFilename() const
+{
+	return m_filename;
+}
+
 /*virtual*/ void BulletGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	switch (hero.m_stateWeapon)
+	switch (hero.m_stateBullet)
 	{
-		case Monster::StateWeapon::WEAPON_STATE_FIRE:
+		case Monster::StateBullet::BULLET_STATE_FIRE:
 		{
 			if (m_position == cocos2d::Point::ZERO)
 			{
@@ -42,7 +63,7 @@ BulletGraphicComponent::BulletGraphicComponent()
 
 			break;
 		}
-		case Monster::StateWeapon::WEAPON_STATE_FIRE_UP:
+		case Monster::StateBullet::BULLET_STATE_FIRE_UP:
 		{
 			if (m_position == cocos2d::Point::ZERO)
 			{
@@ -62,7 +83,7 @@ BulletGraphicComponent::BulletGraphicComponent()
 
 			break;
 		}
-		case Monster::StateWeapon::WEAPON_STATE_DEAD:
+		case Monster::StateBullet::BULLET_STATE_DEAD:
 		{
 			m_position = cocos2d::Point::ZERO;
 			this->setPosition(m_position);

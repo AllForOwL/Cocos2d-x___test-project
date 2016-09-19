@@ -33,7 +33,7 @@ bool GameScene::init()
 	}
 	
 	Size _visibleSize   = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	Vec2 origin			= Director::getInstance()->getVisibleOrigin();
 
 	m_countSpriteInVector = 0;
 	
@@ -82,8 +82,7 @@ bool GameScene::init()
 	
 	//sprite->runAction(RepeatForever::create(animate));
 	//sprite->setPosition(100, 100);
-
-
+	
 	m_graphicComponentHero	= new HellGraphicComponent();
 	m_graphicComponentHero->setPosition(_visibleSize.width  / m_graphicComponentHero->getContentSize().width + 100,
 										_visibleSize.height / m_graphicComponentHero->getContentSize().height + 100);
@@ -98,7 +97,7 @@ bool GameScene::init()
 									   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 2);
 	
 	this->addChild(m_graphicComponentWeapon);
-
+	
 	m_graphicComponentBullet	= new BulletGraphicComponent();
 	m_graphicComponentBullet->setName("bullet");
 	this->addChild(m_graphicComponentBullet);
