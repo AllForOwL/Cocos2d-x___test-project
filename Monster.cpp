@@ -5,6 +5,7 @@
 #include "WeaponGraphicComponent.h"
 #include "GameObjectMonster.h"
 #include "PhysicComponent.h"
+#include "BulletGraphicComponent.h"
 
 Monster::Monster(
 				GraphicComponent* graphicComponentHero, GraphicComponent* graphicComponentWeapon,
@@ -25,6 +26,18 @@ Monster::Monster(
 	m_stateBullet	= Monster::StateBullet::BULLET_STATE_REST;
 	m_stateEnemy	= Monster::StateEnemy::ENEMY_STATE_ATTACK;
 	m_statePhysic	= Monster::StatePhysic::PHYSIC_NOTHING;
+}
+
+void Monster::ChangeWeapon(WeaponGraphicComponent& weapon)
+{
+	m_graphicComponentWeapon->removeFromParent();
+	m_graphicComponentWeapon = new WeaponGraphicComponent(weapon);
+}
+
+void Monster::ChangeBullet(BulletGraphicComponent& bullet)
+{
+	m_graphiComponentBullet->removeFromParent();
+	m_graphiComponentBullet = new BulletGraphicComponent(bullet);
 }
 
 void Monster::Update(GameScene& scene)

@@ -1,4 +1,7 @@
 #include "PlayerInputComponent.h"
+#include "WeaponGraphicComponent.h"
+#include "BulletGraphicComponent.h"
+#include "Monster.h"
 
 PlayerInputComponent::PlayerInputComponent()
 {
@@ -38,6 +41,10 @@ PlayerInputComponent::PlayerInputComponent()
 		{
 			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_FIRE_UP;
 			break;
+		}
+		case EventKeyboard::KeyCode::KEY_C:
+		{
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_CHANGE_WEAPON;
 		}
 	}
 

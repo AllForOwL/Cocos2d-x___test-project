@@ -36,6 +36,9 @@ BulletGraphicComponent::BulletGraphicComponent(BulletGraphicComponent& bullet)
 
 	this->setPhysicsBody(physicBody);
 	this->initWithFile(m_filename);
+
+	this->setPosition(m_position);
+	this->setContentSize(Size(20, 20));
 }
 
 int BulletGraphicComponent::GetAttack() const

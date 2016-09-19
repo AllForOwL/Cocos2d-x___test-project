@@ -11,6 +11,8 @@ class InputComponent;
 class GraphicComponent;
 class GameObjectMonster;
 class PhysicComponent;
+class WeaponGraphicComponent;
+class BulletGraphicComponent;
 
 class Monster
 {
@@ -20,7 +22,8 @@ public:
 		HERO_STATE_WALK,
 		HERO_STATE_ATTACK,
 		HERO_STATE_RUN,
-		HERO_STATE_JUMP
+		HERO_STATE_JUMP,
+		HERO_STATE_CHANGE_WEAPON
 	};
 
 	enum StateWeapon
@@ -61,7 +64,10 @@ public:
 						PhysicComponent* physicComponent
 					 );
 
-	void Update(GameScene& scene);
+	virtual void Update(GameScene& scene);
+	
+	void ChangeWeapon(WeaponGraphicComponent& weapon);
+	void ChangeBullet(BulletGraphicComponent& bullet);
 
 	~Monster();
 

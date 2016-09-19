@@ -13,8 +13,13 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 {
 	this->m_attack   = weapon.GetAttack();
 	this->m_filename = weapon.GetFilename();
-
+	
 	this->initWithFile(m_filename);
+
+	Size _visibleSize = Director::getInstance()->getVisibleSize();
+	this->setScale(_visibleSize.width / this->getContentSize().width / 6,
+		_visibleSize.height / this->getContentSize().height / 2);
+	this->setPosition(100, 50);
 }
 
 /*virtual*/ void WeaponGraphicComponent::Update(Monster& hero, GameScene& scene)

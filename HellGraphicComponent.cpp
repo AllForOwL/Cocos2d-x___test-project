@@ -3,6 +3,8 @@
 #include "GraphicComponent.h"
 #include "GameScene.h"
 #include "constants.h"
+#include "WeaponGraphicComponent.h"
+#include "BulletGraphicComponent.h"
 
 HellGraphicComponent::HellGraphicComponent()
 {
@@ -76,6 +78,28 @@ HellGraphicComponent::HellGraphicComponent()
 				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
 			}
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesRun[m_countSpriteInVectorRun]));
+			break;
+		}
+		case Monster::StateHero::HERO_STATE_CHANGE_WEAPON:
+		{
+			std::string nameWeapon = "AK47.png";
+			WeaponGraphicComponent* _weapon = new WeaponGraphicComponent(100, nameWeapon);
+			Size _visibleSize = Director::getInstance()->getVisibleSize();
+			_weapon->setScale(_visibleSize.width / _weapon->getContentSize().width / 6,
+				_visibleSize.height / _weapon->getContentSize().height / 2);
+			_weapon->setPosition(100, 50);
+			
+			hero.ChangeWeapon(*_weapon);
+			scene.addChild(_weapon);
+
+			//std::string nameBullet = "bullet.jpg";
+			//BulletGraphicComponent* b = new BulletGraphicComponent(20, nameBullet);
+			//b->setPosition(Point(Point::ZERO));
+			//hero.ChangeBullet(*b);
+			//scene.addChild(b);
+
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+
 			break;
 		}
 	}
