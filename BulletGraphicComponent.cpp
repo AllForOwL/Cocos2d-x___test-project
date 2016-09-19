@@ -51,7 +51,7 @@ BulletGraphicComponent::BulletGraphicComponent()
 			else if (m_position < Director::getInstance()->getVisibleSize())
 			{
 				++m_position.x;
-				++m_position.y;
+				m_position.y += 2;
 			}
 			else
 			{

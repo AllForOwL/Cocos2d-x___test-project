@@ -137,7 +137,6 @@ void GameObjectMonster::GoesAirplanes(std::string& filename)
 		Vec2 _positionAirplane = m_monsterComponent[i]->getPosition();
 		m_monsterComponent[i]->setPosition(--_positionAirplane.x, _positionAirplane.y);
 		m_monsterComponent[i]->setTexture(CCTextureCache::sharedTextureCache()->addImage(filename));
-
 	}
 }
 
@@ -161,9 +160,9 @@ void GameObjectMonster::Spawner(GameScene& scene)
 
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 	
-	int _randomValue = 1; // rand() % 1 + 0;
+	int _randomValue = rand() % 2 + 1;
 
-	if (_randomValue == 0)		// airplanes
+	if (_randomValue == 1)		// airplanes
 	{
 		int _attack				= 200;
 		int _health				= 100;
@@ -183,7 +182,7 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		m_monster->setName("airplanes");
 		m_monsterComponent.push_back(m_monster);
 	}
-	else if (_randomValue == 1)	// boy
+	else if (_randomValue == 2)	// boy
 	{
 		int _attack = 100;
 		int _health = 100;
