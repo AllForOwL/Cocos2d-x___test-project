@@ -3,7 +3,7 @@
 #include "InputComponent.h"
 #include "GraphicComponent.h"
 #include "HellGraphicComponent.h"
-#include "AK47GraphicComponent.h"
+#include "WeaponGraphicComponent.h"
 #include "BulletGraphicComponent.h"
 #include "BreedGraphicComponent.h"
 #include "BotInputComponent.h"
@@ -91,14 +91,16 @@ bool GameScene::init()
 	
 	this->addChild(m_graphicComponentHero);
 	
-	m_graphicComponentWeapon = new AK47GraphicComponent();
+	std::string nameWeapon = "mi-71.png";
+	m_graphicComponentWeapon = new WeaponGraphicComponent(200, nameWeapon);
 	m_graphicComponentWeapon->setPosition(100, 50);
 	m_graphicComponentWeapon->setScale(_visibleSize.width / m_graphicComponentWeapon->getContentSize().width / 6,
 									   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 2);
 	
 	this->addChild(m_graphicComponentWeapon);
 	
-	m_graphicComponentBullet	= new BulletGraphicComponent();
+	std::string nameBullet = "shuriken.png";
+	m_graphicComponentBullet	= new BulletGraphicComponent(30, nameBullet); 
 	m_graphicComponentBullet->setName("bullet");
 	this->addChild(m_graphicComponentBullet);
 

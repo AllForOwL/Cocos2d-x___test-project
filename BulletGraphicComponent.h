@@ -10,11 +10,12 @@ using namespace cocos2d;
 class BulletGraphicComponent : public GraphicComponent
 {
 public:
-	BulletGraphicComponent(std::string& filename);
+	BulletGraphicComponent(int attack, std::string& filename);
 	BulletGraphicComponent(BulletGraphicComponent& bullet);
 
 	virtual void Update(Monster& hero, GameScene& scene);
 
+	int GetAttack() const;
 	std::string GetFilename() const;
 
 	~BulletGraphicComponent();
@@ -22,6 +23,7 @@ public:
 private:
 	cocos2d::Point	m_position;
 	std::string		m_filename;
+	int				m_attack;
 };
 
 #endif

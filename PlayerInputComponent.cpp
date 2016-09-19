@@ -31,12 +31,12 @@ PlayerInputComponent::PlayerInputComponent()
 		}
 		case EventKeyboard::KeyCode::KEY_F:
 		{
-			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_FIRE;
+			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_FIRE;
 			break;
 		}
 		case EventKeyboard::KeyCode::KEY_U:
 		{
-			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_FIRE_UP;
+			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_FIRE_UP;
 			break;
 		}
 	}
@@ -61,6 +61,6 @@ PlayerInputComponent::~PlayerInputComponent()
 
 /*  GraphicComponent	- тільки малює спрайти 
 	PhysicsComponent	- виявлє зіткнення героя
-	InputComponent		- приймає діна з клавіатури
+	InputComponent		- приймає дані з клавіатури
 	Monster				- контейнер для цих компонентів
 */

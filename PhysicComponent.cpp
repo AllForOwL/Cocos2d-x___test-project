@@ -22,7 +22,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			 
 			// set state 
 			hero.m_stateEnemy	= Monster::StateEnemy::ENEMY_STATE_DEAD;
-			hero.m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_DEAD;
+			hero.m_stateBullet	= Monster::StateBullet::BULLET_STATE_DEAD;
 			m_statePhysic		= StatePhysic::PHYSIC_NOTHING;
 
 			break;

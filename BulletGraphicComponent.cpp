@@ -4,8 +4,9 @@
 #include "GameScene.h"
 #include "constants.h"
 
-BulletGraphicComponent::BulletGraphicComponent(std::string& filename)
-												: m_filename(filename)
+BulletGraphicComponent::BulletGraphicComponent(int attack, std::string& filename)
+												: m_attack	(attack),
+												  m_filename(filename)
 {
 	this->initWithFile(m_filename);
 	this->setTag(CNT_TAG_BULLET);
@@ -28,11 +29,18 @@ BulletGraphicComponent::BulletGraphicComponent(BulletGraphicComponent& bullet)
 	physicBody->setContactTestBitmask(true);
 	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
 	
+	this->m_attack	 = bullet.GetAttack();
 	this->m_filename = bullet.GetFilename();
 	this->m_position = bullet.getPosition();
+	this->setPosition(m_position);
 
 	this->setPhysicsBody(physicBody);
 	this->initWithFile(m_filename);
+}
+
+int BulletGraphicComponent::GetAttack() const
+{
+	return m_attack;
 }
 
 std::string BulletGraphicComponent::GetFilename() const
@@ -57,7 +65,7 @@ std::string BulletGraphicComponent::GetFilename() const
 			else
 			{
 				m_position = Point::ZERO;
-				hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_REST;
+				hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
 			}
 			setPosition(m_position);
 
@@ -67,7 +75,7 @@ std::string BulletGraphicComponent::GetFilename() const
 		{
 			if (m_position == cocos2d::Point::ZERO)
 			{
-				m_position = hero.m_graphicComponentWeapon->getPosition();
+				m_position = hero.m_graphiComponentBullet->getPosition();
 			}
 			else if (m_position < Director::getInstance()->getVisibleSize())
 			{
@@ -77,10 +85,15 @@ std::string BulletGraphicComponent::GetFilename() const
 			else
 			{
 				m_position = Point::ZERO;
-				hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_REST;
+				hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
 			}
 			setPosition(m_position);
 
+			break;
+		}
+		case Monster::StateBullet::BULLET_STATE_REST:
+		{
+			
 			break;
 		}
 		case Monster::StateBullet::BULLET_STATE_DEAD:
@@ -88,7 +101,7 @@ std::string BulletGraphicComponent::GetFilename() const
 			m_position = cocos2d::Point::ZERO;
 			this->setPosition(m_position);
 			this->setTag(CNT_TAG_BULLET);
-			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_REST;
+			hero.m_stateBullet = Monster::StateBullet::BULLET_STATE_REST;
 			scene.addChild(this);
 
 			break;

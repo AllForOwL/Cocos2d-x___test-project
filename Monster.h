@@ -59,7 +59,7 @@ public:
 						GraphicComponent* graphicComponentBullet, GameObjectMonster* objectMonster, 
 						InputComponent* inputComponent, InputComponent* botInputComponent,
 						PhysicComponent* physicComponent
-					);
+					 );
 
 	void Update(GameScene& scene);
 

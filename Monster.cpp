@@ -2,7 +2,7 @@
 #include "InputComponent.h"
 #include "GraphicComponent.h"
 #include "GameScene.h"
-#include "AK47GraphicComponent.h"
+#include "WeaponGraphicComponent.h"
 #include "GameObjectMonster.h"
 #include "PhysicComponent.h"
 
