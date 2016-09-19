@@ -1,5 +1,5 @@
-#ifndef __HELL_GRAPHIC_COMPONENT_H__
-#define __HELL_GRAPHIC_COMPONENT_H__
+#ifndef __HERO_GRAPHIC_COMPONENT_H__
+#define __HERO_GRAPHIC_COMPONENT_H__
 
 #include "cocos2d.h"
 #include "GraphicComponent.h"
@@ -7,14 +7,17 @@
 using namespace std;
 using namespace cocos2d;
 
-class HellGraphicComponent : public GraphicComponent
+class HeroGraphicComponent : public GraphicComponent
 {
 public:
-	HellGraphicComponent();
+	HeroGraphicComponent(const std::string& typeHero);
+	HeroGraphicComponent(HeroGraphicComponent& heroGraphiComponent);
 
 	virtual void Update(Monster& hero, GameScene& scene);
 
-	~HellGraphicComponent();
+	void LoadSpritesForHell();
+
+	~HeroGraphicComponent();
 
 public:
 	std::vector<std::string> m_vecSpritesWalk;
@@ -27,6 +30,8 @@ public:
 	int m_countSpriteInVectorWalk;
 	int m_countSpriteInVectorAttack;
 	int m_countSpriteInVectorRun;
+
+	std::string m_typeHero;
 };
 
 #endif

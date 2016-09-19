@@ -2,7 +2,7 @@
 #include "constants.h"
 #include "InputComponent.h"
 #include "GraphicComponent.h"
-#include "HellGraphicComponent.h"
+#include "HeroGraphicComponent.h"
 #include "WeaponGraphicComponent.h"
 #include "BulletGraphicComponent.h"
 #include "BreedGraphicComponent.h"
@@ -83,7 +83,7 @@ bool GameScene::init()
 	//sprite->runAction(RepeatForever::create(animate));
 	//sprite->setPosition(100, 100);
 	
-	m_graphicComponentHero	= new HellGraphicComponent();
+	m_graphicComponentHero	= new HeroGraphicComponent(CNT_NAME_HERO_HELL);
 	m_graphicComponentHero->setPosition(_visibleSize.width  / m_graphicComponentHero->getContentSize().width + 100,
 										_visibleSize.height / m_graphicComponentHero->getContentSize().height + 100);
 	m_graphicComponentHero->setScale(_visibleSize.width / m_graphicComponentHero->getContentSize().width / 6,

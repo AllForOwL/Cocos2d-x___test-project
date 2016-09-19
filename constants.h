@@ -9,6 +9,8 @@ const int CNT_TAG_BOY				= 1;
 const int CNT_TAG_TANK				= 2;
 const int CNT_TAG_BULLET			= 100;
 
+const std::string CNT_NAME_HERO_HELL = "Hell";
+
 #define HERO_COLLISION_BITMASK		0x000001
 #define ENEMY_COLLISION_BITMASK		0x000002
 #define BULLET_COLLISION_BITMASK	0x000003

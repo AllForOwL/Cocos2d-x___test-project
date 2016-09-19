@@ -1,4 +1,4 @@
-#include "HellGraphicComponent.h"
+#include "HeroGraphicComponent.h"
 #include "Monster.h"
 #include "GraphicComponent.h"
 #include "GameScene.h"
@@ -6,7 +6,21 @@
 #include "WeaponGraphicComponent.h"
 #include "BulletGraphicComponent.h"
 
-HellGraphicComponent::HellGraphicComponent()
+HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_typeHero(typeHero)
+{
+	if (m_typeHero == CNT_NAME_HERO_HELL)
+	{
+		LoadSpritesForHell();
+	}
+
+	m_countSpriteInVectorWalk		= 0;
+	m_countSpriteInVectorAttack		= 0;
+	m_countSpriteInVectorRun		= 0;
+
+	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVectorWalk]);
+}
+
+void HeroGraphicComponent::LoadSpritesForHell()
 {
 	m_vecSpritesWalk.push_back("walk-0001.png");
 	m_vecSpritesWalk.push_back("walk-0002.png");
@@ -39,15 +53,9 @@ HellGraphicComponent::HellGraphicComponent()
 	m_vecSpritesDizzy.push_back("dizzy-0001.png");
 	m_vecSpritesDizzy.push_back("dizzy-0002.png");
 	m_vecSpritesDizzy.push_back("dizzy-0003.png");
-
-	m_countSpriteInVectorWalk		= 0;
-	m_countSpriteInVectorAttack		= 0;
-	m_countSpriteInVectorRun		= 0;
-
-	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVectorWalk]);
 }
 
-/*virtual*/void HellGraphicComponent::Update(Monster& hero, GameScene& scene)
+/*virtual*/void HeroGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 	switch (hero.m_stateHero)
 	{
@@ -75,7 +83,7 @@ HellGraphicComponent::HellGraphicComponent()
 			if (++m_countSpriteInVectorRun >= CNT_NUMBER_SPRITES_RUN)
 			{
 				m_countSpriteInVectorRun = 0;
-				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+				//hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
 			}
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesRun[m_countSpriteInVectorRun]));
 			break;
@@ -107,7 +115,7 @@ HellGraphicComponent::HellGraphicComponent()
 	}
 }
 
-HellGraphicComponent::~HellGraphicComponent()
+HeroGraphicComponent::~HeroGraphicComponent()
 {
 
 }
