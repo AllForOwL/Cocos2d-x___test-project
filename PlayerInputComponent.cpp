@@ -34,6 +34,11 @@ PlayerInputComponent::PlayerInputComponent()
 			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_FIRE;
 			break;
 		}
+		case EventKeyboard::KeyCode::KEY_U:
+		{
+			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_FIRE_UP;
+			break;
+		}
 	}
 
 	m_keyCode = EventKeyboard::KeyCode::KEY_TILDE;

@@ -28,9 +28,9 @@ public:
 
 private:
 	StatePhysic						m_statePhysic;
-	std::vector<cocos2d::Sprite*>	m_vecSprites;
 	int								m_countElementInVector;
 	cocos2d::Vec2					m_positionCollision;
+	int								m_tagForDelete;
 };
 
 #endif

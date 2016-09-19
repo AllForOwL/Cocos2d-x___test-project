@@ -53,6 +53,37 @@ bool GameScene::init()
 
 	this->addChild(edgeNode);
 
+	/*auto spritecache = SpriteFrameCache::getInstance();
+	spritecache->addSpriteFramesWithFile("explosion_bullet.plist");
+
+	Vector<cocos2d::SpriteFrame*> frame;
+	frame.reserve(5);
+	frame.pushBack(SpriteFrame::create("13_5.png", Rect(0, 0, 32, 33)));
+	frame.pushBack(SpriteFrame::create("13_4.png", Rect(0, 0, 32, 33)));
+	frame.pushBack(SpriteFrame::create("13_3.png", Rect(0, 0, 32, 33)));
+	frame.pushBack(SpriteFrame::create("13_2.png", Rect(0, 0, 32, 33)));
+	frame.pushBack(SpriteFrame::create("13_1.png", Rect(0, 0, 32, 33)));
+
+	Animation* animation = Animation::createWithSpriteFrames(frame, 0.1f);
+	Animate* animate = Animate::create(animation);
+	*/
+
+	//auto sprite = Sprite::create("AK47.png");
+	//auto moveBy = MoveBy::create(10, Vec2(20, 0));
+	//sprite->runAction(moveBy);
+
+	//this->addChild(sprite);
+
+	// Move sprite to position 50,10 in 2 seconds.
+	//auto moveTo = MoveTo::create(2, Vec2(50, 10));
+	//sprite->runAction(moveTo);
+
+	// Move sprite 20 points to right in 2 seconds
+	
+	//sprite->runAction(RepeatForever::create(animate));
+	//sprite->setPosition(100, 100);
+
+
 	m_graphicComponentHero	= new HellGraphicComponent();
 	m_graphicComponentHero->setPosition(_visibleSize.width  / m_graphicComponentHero->getContentSize().width + 100,
 										_visibleSize.height / m_graphicComponentHero->getContentSize().height + 100);
@@ -101,7 +132,6 @@ bool GameScene::init()
 	auto background = Sprite::createWithSpriteFrameName("background.png");
 	background->setPosition(origin.x + visibleSize.x / 2, origin.y + visibleSize.y / 2);
 	this->addChild(background);*/
-
 	return true;
 }
 

@@ -7,7 +7,8 @@
 BulletGraphicComponent::BulletGraphicComponent()
 {
 	this->initWithFile("shuriken.png");
-	
+	this->setTag(CNT_TAG_BULLET);
+
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 //	physicBody->setDynamic(false);
 	physicBody->setContactTestBitmask(true);
@@ -41,10 +42,31 @@ BulletGraphicComponent::BulletGraphicComponent()
 
 			break;
 		}
+		case Monster::StateWeapon::WEAPON_STATE_FIRE_UP:
+		{
+			if (m_position == cocos2d::Point::ZERO)
+			{
+				m_position = hero.m_graphicComponentWeapon->getPosition();
+			}
+			else if (m_position < Director::getInstance()->getVisibleSize())
+			{
+				++m_position.x;
+				++m_position.y;
+			}
+			else
+			{
+				m_position = Point::ZERO;
+				hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_REST;
+			}
+			setPosition(m_position);
+
+			break;
+		}
 		case Monster::StateWeapon::WEAPON_STATE_DEAD:
 		{
 			m_position = cocos2d::Point::ZERO;
 			this->setPosition(m_position);
+			this->setTag(CNT_TAG_BULLET);
 			hero.m_stateWeapon = Monster::StateWeapon::WEAPON_STATE_REST;
 			scene.addChild(this);
 
