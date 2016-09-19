@@ -5,9 +5,9 @@
 
 PhysicComponent::PhysicComponent()
 {
-	m_statePhysic = PHYSIC_NOTHING;
-	m_countElementInVector = 0;
-	m_tagForDelete = 0;
+	m_statePhysic			= PHYSIC_NOTHING;
+	m_countElementInVector	= 0;
+	m_tagForDelete			= 0;
 }
 
 void PhysicComponent::Update(Monster& hero, GameScene& scene)
@@ -50,7 +50,7 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 	if (
 		_a->getCollisionBitmask() == BULLET_COLLISION_BITMASK && _b->getCollisionBitmask() == ENEMY_COLLISION_BITMASK ||
 		_a->getCollisionBitmask() == ENEMY_COLLISION_BITMASK  && _b->getCollisionBitmask() == BULLET_COLLISION_BITMASK
-		)
+	   )
 	{
 		m_statePhysic		= PHYSIC_KILL_ENEMY;
 		m_positionCollision = _a->getPosition();

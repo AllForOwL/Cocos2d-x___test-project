@@ -44,7 +44,7 @@ PlayerInputComponent::PlayerInputComponent()
 		}
 		case EventKeyboard::KeyCode::KEY_C:
 		{
-			hero.m_stateHero = Monster::StateHero::HERO_STATE_CHANGE_WEAPON;
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_CHANGE_WEAPON_BULLET;
 		}
 	}
 
