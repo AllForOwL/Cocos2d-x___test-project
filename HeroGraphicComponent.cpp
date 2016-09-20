@@ -88,6 +88,12 @@ void HeroGraphicComponent::LoadSpritesForHell()
 			this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesRun[m_countSpriteInVectorRun]));
 			break;
 		}
+		case Monster::StateHero::HERO_STATE_JUMP:
+		{
+			this->setTexture(CCTextureCache::sharedTextureCache()->addImage("jump.png"));	
+			hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
+			break;
+		}
 		case Monster::StateHero::HERO_STATE_CHANGE_WEAPON_BULLET:
 		{
 			std::string nameWeapon = "AK47.png";

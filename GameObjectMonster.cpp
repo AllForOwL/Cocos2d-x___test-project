@@ -9,61 +9,24 @@ const int CNT_COUNT_OBJECT = 10;
 
 GameObjectMonster::GameObjectMonster()
 {
-	/*Size _visibleSize = Director::getInstance()->getVisibleSize();
-	
-	m_monsterComponent.resize(CNT_COUNT_OBJECT);
-	for (int i = 0; i < CNT_COUNT_OBJECT; i++)
-	{
-		m_monsterComponent[i] = new BreedGraphicComponent(*CreateNewMonster());
-		m_monsterComponent[i]->setScale(_visibleSize.width / m_monsterComponent[i]->getContentSize().width / 6,
-			_visibleSize.height / m_monsterComponent[i]->getContentSize().height / 4);
-		m_monsterComponent[i]->setPosition(150 + i * 30, 100);
-	}
+	std::string s = "Soldier.png";
 
-	m_vecDieBoy.push_back("die-0001.png");
-	m_vecDieBoy.push_back("die-0002.png");
-	m_vecDieBoy.push_back("die-0003.png");
-	m_vecDieBoy.push_back("die-0004.png");
-	m_countInVector = 0;
-
-	*/
-	
-	m_vecSpritesAirplanesRest.push_back("AEG_CIV_default.png");
-	
-	m_vecSpritesAirplanesAttack.push_back("AEG_CIV_attack_1.png");
-	m_vecSpritesAirplanesAttack.push_back("AEG_CIV_attack_1.png");
-
-	m_vecSpritesAirplanesDead.push_back("AEG_CIV_death_1.png");
-	m_vecSpritesAirplanesDead.push_back("AEG_CIV_death_2.png");
-	m_vecSpritesAirplanesDead.push_back("AEG_CIV_death_3.png");
-	m_vecSpritesAirplanesDead.push_back("AEG_CIV_death_4.png");
-
-	m_vecSpritesBoyWalk.push_back("walk-0001.png");
-	m_vecSpritesBoyWalk.push_back("walk-0002.png");
-	m_vecSpritesBoyWalk.push_back("walk-0003.png");
-	m_vecSpritesBoyWalk.push_back("walk-0004.png");
-	m_vecSpritesBoyWalk.push_back("walk-0005.png");
-	m_vecSpritesBoyWalk.push_back("walk-0006.png");
-	m_vecSpritesBoyWalk.push_back("walk-0007.png");
-	m_vecSpritesBoyWalk.push_back("walk-0008.png");
-
-	m_vecSpritesBoyDeath.push_back("dizzy-0001.png");
-	m_vecSpritesBoyDeath.push_back("dizzy-0002.png");
-	m_vecSpritesBoyDeath.push_back("dizzy-0002.png");
-
-	m_countSpriteInVectorAirplanesRest		= 0;
-	m_countSpriteInVectorAirplanesAttack	= 0;
-	m_countSpriteInVectorAirplanesDead		= 0;
-	m_countInVectorBoyWalk					= 0;
-	m_countInVectorBoyDeath					= 0;
-
-	std::string filename = "attack-0001.png";
-	m_monster = new BreedGraphicComponent(*CreateNewMonster(100, 100, filename));
+	m_monster = new BreedGraphicComponent(*CreateNewMonster(100, 100, s));
 }
 
 void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 {
-	switch (hero.m_stateEnemy)
+
+	if (m_monsterComponent.size())
+	{
+		for (int i = 0; i < m_monsterComponent.size(); i++)
+		{
+			m_monsterComponent[i]->Update(hero, scene);
+		}
+	}
+
+
+/*	switch (hero.m_stateEnemy)
 	{
 		case Monster::StateEnemy::ENEMY_STATE_ATTACK:
 		{
@@ -122,7 +85,7 @@ void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 			}			
 			break;
 		}
-	}
+	}*/
 }
 
 BreedGraphicComponent* GameObjectMonster::CreateNewMonster(int attack, int health, std::string& filename)
@@ -135,7 +98,6 @@ void GameObjectMonster::GoesAirplanes(std::string& filename)
 	for (int i = 0; i < m_monsterComponent.size(); i++)
 	{
 		Vec2 _positionAirplane = m_monsterComponent[i]->getPosition();
-		m_monsterComponent[i]->setPosition(--_positionAirplane.x, _positionAirplane.y);
 		m_monsterComponent[i]->setTexture(CCTextureCache::sharedTextureCache()->addImage(filename));
 	}
 }
@@ -145,9 +107,7 @@ void GameObjectMonster::GoesBoy(std::string& filename)
 	for (int i = 0; i < m_monsterComponent.size(); i++)
 	{
 		Vec2 _positionAirplane = m_monsterComponent[i]->getPosition();
-		//m_monsterComponent[i]->setPosition(--_positionAirplane.x, _positionAirplane.y);
 		m_monsterComponent[i]->setTexture(CCTextureCache::sharedTextureCache()->addImage(filename));
-
 	}
 }
 
@@ -160,17 +120,16 @@ void GameObjectMonster::Spawner(GameScene& scene)
 
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 	
-	int _randomValue = rand() % 2 + 1;
+	int _randomValue  = 1; //= rand() % 3 + 1;
 
-	if (_randomValue == 1)		// airplanes
+	if (_randomValue == 1)		// soldier
 	{
 		int _attack				= 200;
 		int _health				= 100;
-		std::string _filename	= "AEG_CIV_attack_1.png";
+		std::string _typeObject = CNT_NAME_ENEMY_SOLDIER;
 
-		m_monster = new BreedGraphicComponent(*CreateNewMonster(_attack, _health, _filename));
-		//m_monster->setRotationX(180);
-
+		m_monster = new BreedGraphicComponent(*CreateNewMonster(_attack, _health, _typeObject));
+		
 		int _width	= m_monster->getContentSize().width;
 		int _height = m_monster->getContentSize().height;
 
@@ -178,27 +137,43 @@ void GameObjectMonster::Spawner(GameScene& scene)
 							_visibleSize.height / _height / 6);
 
 		m_monster->setPosition(_visibleSize.width - 30, _visibleSize.height - _visibleSize.height / _height / 6);
-		m_monster->setTag(CNT_TAG_AIRPLANE);
-		m_monster->setName("airplanes");
+		m_monster->setName(_typeObject);
 		m_monsterComponent.push_back(m_monster);
 	}
-	else if (_randomValue == 2)	// boy
+	else if (_randomValue == 2)	// tank
 	{
-		int _attack = 100;
+		int _attack = 300;
 		int _health = 100;
-		std::string _filename = "attack-0001.png";
+		std::string _typeObject = CNT_NAME_ENEMY_TANK;
 
-		m_monster = new BreedGraphicComponent(*CreateNewMonster(_attack, _health, _filename));
+		m_monster = new BreedGraphicComponent(*CreateNewMonster(_attack, _health, _typeObject));
 
 		int _width  = m_monster->getContentSize().width;
 		int _height = m_monster->getContentSize().height;
 		
 		m_monster->setScale(_visibleSize.width / _width / 6,
-			_visibleSize.height / _height / 2);
+			_visibleSize.height / _height / 4);
 
 		m_monster->setPosition(300, 50);
-		m_monster->setTag(CNT_TAG_BOY);
-		m_monster->setName("boy");
+		m_monster->setName(_typeObject);
+		m_monsterComponent.push_back(m_monster);
+	}
+	else if (_randomValue == 3)	// turret
+	{
+		int _attack = 200;
+		int _health = 100;
+		std::string _typeObject = CNT_NAME_ENEMY_TURRET;
+
+		m_monster = new BreedGraphicComponent(*CreateNewMonster(_attack, _health, _typeObject));
+
+		int _width = m_monster->getContentSize().width;
+		int _height = m_monster->getContentSize().height;
+
+		m_monster->setScale(_visibleSize.width / _width / 6,
+			_visibleSize.height / _height / 4);
+
+		m_monster->setPosition(300, 50);
+		m_monster->setName(_typeObject);
 		m_monsterComponent.push_back(m_monster);
 	}
 

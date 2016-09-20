@@ -2,11 +2,11 @@
 #include "Monster.h"
 #include "GameScene.h"
 
-WeaponGraphicComponent::WeaponGraphicComponent(int attack, std::string& filename)
+WeaponGraphicComponent::WeaponGraphicComponent(int attack, const std::string& filename)
 												: m_attack  (attack),
 												  m_filename(filename)
 {
-	this->initWithFile(m_filename);
+	//this->initWithFile(m_filename);
 }
 
 WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)

@@ -12,21 +12,29 @@ class Monster;
 class BreedGraphicComponent : public GraphicComponent
 {
 public:
-	BreedGraphicComponent(int attack, int health, std::string& filename);
+	BreedGraphicComponent(int attack, int health, const std::string& typeObject);
 	BreedGraphicComponent(BreedGraphicComponent& breed);
 
 	virtual void Update(Monster& hero, GameScene& scene);
 
+	void		LoadSpritesForSoldier();
 	int			GetAttack()   const;
 	int			GetHealth()   const;
-	std::string GetFilename() const;
+	std::string GetTypeObject() const;
 
 	~BreedGraphicComponent();
 
 private:
 	int m_attack;
 	int m_health;
-	std::string m_filename;
-
+	std::string m_typeObject;
+	
+	std::vector<cocos2d::Sprite*> m_vecSpritesWalkSoldier;
+	std::vector<cocos2d::Sprite*> m_vecSpritesShotFrontSoldier;
+	std::vector<cocos2d::Sprite*> m_vecSpritesShotUpSoldier;
+	
+	int	m_countSpritesInVectorWalkSoldier;
+	int	m_countSpritesInVectorShotFrontSoldier;
+	int	m_countSpritesInVectorShotUpSoldier;
 };
 #endif

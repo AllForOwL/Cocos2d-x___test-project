@@ -3,6 +3,8 @@
 
 #include "cocos2d.h"
 
+using namespace cocos2d;
+
 class  AppDelegate : private cocos2d::Application
 {
 public:

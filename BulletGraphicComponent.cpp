@@ -4,11 +4,11 @@
 #include "GameScene.h"
 #include "constants.h"
 
-BulletGraphicComponent::BulletGraphicComponent(int attack, std::string& filename)
+BulletGraphicComponent::BulletGraphicComponent(int attack, const std::string& filename)
 												: m_attack	(attack),
 												  m_filename(filename)
 {
-	this->initWithFile(m_filename);
+	/*this->initWithFile(m_filename);
 	this->setTag(CNT_TAG_BULLET);
 
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
@@ -18,7 +18,7 @@ BulletGraphicComponent::BulletGraphicComponent(int attack, std::string& filename
 
 	this->setPhysicsBody(physicBody);
 	
-	m_position = cocos2d::Point::ZERO;
+	m_position = cocos2d::Point::ZERO;*/
 }
 
 BulletGraphicComponent::BulletGraphicComponent(BulletGraphicComponent& bullet)
@@ -31,7 +31,7 @@ BulletGraphicComponent::BulletGraphicComponent(BulletGraphicComponent& bullet)
 	
 	this->m_attack	 = bullet.GetAttack();
 	this->m_filename = bullet.GetFilename();
-	this->m_position = bullet.getPosition();
+	this->m_position = cocos2d::Point::ZERO;
 	this->setPosition(m_position);
 
 	this->setPhysicsBody(physicBody);
@@ -53,7 +53,7 @@ std::string BulletGraphicComponent::GetFilename() const
 
 /*virtual*/ void BulletGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	switch (hero.m_stateBullet)
+/*	switch (hero.m_stateBullet)
 	{
 		case Monster::StateBullet::BULLET_STATE_FIRE:
 		{
@@ -78,7 +78,7 @@ std::string BulletGraphicComponent::GetFilename() const
 		{
 			if (m_position == cocos2d::Point::ZERO)
 			{
-				m_position = hero.m_graphiComponentBullet->getPosition();
+				m_position = hero.m_graphicComponentWeapon->getPosition();
 			}
 			else if (m_position < Director::getInstance()->getVisibleSize())
 			{
@@ -112,6 +112,7 @@ std::string BulletGraphicComponent::GetFilename() const
 	default:
 		break;
 	}
+	*/
 }
 
 BulletGraphicComponent::~BulletGraphicComponent()

@@ -35,13 +35,10 @@ bool GameScene::init()
 	Size _visibleSize   = Director::getInstance()->getVisibleSize();
 	Vec2 origin			= Director::getInstance()->getVisibleOrigin();
 
+	m_countLevel = 0;
 	m_countSpriteInVector = 0;
 	
-	m_background = Sprite::create("background.png");
-	m_background->setPosition(_visibleSize.width / 2,
-							  _visibleSize.height / 2);
-	
-	this->addChild(m_background);
+	LoadFileBackground();
 
 	auto edgeBody = PhysicsBody::createEdgeBox(_visibleSize, PHYSICSBODY_MATERIAL_DEFAULT, 3);
 	edgeBody->setCollisionBitmask(SCENE_COLLISION_BITMASK);
@@ -53,55 +50,27 @@ bool GameScene::init()
 
 	this->addChild(edgeNode);
 
-	/*auto spritecache = SpriteFrameCache::getInstance();
-	spritecache->addSpriteFramesWithFile("explosion_bullet.plist");
-
-	Vector<cocos2d::SpriteFrame*> frame;
-	frame.reserve(5);
-	frame.pushBack(SpriteFrame::create("13_5.png", Rect(0, 0, 32, 33)));
-	frame.pushBack(SpriteFrame::create("13_4.png", Rect(0, 0, 32, 33)));
-	frame.pushBack(SpriteFrame::create("13_3.png", Rect(0, 0, 32, 33)));
-	frame.pushBack(SpriteFrame::create("13_2.png", Rect(0, 0, 32, 33)));
-	frame.pushBack(SpriteFrame::create("13_1.png", Rect(0, 0, 32, 33)));
-
-	Animation* animation = Animation::createWithSpriteFrames(frame, 0.1f);
-	Animate* animate = Animate::create(animation);
-	*/
-
-	//auto sprite = Sprite::create("AK47.png");
-	//auto moveBy = MoveBy::create(10, Vec2(20, 0));
-	//sprite->runAction(moveBy);
-
-	//this->addChild(sprite);
-
-	// Move sprite to position 50,10 in 2 seconds.
-	//auto moveTo = MoveTo::create(2, Vec2(50, 10));
-	//sprite->runAction(moveTo);
-
-	// Move sprite 20 points to right in 2 seconds
-	
-	//sprite->runAction(RepeatForever::create(animate));
-	//sprite->setPosition(100, 100);
-	
 	m_graphicComponentHero	= new HeroGraphicComponent(CNT_NAME_HERO_HELL);
 	m_graphicComponentHero->setPosition(_visibleSize.width  / m_graphicComponentHero->getContentSize().width + 100,
 										_visibleSize.height / m_graphicComponentHero->getContentSize().height + 100);
 	m_graphicComponentHero->setScale(_visibleSize.width / m_graphicComponentHero->getContentSize().width / 6,
-									 _visibleSize.height / m_graphicComponentHero->getContentSize().height / 2);
+									 _visibleSize.height / m_graphicComponentHero->getContentSize().height / 4);
 	
 	this->addChild(m_graphicComponentHero);
 	
-	std::string nameWeapon = "mi-71.png";
-	m_graphicComponentWeapon = new WeaponGraphicComponent(200, nameWeapon);
-	m_graphicComponentWeapon->setPosition(100, 50);
-	m_graphicComponentWeapon->setScale(_visibleSize.width / m_graphicComponentWeapon->getContentSize().width / 6,
-									   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 2);
+	m_graphicComponentWeapon = new WeaponGraphicComponent(200, CNT_NAME_WEAPON_AK);
+	m_graphicComponentWeapon->setPosition(100, 40);
+	m_graphicComponentWeapon->setScale(_visibleSize.width / m_graphicComponentWeapon->getContentSize().width / 12,
+									   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 12);
 	
 	this->addChild(m_graphicComponentWeapon);
 	
-	std::string nameBullet = "shuriken.png";
-	m_graphicComponentBullet	= new BulletGraphicComponent(30, nameBullet); 
+	m_graphicComponentBullet	= new BulletGraphicComponent(30, CNT_NAME_BULLET_DEFAULT); 
+	m_graphicComponentBullet->setScale(m_graphicComponentBullet->getContentSize().width / 10,
+										m_graphicComponentBullet->getContentSize().height  / 10
+										);
 	m_graphicComponentBullet->setName("bullet");
+
 	this->addChild(m_graphicComponentBullet);
 
 	m_inputComponent			= new PlayerInputComponent();
@@ -120,26 +89,17 @@ bool GameScene::init()
 	
 	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(contactListener, this);
 
-	this->schedule(schedule_selector(GameScene::update), 0.1);
-	this->schedule(schedule_selector(GameScene::Spawn),  5);
+	this->schedule(schedule_selector(GameScene::update), CNT_TIME_UPDATE_SCENE);
+	this->schedule(schedule_selector(GameScene::Spawn),  CNT_TIME_SPAWN);
 	this->scheduleUpdate();
-
-	/*SpriteFrameCache::getInstance()->addSpriteFramesWithFile("enemy.plist");
-
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-	Vec2 visibleSize = Director::getInstance()->getVisibleSize();
-
-	// background
-	auto background = Sprite::createWithSpriteFrameName("background.png");
-	background->setPosition(origin.x + visibleSize.x / 2, origin.y + visibleSize.y / 2);
-	this->addChild(background);*/
+	
 	return true;
 }
 
 void GameScene::update(float dt)
 {
-	auto position = m_background->getPosition();
-	m_background->setPosition(--position.x, position.y);
+//	auto position = m_background->getPosition();
+//	m_background->setPosition(--position.x, position.y);
 
 	m_hero->Update(*this);
 }
@@ -147,6 +107,36 @@ void GameScene::update(float dt)
 void GameScene::Spawn(float dt)
 {
 	m_gameObjectMonster->Spawner(*this);
+}
+
+void GameScene::LoadFileBackground()
+{
+	auto spritecache = SpriteFrameCache::getInstance();
+	spritecache->addSpriteFramesWithFile("Backgrounds.plist");
+	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("1-night.png"));
+	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("2-night.png"));
+	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("2.png"));
+	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("3-night.png"));
+	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("4-night.png"));
+	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("4.png"));
+	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("5-night.png"));
+	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("5.png"));
+	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("6-night.png"));
+	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("6.png"));
+	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("7-night.png"));
+	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("7.png"));
+
+	Size _visibleSize = Director::getInstance()->getVisibleSize();
+
+	m_vecBackground[m_countLevel]->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
+	this->addChild(m_vecBackground[m_countLevel]);
+}
+
+void GameScene::LoadLevel()
+{
+	m_vecBackground[m_countLevel]->removeFromParent();
+	++m_countLevel;
+	this->addChild(m_vecBackground[m_countLevel]);
 }
 
 GameScene::~GameScene()

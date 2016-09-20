@@ -18,6 +18,8 @@ public:
 	virtual bool init();
 	void update(float dt);
 	void Spawn(float dt);
+	void LoadLevel();
+	void LoadFileBackground();
 
 	CREATE_FUNC(GameScene);
 
@@ -48,6 +50,8 @@ public:
 
 	std::vector<std::string> m_vecSpritesWalk;
 	int m_countSpriteInVector;
+	int m_countLevel;
+	std::vector<cocos2d::Sprite*> m_vecBackground;
 };
 
 #endif // __GAME_SCENE_H__

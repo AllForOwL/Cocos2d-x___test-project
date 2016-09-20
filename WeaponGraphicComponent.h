@@ -10,7 +10,7 @@ using namespace cocos2d;
 class WeaponGraphicComponent : public GraphicComponent
 {
 public:
-	WeaponGraphicComponent(int attack, std::string& filename);
+	WeaponGraphicComponent(int attack, const std::string& filename);
 	WeaponGraphicComponent(WeaponGraphicComponent& weapon);
 
 	virtual void Update(Monster& hero, GameScene& scene);

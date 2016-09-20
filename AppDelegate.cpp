@@ -3,40 +3,58 @@
 
 USING_NS_CC;
 
-static cocos2d::Size designResolutionSize = cocos2d::Size(512, 384);
-static cocos2d::Size smallResolutionSize = cocos2d::Size(512, 384);
-static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);
-static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 1536);
+typedef struct tagResource
+{
+	cocos2d::CCSize size;
+	char directory[100];
+}Resource;
+
+/*static cocos2d::Size designResolutionSize = cocos2d::Size(480, 320);
+static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);
+static cocos2d::Size mediumResolutionSize = cocos2d::Size(960, 640);
+static cocos2d::Size largeResolutionSize = cocos2d::Size(1024, 768);
+*/
+
+static Resource smallResource = { cocos2d::CCSizeMake(480, 320), "res/HDR" };
+static Resource mediumResource = { cocos2d::CCSizeMake(1024, 768), "res/HD" };
+static Resource largeResource = { cocos2d::CCSizeMake(2048, 1536), "res/HDR" };
+static cocos2d::CCSize designResolutionSize = cocos2d::CCSizeMake(480, 320);
 
 void AppDelegate::initMultiResolution()
 {
-	auto director = Director::getInstance();
-	auto glview = director->getOpenGLView();
+	CCDirector* pDirector = CCDirector::sharedDirector();
+	CCEGLView* pEGLView = Director::sharedDirector()->getOpenGLView();
 
-	glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::NO_BORDER);
+	pDirector->setOpenGLView(pEGLView);
 
-	std::vector<std::string> searchPaths;
-	float scaleFactor = 1.0f;
-	Size frameSize = glview->getFrameSize();
+	// Set the design resolution
+	pEGLView->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, kResolutionNoBorder);
 
-	if (frameSize.height > mediumResolutionSize.height)
+	CCSize frameSize = pEGLView->getFrameSize();
+
+	std::vector<std::string> _searchPath;
+
+	// if the frame's height is larger than the height of medium resource size, select large resource.
+	if (frameSize.height > mediumResource.size.height)
 	{
-		searchPaths.push_back("res/HDR");
-		scaleFactor = largeResolutionSize.height / designResolutionSize.height;
+		_searchPath.push_back(largeResource.directory);
+		pDirector->setContentScaleFactor(largeResource.size.height / designResolutionSize.height);
 	}
-	else if (frameSize.height > smallResolutionSize.height)
+	// if the frame's height is larger than the height of small resource size, select medium resource.
+	else if (frameSize.height > smallResource.size.height)
 	{
-		searchPaths.push_back("res/HD");
-		scaleFactor = mediumResolutionSize.height / designResolutionSize.height;
+		_searchPath.push_back(mediumResource.directory);
+		pDirector->setContentScaleFactor(mediumResource.size.height / designResolutionSize.height);
 	}
+	// if the frame's height is smaller than the height of medium resource size, select small resource.
 	else
 	{
-		searchPaths.push_back("res/SD");
-		scaleFactor = smallResolutionSize.height / designResolutionSize.height;
+		_searchPath.push_back(smallResource.directory);
+		pDirector->setContentScaleFactor(smallResource.size.height / designResolutionSize.height);
 	}
 
-	director->setContentScaleFactor(scaleFactor);
-	FileUtils::getInstance()->setSearchPaths(searchPaths);
+	//pDirector->setContentScaleFactor(scaleFactor);
+	FileUtils::getInstance()->setSearchPaths(_searchPath);
 }
 
 

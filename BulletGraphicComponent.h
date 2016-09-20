@@ -10,7 +10,7 @@ using namespace cocos2d;
 class BulletGraphicComponent : public GraphicComponent
 {
 public:
-	BulletGraphicComponent(int attack, std::string& filename);
+	BulletGraphicComponent(int attack, const std::string& filename);
 	BulletGraphicComponent(BulletGraphicComponent& bullet);
 
 	virtual void Update(Monster& hero, GameScene& scene);
