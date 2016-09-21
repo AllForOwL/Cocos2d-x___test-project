@@ -40,14 +40,6 @@ public:
 		BULLET_STATE_REST
 	};
 
-	enum StateEnemy
-	{
-		ENEMY_STATE_FIRE,
-		ENEMY_STATE_MOVE,
-		ENEMY_STATE_DEATH,
-		ENEMY_STATE_NOTHING
-	};
-
 	enum StatePhysic
 	{
 		PHYSIC_NOTHING,
@@ -71,16 +63,15 @@ public:
 
 public:
 	GraphicComponent*	m_graphicComponentHero;
-	GraphicComponent*	m_graphicComponentWeapon;
-	GraphicComponent*	m_graphiComponentBullet;
+	GraphicComponent*	m_graphicComponentHeroWeapon;
+	GraphicComponent*	m_graphiComponentHeroBullet;
 	GameObjectMonster*	m_objectMonster;
-	InputComponent*		m_inputComponent;
+	InputComponent*		m_inputComponentHero;
 	InputComponent*		m_botInputComponent;
 	PhysicComponent*	m_physicComponent;
 	StateHero			m_stateHero;
 	StateWeapon			m_stateWeapon;
 	StateBullet			m_stateBullet;
-	StateEnemy			m_stateEnemy;
 	StatePhysic			m_statePhysic;
 };
 

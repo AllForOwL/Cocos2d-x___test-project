@@ -10,21 +10,21 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 {
 	if (m_typeObject == CNT_NAME_ENEMY_SOLDIER)
 	{
-		m_activeEnemy = BreedGraphicComponent::ActiveEnemy::ACTIVE_SOLDIER;
 		LoadSpritesForSoldier();
 		this->initWithFile(m_vecDefaultNamesMove[m_countDefaultSpriteInMove]);
+		this->m_stateEnemy = StateEnemy::ENEMY_STATE_MOVE;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_TANK)
 	{
-		m_activeEnemy = BreedGraphicComponent::ActiveEnemy::ACTIVE_TANK;
 		LoadSpritesForTanks();
 		this->initWithFile(m_vecDefaultNamesMove[m_countDefaultSpriteInMove]);
+		this->m_stateEnemy = StateEnemy::ENEMY_STATE_FIRE;
 	}
 	else if (m_typeObject == CNT_NAME_ENEMY_TURRET)
 	{
-		m_activeEnemy = BreedGraphicComponent::ActiveEnemy::ACTIVE_TURRET;
 		LoadSpritesForTurrets();
 		this->initWithFile(m_vecDefaultNamesFire[m_countDefaultSpriteInFire]);
+		this->m_stateEnemy = StateEnemy::ENEMY_STATE_FIRE;
 	}
 
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
@@ -61,19 +61,19 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 
 /*virtual*/ void BreedGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	switch (hero.m_stateEnemy)
+	switch (this->m_stateEnemy)
 	{
-			case Monster::StateEnemy::ENEMY_STATE_FIRE:
+			case StateEnemy::ENEMY_STATE_FIRE:
 			{
 				Fire();			
 				break;
 			}
-			case Monster::StateEnemy::ENEMY_STATE_MOVE:
+			case StateEnemy::ENEMY_STATE_MOVE:
 			{
 				Move();
 				break;
 			}
-			case Monster::StateEnemy::ENEMY_STATE_DEATH:
+			case StateEnemy::ENEMY_STATE_DEATH:
 			{
 				Death();
 				break;
@@ -94,7 +94,7 @@ void BreedGraphicComponent::Fire()
 
 void BreedGraphicComponent::Move()
 {
-	if (m_activeEnemy == BreedGraphicComponent::ActiveEnemy::ACTIVE_TURRET)
+	if (this->GetTypeObject() == CNT_NAME_ENEMY_TURRET)
 	{
 		return;
 	}
@@ -108,7 +108,7 @@ void BreedGraphicComponent::Move()
 
 void BreedGraphicComponent::Death()
 {
-	if (m_activeEnemy != BreedGraphicComponent::ActiveEnemy::ACTIVE_TANK)
+	if (this->GetTypeObject() != CNT_NAME_ENEMY_TANK)
 	{
 		return;
 	}

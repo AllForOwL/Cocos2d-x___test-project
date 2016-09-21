@@ -40,7 +40,6 @@ public:
 	GraphicComponent*				m_bullet;
 
 	StateBullet	m_stateBullet;
-
 };
 
 

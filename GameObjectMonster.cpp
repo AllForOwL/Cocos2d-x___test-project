@@ -44,15 +44,15 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		
 		int _health				= 100;
 
-		m_stateBullet = GameObjectMonster::StateBullet::STATE_FIRE_UP;
+		m_stateBullet	= GameObjectMonster::StateBullet::STATE_FIRE;
 
 		std::string _typeObjectEnemy	= CNT_NAME_ENEMY_SOLDIER;
 		std::string _typeObjectWeapon	= CNT_NAME_WEAPON_AK47;
 		std::string _typeObjectBullet	= CNT_NAME_BULLET_DEFAULT;
 
-		m_enemy		= new BreedGraphicComponent	(_attackEnemy, _health, _typeObjectEnemy);
-		m_weapon	= new WeaponGraphicComponent(_attackWeapon, _typeObjectWeapon); 
-		m_bullet	= new BotBulletGraphicComponent(_attackBullet, _typeObjectBullet);
+		m_enemy		= new BreedGraphicComponent		(_attackEnemy, _health, _typeObjectEnemy);
+		m_weapon	= new WeaponGraphicComponent	(_attackWeapon, _typeObjectWeapon); 
+		m_bullet	= new BotBulletGraphicComponent	(_attackBullet, _typeObjectBullet);
 
 		int _widthEnemy	 = m_enemy->getContentSize().width;
 		int _heightEnemy = m_enemy->getContentSize().height;
@@ -67,12 +67,12 @@ void GameObjectMonster::Spawner(GameScene& scene)
 						 _visibleSize.height / _heightEnemy / 4);
 		m_weapon->setScale(_visibleSize.width / _widthWeapon / 6,
 							_visibleSize.height / _heightWeapon / 4);
-		m_bullet->setScale(_visibleSize.width / _widthBullet / 6,
-							_visibleSize.height / _heightBullet / 4);
+		m_bullet->setScale(_visibleSize.width / _widthBullet / 40,
+							_visibleSize.height / _heightBullet / 40);
 
 		m_enemy->setPosition	(350, 100);
 		m_weapon->setPosition	(350, 80);
-		m_bullet->setPosition	(350, 80);
+		m_bullet->setPosition	(300, 80);
 
 		m_enemy->setName	(_typeObjectEnemy);
 		m_weapon->setName	(_typeObjectWeapon);
@@ -84,39 +84,69 @@ void GameObjectMonster::Spawner(GameScene& scene)
 	}
 	else if (_randomValue == 2)	// tank
 	{
-		int _attack = 300;
-		int _health = 100;
-		std::string _typeObject = CNT_NAME_ENEMY_TANK;
-
-		m_enemy = new BreedGraphicComponent(_attack, _health, _typeObject);
-
-		int _width  = m_enemy->getContentSize().width;
-		int _height = m_enemy->getContentSize().height;
+		int _attackEnemy	= 300;
+		int _attackBullet	= 120;
 		
-		m_enemy->setScale(_visibleSize.width / _width / 6,
-							_visibleSize.height / _height / 4);
+		int _health = 100;
+		
+		std::string _typeObjectEnemy	= CNT_NAME_ENEMY_TANK;
+		std::string _typeObjectBullet	= CNT_NAME_BULLET_DEFAULT;
+
+		m_enemy		= new BreedGraphicComponent(_attackEnemy, _health, _typeObjectEnemy);
+		m_bullet	= new BotBulletGraphicComponent(_attackBullet, _typeObjectBullet); 
+
+		int _widthEnemy  = m_enemy->getContentSize().width;
+		int _heightEnemy = m_enemy->getContentSize().height;
+		
+		int _widthBullet	= m_bullet->getContentSize().width;
+		int _heightBullet	= m_bullet->getContentSize().height;
+
+		m_enemy->setScale(_visibleSize.width / _widthEnemy / 6,
+							_visibleSize.height / _heightEnemy / 4);
+		m_enemy->setScale(_visibleSize.width / _widthBullet / 6,
+						  _visibleSize.height / _heightBullet / 4);
 
 		m_enemy->setPosition(300, 50);
-		m_enemy->setName(_typeObject);
+		m_bullet->setPosition(300 - _widthEnemy, 50);
+
+		m_enemy->setName(_typeObjectEnemy);
+		m_bullet->setName(_typeObjectBullet);
+
 		m_vecComponentEnemy.push_back(m_enemy);
+		m_vecComponentBullet.push_back(m_bullet);
 	}
 	else if (_randomValue == 3)	// turret
 	{
-		int _attack = 200;
+		int _attackEnemy	= 200;
+		int _attackBullet	= 80;
+		
 		int _health = 100;
-		std::string _typeObject = CNT_NAME_ENEMY_TURRET;
+		
+		std::string _typeObjectEnemy	= CNT_NAME_ENEMY_TURRET;
+		std::string _typeObjectBullet	= CNT_NAME_BULLET_DEFAULT; 
 
-		m_enemy = new BreedGraphicComponent(_attack, _health, _typeObject);
+		m_enemy		= new BreedGraphicComponent(_attackEnemy, _health, _typeObjectEnemy);
+		m_bullet	= new BotBulletGraphicComponent(_attackBullet, _typeObjectBullet);
 
-		int _width	= m_enemy->getContentSize().width;
-		int _height = m_enemy->getContentSize().height;
+		int _widthEnemy		= m_enemy->getContentSize().width;
+		int _heightEnemy	= m_enemy->getContentSize().height;
 
-		m_enemy->setScale(_visibleSize.width / _width / 6,
-							_visibleSize.height / _height / 4);
+		int _widthBullet	= m_bullet->getContentSize().width;
+		int _heightBullet	= m_bullet->getContentSize().height;
 
-		m_enemy->setPosition(300, 100);
-		m_enemy->setName(_typeObject);
-		m_vecComponentEnemy.push_back(m_enemy);
+		m_enemy->setScale(_visibleSize.width / _widthEnemy / 6,
+							_visibleSize.height / _heightEnemy / 4);
+		m_bullet->setScale(_visibleSize.width / _widthBullet / 6,
+							_visibleSize.height / _heightBullet / 4);
+
+		m_enemy->setPosition	(300,				100);
+		m_bullet->setPosition	(300 - _widthEnemy, 50);
+
+		m_enemy->setName	(_typeObjectEnemy);
+		m_bullet->setName	(_typeObjectBullet);
+		
+		m_vecComponentEnemy.push_back	(m_enemy);
+		m_vecComponentBullet.push_back	(m_bullet);
 	}
 
 	scene.addChild(m_vecComponentEnemy[m_vecComponentEnemy.size() - 1]);

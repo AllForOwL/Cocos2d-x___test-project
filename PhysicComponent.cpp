@@ -16,12 +16,8 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 	{
 		case StatePhysic::PHYSIC_KILL_ENEMY:
 		{
-			// delete element from scene
-			//scene.removeChildByTag(m_tagForDelete);
-			//scene.removeChildByTag(CNT_TAG_BULLET);
-			 
 			// set state 
-			hero.m_stateEnemy	= Monster::StateEnemy::ENEMY_STATE_DEATH;
+			//hero.m_objectMonster->m_stateEnemy	= GameObjectMonster::StateEnemy::ENEMY_STATE_DEATH;
 			hero.m_stateBullet	= Monster::StateBullet::BULLET_STATE_REST;
 			m_statePhysic		= StatePhysic::PHYSIC_NOTHING;
 

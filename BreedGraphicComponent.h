@@ -13,11 +13,12 @@ class BreedGraphicComponent : public GraphicComponent
 { 
 public:
 
-	enum ActiveEnemy
+	enum StateEnemy
 	{
-		ACTIVE_SOLDIER,
-		ACTIVE_TANK,
-		ACTIVE_TURRET
+		ENEMY_STATE_FIRE,
+		ENEMY_STATE_MOVE,
+		ENEMY_STATE_DEATH,
+		ENEMY_STATE_NOTHING
 	};
 
 	BreedGraphicComponent(int attack, int health, const std::string& typeObject);
@@ -41,7 +42,7 @@ public:
 
 	~BreedGraphicComponent();
 
-private:
+public:
 	int m_attack;
 	int m_health;
 	std::string m_typeObject;
@@ -54,22 +55,6 @@ private:
 	int m_countDefaultSpriteInFire;
 	int m_countDefaultSpriteInDeath;
 
-	ActiveEnemy	m_activeEnemy;
-
-	/*std::vector<std::string> m_vecSpritesNamesWalkSoldier;
-	std::vector<std::string> m_vecSpritesNamesShotFrontSoldier;
-	std::vector<std::string> m_vecSpritesNamesShotUpSoldier;
-	
-	std::vector<std::string> m_vecSpritesNameMoveTanks;
-	std::vector<std::string> m_vecSpritesNameAttackTanks;
-	std::vector<std::string> m_vecSpritesNameDeathTanks;
-
-	int	m_countSpritesInVectorWalkSoldier;
-	int	m_countSpritesInVectorShotFrontSoldier;
-	int	m_countSpritesInVectorShotUpSoldier;
-
-	int	m_countSpritesInVectorMoveTank;
-	int	m_countSpritesInVectorAttackTank;
-	int	m_countSpritesInVectorDeathTank;&=*/
+	StateEnemy	m_stateEnemy;
 };
 #endif

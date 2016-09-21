@@ -9,12 +9,6 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(int attack, const std::stri
 														: m_attack		(attack),
 														  m_typeObject	(typeObject)
 {
-	auto physicBody = PhysicsBody::createBox(this->getContentSize());
-	physicBody->setContactTestBitmask(true);
-	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
-
-	this->setPhysicsBody(physicBody);
-
 	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
 	{
 		LoadBulletNormal();
@@ -25,19 +19,19 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(int attack, const std::stri
 		LoadBomb();
 		this->initWithFile(m_strFilename);
 	}
+
+	auto physicBody = PhysicsBody::createBox(this->getContentSize());
+	physicBody->setContactTestBitmask(true);
+	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+
+	this->setPhysicsBody(physicBody);
 }
 
 BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& bullet)
 {
-	auto physicBody = PhysicsBody::createBox(this->getContentSize());
-	physicBody->setContactTestBitmask(true);
-	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
-	
 	this->m_attack		= bullet.GetAttack();
 	this->m_typeObject	= bullet.GetTypeObject();
 	this->m_position	= cocos2d::Point::ZERO;
-
-	this->setPhysicsBody(physicBody);
 
 	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
 	{
@@ -49,6 +43,12 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 		LoadBomb();
 		this->initWithFile(m_strFilename);
 	}
+
+	auto physicBody = PhysicsBody::createBox(this->getContentSize());
+	physicBody->setContactTestBitmask(true);
+	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+
+	this->setPhysicsBody(physicBody);
 }
 
 int BotBulletGraphicComponent::GetAttack() const
@@ -68,7 +68,7 @@ std::string BotBulletGraphicComponent::GetTypeObject() const
 		case GameObjectMonster::StateBullet::STATE_FIRE:
 		{
 			Vec2 _position = this->getPosition();															
-			this->setPosition(++_position.x, _position.y);
+			this->setPosition(--_position.x, _position.y);
 
 			break;
 		}
@@ -104,7 +104,7 @@ std::string BotBulletGraphicComponent::GetTypeObject() const
 void BotBulletGraphicComponent::LoadBulletNormal()
 {
 	m_position = Point::ZERO;
-	m_strFilename = "Bullet.png";
+	m_strFilename = "Bullet_normal.png";
 }
 
 void BotBulletGraphicComponent::LoadBomb()

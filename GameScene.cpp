@@ -59,17 +59,18 @@ bool GameScene::init()
 	this->addChild(m_graphicComponentHero);
 	
 	m_graphicComponentWeapon = new WeaponGraphicComponent(200, CNT_NAME_WEAPON_AK47);
-	m_graphicComponentWeapon->setPosition(100, 40);
-	m_graphicComponentWeapon->setScale(_visibleSize.width / m_graphicComponentWeapon->getContentSize().width / 12,
-									   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 12);
+	m_graphicComponentWeapon->setPosition(m_graphicComponentHero->getPosition().x, m_graphicComponentHero->getPosition().y - 20);
+	m_graphicComponentWeapon->setScale(_visibleSize.width / m_graphicComponentWeapon->getContentSize().width / 10,
+									   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 10);
 	
 	this->addChild(m_graphicComponentWeapon);
 	
 	m_graphicComponentBullet	= new PlayerBulletGraphicComponent(30, CNT_NAME_BULLET_DEFAULT); 
-	m_graphicComponentBullet->setScale(_visibleSize.width / m_graphicComponentBullet->getContentSize().width / 10,
-										_visibleSize.height / m_graphicComponentBullet->getContentSize().height  / 10
+	m_graphicComponentBullet->setPosition(m_graphicComponentWeapon->getPosition().x + m_graphicComponentWeapon->getContentSize().width / 10 / 2,
+											m_graphicComponentWeapon->getPosition().y);
+	m_graphicComponentBullet->setScale(_visibleSize.width / m_graphicComponentBullet->getContentSize().width / 40,
+										_visibleSize.height / m_graphicComponentBullet->getContentSize().height  / 40
 										);
-	m_graphicComponentBullet->setName("bullet");
 
 	this->addChild(m_graphicComponentBullet);
 
@@ -77,7 +78,7 @@ bool GameScene::init()
 	m_gameObjectMonster			= new GameObjectMonster();
 	m_botInputComponent			= new BotInputComponent();
 	m_physicComponent			= new PhysicComponent();
-	m_hero				= new Monster(m_graphicComponentHero, m_graphicComponentWeapon, m_graphicComponentBullet, m_gameObjectMonster, m_inputComponent, m_botInputComponent, m_physicComponent);
+	m_hero						= new Monster(m_graphicComponentHero, m_graphicComponentWeapon, m_graphicComponentBullet, m_gameObjectMonster, m_inputComponent, m_botInputComponent, m_physicComponent);
 	
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);

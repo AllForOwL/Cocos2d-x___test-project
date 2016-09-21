@@ -9,12 +9,6 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int attack, const std
 																			: m_attack		(attack),
 																			  m_typeObject	(typeObject)
 {
-	auto physicBody = PhysicsBody::createBox(this->getContentSize());
-	physicBody->setContactTestBitmask(true);
-	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
-
-	this->setPhysicsBody(physicBody);
-
 	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
 	{
 		LoadBulletNormal();
@@ -25,19 +19,19 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(int attack, const std
 		LoadBomb();
 		this->initWithFile(m_strFilename);
 	}
+	
+	auto physicBody = PhysicsBody::createBox(this->getContentSize());
+	physicBody->setContactTestBitmask(true);
+	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+
+	this->setPhysicsBody(physicBody);
 }
 
 PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicComponent& bullet)
 {
-	auto physicBody = PhysicsBody::createBox(this->getContentSize());
-	physicBody->setContactTestBitmask(true);
-	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
-	
 	this->m_attack		= bullet.GetAttack();
 	this->m_typeObject	= bullet.GetTypeObject();
 	this->m_position	= cocos2d::Point::ZERO;
-
-	this->setPhysicsBody(physicBody);
 
 	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
 	{
@@ -49,6 +43,12 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 		LoadBomb();
 		this->initWithFile(m_strFilename);
 	}
+
+	auto physicBody = PhysicsBody::createBox(this->getContentSize());
+	physicBody->setContactTestBitmask(true);
+	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+
+	this->setPhysicsBody(physicBody);
 }
 
 int PlayerBulletGraphicComponent::GetAttack() const
@@ -69,7 +69,7 @@ std::string PlayerBulletGraphicComponent::GetTypeObject() const
 		{
 			if (m_position == cocos2d::Point::ZERO)
 			{
-				m_position = hero.m_graphicComponentWeapon->getPosition();
+				m_position = hero.m_graphicComponentHeroWeapon->getPosition();
 			}
 			else if (m_position < Director::getInstance()->getVisibleSize())
 			{
@@ -88,7 +88,7 @@ std::string PlayerBulletGraphicComponent::GetTypeObject() const
 		{
 			if (m_position == cocos2d::Point::ZERO)
 			{
-				m_position = hero.m_graphicComponentWeapon->getPosition();
+				m_position = hero.m_graphicComponentHeroWeapon->getPosition();
 			}
 			else if (m_position < Director::getInstance()->getVisibleSize())
 			{
