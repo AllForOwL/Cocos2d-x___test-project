@@ -18,6 +18,10 @@ public:
 	virtual void Update(Monster& hero, GameScene& scene);
 
 	void		LoadSpritesForSoldier();
+	void		LoadSpritesForTanks();
+	void		LoadSpritesForTurrets();
+	void		LoadSpritesForAirplanes();
+
 	int			GetAttack()   const;
 	int			GetHealth()   const;
 	std::string GetTypeObject() const;
@@ -29,12 +33,30 @@ private:
 	int m_health;
 	std::string m_typeObject;
 	
-	std::vector<std::string> m_vecSpritesNamesWalkSoldier;
+	std::vector<std::string> m_vecDefaultNamesMove;
+	std::vector<std::string> m_vecDefaultNamesAttack;
+	std::vector<std::string> m_vecDefaultNamesFire;
+	std::vector<std::string> m_vecDefaultNamesDeath;
+
+	int	m_countDefaultSpriteInMove;
+	int	m_countDefaultSpriteInAttack;
+	int m_countDefaultSpriteInFire;
+	int m_countDefaultSpriteInDeath;
+
+	/*std::vector<std::string> m_vecSpritesNamesWalkSoldier;
 	std::vector<std::string> m_vecSpritesNamesShotFrontSoldier;
 	std::vector<std::string> m_vecSpritesNamesShotUpSoldier;
 	
+	std::vector<std::string> m_vecSpritesNameMoveTanks;
+	std::vector<std::string> m_vecSpritesNameAttackTanks;
+	std::vector<std::string> m_vecSpritesNameDeathTanks;
+
 	int	m_countSpritesInVectorWalkSoldier;
 	int	m_countSpritesInVectorShotFrontSoldier;
 	int	m_countSpritesInVectorShotUpSoldier;
+
+	int	m_countSpritesInVectorMoveTank;
+	int	m_countSpritesInVectorAttackTank;
+	int	m_countSpritesInVectorDeathTank;&=*/
 };
 #endif

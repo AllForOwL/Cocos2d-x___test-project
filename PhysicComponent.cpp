@@ -21,7 +21,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			scene.removeChildByTag(CNT_TAG_BULLET);
 			 
 			// set state 
-			hero.m_stateEnemy	= Monster::StateEnemy::ENEMY_STATE_DEAD;
+			hero.m_stateEnemy	= Monster::StateEnemy::ENEMY_STATE_DEATH;
 			hero.m_stateBullet	= Monster::StateBullet::BULLET_STATE_DEAD;
 			m_statePhysic		= StatePhysic::PHYSIC_NOTHING;
 

@@ -115,7 +115,7 @@ void GameObjectMonster::Spawner(GameScene& scene)
 
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 	
-	int _randomValue  = 1; //= rand() % 3 + 1;
+	int _randomValue  = 2; //= rand() % 3 + 1;
 
 	if (_randomValue == 1)		// soldier
 	{
@@ -147,7 +147,7 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		int _height = m_monster->getContentSize().height;
 		
 		m_monster->setScale(_visibleSize.width / _width / 6,
-			_visibleSize.height / _height / 4);
+							_visibleSize.height / _height / 4);
 
 		m_monster->setPosition(300, 50);
 		m_monster->setName(_typeObject);

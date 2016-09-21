@@ -11,7 +11,12 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 	if (m_typeObject == CNT_NAME_ENEMY_SOLDIER)
 	{
 		LoadSpritesForSoldier();
-		this->initWithFile(m_vecSpritesNamesShotFrontSoldier[m_countSpritesInVectorShotFrontSoldier]);
+		this->initWithFile(m_vecDefaultNamesMove[m_countDefaultSpriteInMove]);
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_TANK)
+	{
+		LoadSpritesForTanks();
+		this->initWithFile(m_vecDefaultNamesMove[m_countDefaultSpriteInMove]);
 	}
 
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
@@ -31,7 +36,12 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 	if (m_typeObject == CNT_NAME_ENEMY_SOLDIER)
 	{
 		LoadSpritesForSoldier();
-		this->initWithFile(m_vecSpritesNamesShotFrontSoldier[m_countSpritesInVectorShotFrontSoldier]);
+		this->initWithFile(m_vecDefaultNamesAttack[m_countDefaultSpriteInAttack]);
+	}
+	else if (m_typeObject == CNT_NAME_ENEMY_TANK)
+	{
+		LoadSpritesForTanks();
+		this->initWithFile(m_vecDefaultNamesMove[m_countDefaultSpriteInMove]);
 	}
 
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
@@ -46,47 +56,89 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 {
 	switch (hero.m_stateEnemy)
 	{
+			case Monster::StateEnemy::ENEMY_STATE_MOVE:
+			{
+				if (m_vecDefaultNamesMove.size() == 0)
+				{
+					hero.m_stateEnemy = Monster::StateEnemy::ENEMY_STATE_ATTACK;
+					break;
+				}
+
+				if (++m_countDefaultSpriteInMove == m_vecDefaultNamesMove.size())
+				{
+					m_countDefaultSpriteInMove = 0;
+					hero.m_stateEnemy = Monster::StateEnemy::ENEMY_STATE_ATTACK;
+				}
+				this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecDefaultNamesMove[m_countDefaultSpriteInMove]));
+				break;
+			}
 			case Monster::StateEnemy::ENEMY_STATE_ATTACK:
 			{
-				if (++m_countSpritesInVectorWalkSoldier == m_vecSpritesNamesWalkSoldier.size())
+				if (++m_countDefaultSpriteInAttack == m_vecDefaultNamesAttack.size())
 				{
-					m_countSpritesInVectorWalkSoldier = 0;
-					//hero.m_stateEnemy = Monster::StateEnemy::ENEMY_STATE_FIRE;
+					m_countDefaultSpriteInAttack = 0;
+					hero.m_stateEnemy = Monster::StateEnemy::ENEMY_STATE_DEATH;
 				}
-				this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesNamesWalkSoldier[m_countSpritesInVectorWalkSoldier]));
+				this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecDefaultNamesAttack[m_countDefaultSpriteInAttack]));
 
 				break;
 			}
 			case Monster::StateEnemy::ENEMY_STATE_FIRE:
 			{
-				if (++m_countSpritesInVectorShotFrontSoldier == m_vecSpritesNamesShotFrontSoldier.size())
+				if (++m_countDefaultSpriteInFire == m_vecDefaultNamesFire.size())
 				{
-					m_countSpritesInVectorShotFrontSoldier = 0;
-					hero.m_stateEnemy = Monster::StateEnemy::ENEMY_STATE_ATTACK;
+					m_countDefaultSpriteInFire = 0;
+					hero.m_stateEnemy = Monster::StateEnemy::ENEMY_STATE_DEATH;
 				}
-				this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesNamesShotFrontSoldier[m_countSpritesInVectorShotFrontSoldier]));
+				this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecDefaultNamesFire[m_countDefaultSpriteInFire]));
 			
 				break;
 			}
-			case Monster::StateEnemy::ENEMY_STATE_FIRE_UP:
+			case Monster::StateEnemy::ENEMY_STATE_DEATH:
 			{
-				if (++m_countSpritesInVectorShotUpSoldier == m_vecSpritesNamesShotUpSoldier.size())
+				if (++m_countDefaultSpriteInDeath == m_vecDefaultNamesDeath.size())
 				{
-					m_countSpritesInVectorShotUpSoldier = 0;
-					hero.m_stateEnemy = Monster::StateEnemy::ENEMY_STATE_FIRE_UP;
+					m_countDefaultSpriteInDeath = 0;
+					hero.m_stateEnemy = Monster::StateEnemy::ENEMY_STATE_MOVE;
 				}
-				this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecSpritesNamesShotUpSoldier[m_countSpritesInVectorShotUpSoldier]));
+				this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecDefaultNamesDeath[m_countDefaultSpriteInDeath]));
 
 				break;
 			}
 			default:
 				break;
 	}
+	
+	//this->setRotationX(0);
+	//this->setRotationY(180);
 }
 
 void BreedGraphicComponent::LoadSpritesForSoldier()
 {
-	m_countSpritesInVectorShotFrontSoldier	= 0;
+	m_countDefaultSpriteInMove		= 0;
+	m_countDefaultSpriteInAttack	= 0;
+	m_countDefaultSpriteInFire		= 0;
+	m_countDefaultSpriteInDeath		= 0;
+
+	m_vecDefaultNamesMove.push_back("Soldier1_walk_1.png");
+	m_vecDefaultNamesMove.push_back("Soldier1_walk_2.png");
+	m_vecDefaultNamesMove.push_back("Soldier1_walk_3.png");
+	m_vecDefaultNamesMove.push_back("Soldier1_walk_4.png");
+	m_vecDefaultNamesMove.push_back("Soldier1_walk_5.png");
+	m_vecDefaultNamesMove.push_back("Soldier1_walk_6.png");
+	m_vecDefaultNamesMove.push_back("Soldier1_walk_7.png");
+	m_vecDefaultNamesMove.push_back("Soldier1_walk_8.png");
+
+	m_vecDefaultNamesFire.push_back("Soldier1_shot_front_1.png");
+	m_vecDefaultNamesFire.push_back("Soldier1_shot_front_2.png");
+	m_vecDefaultNamesFire.push_back("Soldier1_shot_front_3.png");
+	m_vecDefaultNamesFire.push_back("Soldier1_shot_front_4.png");
+	m_vecDefaultNamesFire.push_back("Soldier1_shot_front_5.png");
+	m_vecDefaultNamesFire.push_back("Soldier1_shot_front_6.png");
+	m_vecDefaultNamesFire.push_back("Soldier1_shot_front_7.png");
+	m_vecDefaultNamesFire.push_back("Soldier1_shot_front_8.png");
+
+/*	m_countSpritesInVectorShotFrontSoldier	= 0;
 	m_countSpritesInVectorShotUpSoldier		= 0;
 	m_countSpritesInVectorWalkSoldier		= 0;
 
@@ -121,7 +173,7 @@ void BreedGraphicComponent::LoadSpritesForSoldier()
 	m_vecSpritesNamesShotUpSoldier.push_back("Soldier1_shot_up_11.png");
 	m_vecSpritesNamesShotUpSoldier.push_back("Soldier1_shot_up_12.png");
 
-
+	*/
 	/*auto spritecache = SpriteFrameCache::getInstance();
 	
 	spritecache->addSpriteFramesWithFile("soldier.plist");
@@ -156,6 +208,55 @@ void BreedGraphicComponent::LoadSpritesForSoldier()
 	m_vecSpritesShotUpSoldier.push_back(Sprite::createWithSpriteFrameName("Soldier1_shot_up_11.png"));
 	m_vecSpritesShotUpSoldier.push_back(Sprite::createWithSpriteFrameName("Soldier1_shot_up_12.png"));
 	*/
+}
+
+void BreedGraphicComponent::LoadSpritesForTanks()
+{
+	m_countDefaultSpriteInMove		= 0;
+	m_countDefaultSpriteInAttack	= 0;
+	m_countDefaultSpriteInFire		= 0;
+	m_countDefaultSpriteInDeath		= 0;
+
+	m_vecDefaultNamesMove.push_back("American_sherman_move_forward_1.png");
+	m_vecDefaultNamesMove.push_back("American_sherman_move_forward_2.png");
+	m_vecDefaultNamesMove.push_back("American_sherman_move_forward_3.png");
+	m_vecDefaultNamesMove.push_back("American_sherman_move_forward_4.png");
+	m_vecDefaultNamesMove.push_back("American_sherman_move_forward_5.png");
+	m_vecDefaultNamesMove.push_back("American_sherman_move_forward_6.png");
+	m_vecDefaultNamesMove.push_back("American_sherman_move_forward_7.png");
+	m_vecDefaultNamesMove.push_back("American_sherman_move_forward_8.png");
+
+	m_vecDefaultNamesAttack.push_back("American_sherman_attack_1.png");
+	m_vecDefaultNamesAttack.push_back("American_sherman_attack_2.png");
+	m_vecDefaultNamesAttack.push_back("American_sherman_attack_3.png");
+	m_vecDefaultNamesAttack.push_back("American_sherman_attack_4.png");
+	m_vecDefaultNamesAttack.push_back("American_sherman_attack_5.png");
+	m_vecDefaultNamesAttack.push_back("American_sherman_attack_6.png");
+	m_vecDefaultNamesAttack.push_back("American_sherman_attack_7.png");
+	m_vecDefaultNamesAttack.push_back("American_sherman_attack_8.png");
+
+	m_vecDefaultNamesDeath.push_back("American_sherman_death_1.png");
+	m_vecDefaultNamesDeath.push_back("American_sherman_death_2.png");
+	m_vecDefaultNamesDeath.push_back("American_sherman_death_3.png");
+	m_vecDefaultNamesDeath.push_back("American_sherman_death_4.png");
+	m_vecDefaultNamesDeath.push_back("American_sherman_death_5.png");
+	m_vecDefaultNamesDeath.push_back("American_sherman_death_6.png");
+	m_vecDefaultNamesDeath.push_back("American_sherman_death_7.png");
+	m_vecDefaultNamesDeath.push_back("American_sherman_death_8.png");
+	m_vecDefaultNamesDeath.push_back("American_sherman_death_9.png");
+	m_vecDefaultNamesDeath.push_back("American_sherman_death_10.png");
+	m_vecDefaultNamesDeath.push_back("American_sherman_death_11.png");
+	m_vecDefaultNamesDeath.push_back("American_sherman_death_12.png");
+}
+
+void BreedGraphicComponent::LoadSpritesForTurrets()
+{
+
+}
+
+void BreedGraphicComponent::LoadSpritesForAirplanes()
+{
+
 }
 
 int BreedGraphicComponent::GetAttack() const
