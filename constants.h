@@ -7,9 +7,17 @@ const std::string CNT_NAME_ENEMY_SOLDIER	= "Soldier";
 const std::string CNT_NAME_ENEMY_TANK		= "Tank";
 const std::string CNT_NAME_ENEMY_TURRET		= "Turret";
 
-const std::string CNT_NAME_WEAPON_AK		= "AK-47";
+const std::string CNT_NAME_WEAPON_AK47					= "AK-47";
+const std::string CNT_NAME_WEAPON_GUN					= "Gun";
+const std::string CNT_NAME_WEAPON_MI71					= "MI-71";
+const std::string CNT_NAME_WEAPON_MK15					= "MK-15";
+const std::string CNT_NAME_WEAPON_REVOLVER_MONI_SHADE	= "Revolver_moni_shade";
+const std::string CNT_NAME_WEAPON_STEN_GUN_SHADE_2		= "Sten_gun_shade_2";
+const std::string CNT_NAME_WEAPON_TS23					= "TS-23";
+const std::string CNT_NAME_WEAPON_UMG					= "UMG";
 
-const std::string CNT_NAME_BULLET_DEFAULT	= "BULLET_NORMAL";
+const std::string CNT_NAME_BULLET_DEFAULT	= "Bullet_normal";
+const std::string CNT_NAME_BOMB				= "Bomd";
 
 #define HERO_COLLISION_BITMASK		0x000001
 #define ENEMY_COLLISION_BITMASK		0x000002

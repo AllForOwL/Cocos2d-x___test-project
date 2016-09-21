@@ -1,6 +1,6 @@
 #include "PlayerInputComponent.h"
 #include "WeaponGraphicComponent.h"
-#include "BulletGraphicComponent.h"
+#include "PlayerBulletGraphicComponent.h"
 #include "Monster.h"
 
 PlayerInputComponent::PlayerInputComponent()

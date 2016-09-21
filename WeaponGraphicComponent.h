@@ -10,19 +10,21 @@ using namespace cocos2d;
 class WeaponGraphicComponent : public GraphicComponent
 {
 public:
-	WeaponGraphicComponent(int attack, const std::string& filename);
+	WeaponGraphicComponent(int attack, const std::string& typeObject);
 	WeaponGraphicComponent(WeaponGraphicComponent& weapon);
 
 	virtual void Update(Monster& hero, GameScene& scene);
 
 	int GetAttack() const;
-	std::string GetFilename() const;
+	std::string GetTypeObject() const;
 
 	~WeaponGraphicComponent();
 
 public:
 	int			m_attack;
-	std::string m_filename;
+	std::string m_typeObject;
+	
+	std::string m_strFilename;
 
 };
 

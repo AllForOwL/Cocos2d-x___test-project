@@ -4,7 +4,7 @@
 #include "GraphicComponent.h"
 #include "HeroGraphicComponent.h"
 #include "WeaponGraphicComponent.h"
-#include "BulletGraphicComponent.h"
+#include "PlayerBulletGraphicComponent.h"
 #include "BreedGraphicComponent.h"
 #include "BotInputComponent.h"
 #include "PhysicComponent.h"
@@ -58,16 +58,16 @@ bool GameScene::init()
 	
 	this->addChild(m_graphicComponentHero);
 	
-	m_graphicComponentWeapon = new WeaponGraphicComponent(200, CNT_NAME_WEAPON_AK);
+	m_graphicComponentWeapon = new WeaponGraphicComponent(200, CNT_NAME_WEAPON_AK47);
 	m_graphicComponentWeapon->setPosition(100, 40);
 	m_graphicComponentWeapon->setScale(_visibleSize.width / m_graphicComponentWeapon->getContentSize().width / 12,
 									   _visibleSize.height / m_graphicComponentWeapon->getContentSize().height / 12);
 	
 	this->addChild(m_graphicComponentWeapon);
 	
-	m_graphicComponentBullet	= new BulletGraphicComponent(30, CNT_NAME_BULLET_DEFAULT); 
-	m_graphicComponentBullet->setScale(m_graphicComponentBullet->getContentSize().width / 10,
-										m_graphicComponentBullet->getContentSize().height  / 10
+	m_graphicComponentBullet	= new PlayerBulletGraphicComponent(30, CNT_NAME_BULLET_DEFAULT); 
+	m_graphicComponentBullet->setScale(_visibleSize.width / m_graphicComponentBullet->getContentSize().width / 10,
+										_visibleSize.height / m_graphicComponentBullet->getContentSize().height  / 10
 										);
 	m_graphicComponentBullet->setName("bullet");
 

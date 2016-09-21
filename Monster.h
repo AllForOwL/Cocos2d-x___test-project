@@ -12,7 +12,7 @@ class GraphicComponent;
 class GameObjectMonster;
 class PhysicComponent;
 class WeaponGraphicComponent;
-class BulletGraphicComponent;
+class PlayerBulletGraphicComponent;
 
 class Monster
 {
@@ -37,8 +37,7 @@ public:
 	{
 		BULLET_STATE_FIRE,
 		BULLET_STATE_FIRE_UP,
-		BULLET_STATE_REST,
-		BULLET_STATE_DEAD
+		BULLET_STATE_REST
 	};
 
 	enum StateEnemy
@@ -66,7 +65,7 @@ public:
 	virtual void Update(GameScene& scene);
 	
 	void ChangeWeapon(WeaponGraphicComponent& weapon);
-	void ChangeBullet(BulletGraphicComponent& bullet);
+	void ChangeBullet(PlayerBulletGraphicComponent& bullet);
 
 	~Monster();
 

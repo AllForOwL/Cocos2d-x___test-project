@@ -15,6 +15,14 @@ class GraphicComponent;
 class GameObjectMonster
 {
 public:
+
+	enum StateBullet
+	{
+		STATE_FIRE,
+		STATE_FIRE_UP,
+		STATE_FIRE_BOMB
+	};
+
 	GameObjectMonster();
 
 	void Update(Monster& hero, GameScene& scene);
@@ -22,8 +30,17 @@ public:
 
 	~GameObjectMonster();
 public:
-	std::vector<GraphicComponent*>	m_monsterComponent;
-	GraphicComponent*				m_monster;
+	std::vector<GraphicComponent*>	m_vecComponentEnemy;
+	GraphicComponent*				m_enemy;
+
+	std::vector<GraphicComponent*>	m_vecComponentWeapon;
+	GraphicComponent*				m_weapon;
+
+	std::vector<GraphicComponent*>	m_vecComponentBullet;
+	GraphicComponent*				m_bullet;
+
+	StateBullet	m_stateBullet;
+
 };
 
 

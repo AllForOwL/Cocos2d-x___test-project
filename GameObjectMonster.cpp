@@ -1,6 +1,8 @@
 #include "GameObjectMonster.h"
 #include "GameScene.h"
 #include "BreedGraphicComponent.h"
+#include "WeaponGraphicComponent.h"
+#include "BotBulletGraphicComponent.h"
 #include "Monster.h"
 #include "GraphicComponent.h"
 #include "constants.h"
@@ -12,38 +14,73 @@ GameObjectMonster::GameObjectMonster()
 
 void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 {
-	if (m_monsterComponent.size())
+	if (m_vecComponentEnemy.size())
 	{
-		for (int i = 0; i < m_monsterComponent.size(); i++)
+		for (int i = 0; i < m_vecComponentEnemy.size(); i++)
 		{
-			m_monsterComponent[i]->Update(hero, scene);
+			m_vecComponentEnemy[i]->Update	(hero, scene);
+			m_vecComponentWeapon[i]->Update	(hero, scene);
+			m_vecComponentBullet[i]->Update	(hero, scene);
 		}
 	}
 }
 
 void GameObjectMonster::Spawner(GameScene& scene)
 {
+	if (m_vecComponentEnemy.size() > 0)
+	{
+		return;
+	}
+
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 	
-	int _randomValue = rand() % 3 + 1;
+	int _randomValue = 1; // rand() % 3 + 1;
 
 	if (_randomValue == 1)		// soldier
 	{
-		int _attack				= 200;
-		int _health				= 100;
-		std::string _typeObject = CNT_NAME_ENEMY_SOLDIER;
-
-		m_monster = new BreedGraphicComponent(_attack, _health, _typeObject);
+		int _attackEnemy		= 200;
+		int _attackWeapon		= 50;
+		int _attackBullet		= 20;
 		
-		int _width	= m_monster->getContentSize().width;
-		int _height = m_monster->getContentSize().height;
+		int _health				= 100;
 
-		m_monster->setScale(_visibleSize.width / m_monster->getContentSize().width / 6,
-							_visibleSize.height / m_monster->getContentSize().height / 4);
+		m_stateBullet = GameObjectMonster::StateBullet::STATE_FIRE_UP;
 
-		m_monster->setPosition(350, 100);
-		m_monster->setName(_typeObject);
-		m_monsterComponent.push_back(m_monster);
+		std::string _typeObjectEnemy	= CNT_NAME_ENEMY_SOLDIER;
+		std::string _typeObjectWeapon	= CNT_NAME_WEAPON_AK47;
+		std::string _typeObjectBullet	= CNT_NAME_BULLET_DEFAULT;
+
+		m_enemy		= new BreedGraphicComponent	(_attackEnemy, _health, _typeObjectEnemy);
+		m_weapon	= new WeaponGraphicComponent(_attackWeapon, _typeObjectWeapon); 
+		m_bullet	= new BotBulletGraphicComponent(_attackBullet, _typeObjectBullet);
+
+		int _widthEnemy	 = m_enemy->getContentSize().width;
+		int _heightEnemy = m_enemy->getContentSize().height;
+
+		int _widthWeapon	= m_weapon->getContentSize().width;
+		int _heightWeapon	= m_weapon->getContentSize().height;
+
+		int _widthBullet	= m_bullet->getContentSize().width;
+		int _heightBullet	= m_bullet->getContentSize().height;
+
+		m_enemy->setScale(_visibleSize.width / _widthEnemy / 6,
+						 _visibleSize.height / _heightEnemy / 4);
+		m_weapon->setScale(_visibleSize.width / _widthWeapon / 6,
+							_visibleSize.height / _heightWeapon / 4);
+		m_bullet->setScale(_visibleSize.width / _widthBullet / 6,
+							_visibleSize.height / _heightBullet / 4);
+
+		m_enemy->setPosition	(350, 100);
+		m_weapon->setPosition	(350, 80);
+		m_bullet->setPosition	(350, 80);
+
+		m_enemy->setName	(_typeObjectEnemy);
+		m_weapon->setName	(_typeObjectWeapon);
+		m_bullet->setName	(_typeObjectBullet);
+
+		m_vecComponentEnemy.push_back	(m_enemy);
+		m_vecComponentWeapon.push_back	(m_weapon);
+		m_vecComponentBullet.push_back	(m_bullet);
 	}
 	else if (_randomValue == 2)	// tank
 	{
@@ -51,17 +88,17 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		int _health = 100;
 		std::string _typeObject = CNT_NAME_ENEMY_TANK;
 
-		m_monster = new BreedGraphicComponent(_attack, _health, _typeObject);
+		m_enemy = new BreedGraphicComponent(_attack, _health, _typeObject);
 
-		int _width  = m_monster->getContentSize().width;
-		int _height = m_monster->getContentSize().height;
+		int _width  = m_enemy->getContentSize().width;
+		int _height = m_enemy->getContentSize().height;
 		
-		m_monster->setScale(_visibleSize.width / _width / 6,
+		m_enemy->setScale(_visibleSize.width / _width / 6,
 							_visibleSize.height / _height / 4);
 
-		m_monster->setPosition(300, 50);
-		m_monster->setName(_typeObject);
-		m_monsterComponent.push_back(m_monster);
+		m_enemy->setPosition(300, 50);
+		m_enemy->setName(_typeObject);
+		m_vecComponentEnemy.push_back(m_enemy);
 	}
 	else if (_randomValue == 3)	// turret
 	{
@@ -69,20 +106,22 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		int _health = 100;
 		std::string _typeObject = CNT_NAME_ENEMY_TURRET;
 
-		m_monster = new BreedGraphicComponent(_attack, _health, _typeObject);
+		m_enemy = new BreedGraphicComponent(_attack, _health, _typeObject);
 
-		int _width	= m_monster->getContentSize().width;
-		int _height = m_monster->getContentSize().height;
+		int _width	= m_enemy->getContentSize().width;
+		int _height = m_enemy->getContentSize().height;
 
-		m_monster->setScale(_visibleSize.width / _width / 6,
+		m_enemy->setScale(_visibleSize.width / _width / 6,
 							_visibleSize.height / _height / 4);
 
-		m_monster->setPosition(300, 100);
-		m_monster->setName(_typeObject);
-		m_monsterComponent.push_back(m_monster);
+		m_enemy->setPosition(300, 100);
+		m_enemy->setName(_typeObject);
+		m_vecComponentEnemy.push_back(m_enemy);
 	}
 
-	scene.addChild(m_monsterComponent[m_monsterComponent.size() - 1]);
+	scene.addChild(m_vecComponentEnemy[m_vecComponentEnemy.size() - 1]);
+	scene.addChild(m_vecComponentWeapon[m_vecComponentWeapon.size() - 1]);
+	scene.addChild(m_vecComponentBullet[m_vecComponentBullet.size() - 1]);
 }
 
 GameObjectMonster::~GameObjectMonster()

@@ -1,49 +1,104 @@
 #include "WeaponGraphicComponent.h"
 #include "Monster.h"
 #include "GameScene.h"
+#include "constants.h"
 
-WeaponGraphicComponent::WeaponGraphicComponent(int attack, const std::string& filename)
-												: m_attack  (attack),
-												  m_filename(filename)
+WeaponGraphicComponent::WeaponGraphicComponent(int attack, const std::string& typeObject)
+												: m_attack		(attack),
+												  m_typeObject	(typeObject)
 {
-	//this->initWithFile(m_filename);
+	if (m_typeObject == CNT_NAME_WEAPON_AK47)
+	{
+		m_strFilename = "AK47.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_GUN)
+	{
+		m_strFilename = "Gun.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_MI71)
+	{
+		m_strFilename = "MI71.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_MK15)
+	{
+		m_strFilename = "MK15.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_REVOLVER_MONI_SHADE)
+	{
+		m_strFilename = "Revolver_moni_shade.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_STEN_GUN_SHADE_2)
+	{
+		m_strFilename = "Sten_gun_shade_2.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_TS23)
+	{
+		m_strFilename = "TS23.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_UMG)
+	{
+		m_strFilename = "Umg.png";
+		this->initWithFile(m_strFilename);
+	}
 }
 
 WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 {
-	this->m_attack   = weapon.GetAttack();
-	this->m_filename = weapon.GetFilename();
+	this->m_attack		= weapon.GetAttack();
+	this->m_typeObject	= weapon.GetTypeObject();
 	
-	this->initWithFile(m_filename);
-
-	Size _visibleSize = Director::getInstance()->getVisibleSize();
-	this->setScale(_visibleSize.width / this->getContentSize().width / 6,
-		_visibleSize.height / this->getContentSize().height / 2);
-	this->setPosition(100, 50);
+	if (m_typeObject == CNT_NAME_WEAPON_AK47)
+	{
+		m_strFilename = "AK7.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_GUN)
+	{
+		m_strFilename = "Gun.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_MI71)
+	{
+		m_strFilename = "MI71.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_MK15)
+	{
+		m_strFilename = "MK15.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_REVOLVER_MONI_SHADE)
+	{
+		m_strFilename = "Revolver_moni_shade.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_STEN_GUN_SHADE_2)
+	{
+		m_strFilename = "Sten_gun_shade_2.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_TS23)
+	{
+		m_strFilename = "TS23.png";
+		this->initWithFile(m_strFilename);
+	}
+	else if (m_typeObject == CNT_NAME_WEAPON_UMG)
+	{	m_strFilename = "Umg.png";
+		this->initWithFile(m_strFilename);
+	}
 }
 
+	
 /*virtual*/ void WeaponGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	switch (hero.m_stateWeapon)
-	{
-		case Monster::StateWeapon::WEAPON_STATE_FIRE:
-		{
-		
-			break;
-		}
-		case Monster::StateWeapon::WEAPON_STATE_FIRE_UP:
-		{
 
-			break;
-		}
-		case Monster::StateWeapon::WEAPON_STATE_REST:
-		{
-
-			break;
-		}
-	default:
-		break;
-	}
 }
 
 int WeaponGraphicComponent::GetAttack() const
@@ -51,9 +106,9 @@ int WeaponGraphicComponent::GetAttack() const
 	return m_attack;
 }
 
-std::string WeaponGraphicComponent::GetFilename() const
+std::string WeaponGraphicComponent::GetTypeObject() const
 {
-	return m_filename;
+	return m_typeObject;
 }
 
 WeaponGraphicComponent::~WeaponGraphicComponent()

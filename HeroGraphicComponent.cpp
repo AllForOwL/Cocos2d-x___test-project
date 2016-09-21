@@ -4,7 +4,7 @@
 #include "GameScene.h"
 #include "constants.h"
 #include "WeaponGraphicComponent.h"
-#include "BulletGraphicComponent.h"
+#include "PlayerBulletGraphicComponent.h"
 
 HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_typeHero(typeHero)
 {
