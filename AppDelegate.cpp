@@ -16,7 +16,7 @@ static cocos2d::Size largeResolutionSize = cocos2d::Size(1024, 768);
 */
 
 static Resource smallResource = { cocos2d::CCSizeMake(480, 320), "res/HDR" };
-static Resource mediumResource = { cocos2d::CCSizeMake(1024, 768), "res/HD" };
+static Resource mediumResource = { cocos2d::CCSizeMake(1024, 768), "res/HDR" };
 static Resource largeResource = { cocos2d::CCSizeMake(2048, 1536), "res/HDR" };
 static cocos2d::CCSize designResolutionSize = cocos2d::CCSizeMake(480, 320);
 

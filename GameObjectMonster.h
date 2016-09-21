@@ -18,7 +18,7 @@ public:
 	GameObjectMonster();
 
 	void Update(Monster& hero, GameScene& scene);
-	BreedGraphicComponent* CreateNewMonster(int attack, int health, std::string& filename);
+	BreedGraphicComponent* CreateNewMonster(int attack, int health, std::string& typeObject);
 	void GoesAirplanes(std::string& filename);
 	void GoesBoy(std::string& filename);
 	void Spawner(GameScene& scene);

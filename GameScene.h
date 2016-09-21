@@ -52,6 +52,7 @@ public:
 	int m_countSpriteInVector;
 	int m_countLevel;
 	std::vector<cocos2d::Sprite*> m_vecBackground;
+	float						  m_widthBackground;
 };
 
 #endif // __GAME_SCENE_H__

@@ -77,7 +77,7 @@ bool GameScene::init()
 	m_gameObjectMonster			= new GameObjectMonster();
 	m_botInputComponent			= new BotInputComponent();
 	m_physicComponent			= new PhysicComponent();
-	m_hero						= new Monster(m_graphicComponentHero, m_graphicComponentWeapon, m_graphicComponentBullet, m_gameObjectMonster, m_inputComponent, m_botInputComponent, m_physicComponent);
+	m_hero				= new Monster(m_graphicComponentHero, m_graphicComponentWeapon, m_graphicComponentBullet, m_gameObjectMonster, m_inputComponent, m_botInputComponent, m_physicComponent);
 	
 	auto listener = EventListenerKeyboard::create();
 	listener->onKeyPressed = CC_CALLBACK_2(InputComponent::onKeyPressed, m_inputComponent);
@@ -91,15 +91,15 @@ bool GameScene::init()
 
 	this->schedule(schedule_selector(GameScene::update), CNT_TIME_UPDATE_SCENE);
 	this->schedule(schedule_selector(GameScene::Spawn),  CNT_TIME_SPAWN);
-	this->scheduleUpdate();
+	//this->scheduleUpdate();
 	
 	return true;
 }
 
 void GameScene::update(float dt)
 {
-//	auto position = m_background->getPosition();
-//	m_background->setPosition(--position.x, position.y);
+	auto position = m_vecBackground[m_countLevel]->getPosition();
+	m_vecBackground[m_countLevel]->setPosition(--position.x, position.y);
 
 	m_hero->Update(*this);
 }
@@ -127,8 +127,10 @@ void GameScene::LoadFileBackground()
 	m_vecBackground.push_back(Sprite::createWithSpriteFrameName("7.png"));
 
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
-
 	m_vecBackground[m_countLevel]->setPosition(_visibleSize.width / 2, _visibleSize.height / 2);
+	m_widthBackground = m_vecBackground[m_countLevel]->getContentSize().width / 2;
+	m_vecBackground[m_countLevel]->setName("background");
+
 	this->addChild(m_vecBackground[m_countLevel]);
 }
 

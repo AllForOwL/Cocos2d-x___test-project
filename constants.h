@@ -9,8 +9,8 @@ const int CNT_TAG_BOY				= 1;
 const int CNT_TAG_TANK				= 2;
 const int CNT_TAG_BULLET			= 100;
 
-const int CNT_TIME_SPAWN			= 5;
-const float CNT_TIME_UPDATE_SCENE	= 10;
+const float CNT_TIME_SPAWN			= 0.2;
+const float CNT_TIME_UPDATE_SCENE	= 0.1;
 
 const std::string CNT_NAME_HERO_HELL		= "Hell";
 

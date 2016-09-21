@@ -29,9 +29,9 @@ private:
 	int m_health;
 	std::string m_typeObject;
 	
-	std::vector<cocos2d::Sprite*> m_vecSpritesWalkSoldier;
-	std::vector<cocos2d::Sprite*> m_vecSpritesShotFrontSoldier;
-	std::vector<cocos2d::Sprite*> m_vecSpritesShotUpSoldier;
+	std::vector<std::string> m_vecSpritesNamesWalkSoldier;
+	std::vector<std::string> m_vecSpritesNamesShotFrontSoldier;
+	std::vector<std::string> m_vecSpritesNamesShotUpSoldier;
 	
 	int	m_countSpritesInVectorWalkSoldier;
 	int	m_countSpritesInVectorShotFrontSoldier;

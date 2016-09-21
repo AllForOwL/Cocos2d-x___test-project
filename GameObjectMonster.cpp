@@ -9,22 +9,17 @@ const int CNT_COUNT_OBJECT = 10;
 
 GameObjectMonster::GameObjectMonster()
 {
-	std::string s = "Soldier.png";
+	//std::string s = "Soldier.png";
 
-	m_monster = new BreedGraphicComponent(*CreateNewMonster(100, 100, s));
+	//m_monster = new BreedGraphicComponent(*CreateNewMonster(100, 100, s));
 }
 
 void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 {
-
 	if (m_monsterComponent.size())
 	{
-		for (int i = 0; i < m_monsterComponent.size(); i++)
-		{
-			m_monsterComponent[i]->Update(hero, scene);
-		}
+		m_monsterComponent[0]->Update(hero, scene);
 	}
-
 
 /*	switch (hero.m_stateEnemy)
 	{
@@ -88,9 +83,9 @@ void GameObjectMonster::Update(Monster& hero, GameScene& scene)
 	}*/
 }
 
-BreedGraphicComponent* GameObjectMonster::CreateNewMonster(int attack, int health, std::string& filename)
+BreedGraphicComponent* GameObjectMonster::CreateNewMonster(int attack, int health, std::string& typeObject)
 {
-	return new BreedGraphicComponent(attack, health, std::string(filename));
+	return new BreedGraphicComponent(attack, health, std::string(typeObject));
 }
 
 void GameObjectMonster::GoesAirplanes(std::string& filename)
@@ -128,15 +123,15 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		int _health				= 100;
 		std::string _typeObject = CNT_NAME_ENEMY_SOLDIER;
 
-		m_monster = new BreedGraphicComponent(*CreateNewMonster(_attack, _health, _typeObject));
+		m_monster = new BreedGraphicComponent(_attack, _health, _typeObject);
 		
 		int _width	= m_monster->getContentSize().width;
 		int _height = m_monster->getContentSize().height;
 
-		m_monster->setScale(_visibleSize.width / _width / 10,
-							_visibleSize.height / _height / 6);
+		m_monster->setScale(_visibleSize.width / m_monster->getContentSize().width / 6,
+			_visibleSize.height / m_monster->getContentSize().height / 4);
 
-		m_monster->setPosition(_visibleSize.width - 30, _visibleSize.height - _visibleSize.height / _height / 6);
+		m_monster->setPosition(350, 100);
 		m_monster->setName(_typeObject);
 		m_monsterComponent.push_back(m_monster);
 	}
@@ -146,7 +141,7 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		int _health = 100;
 		std::string _typeObject = CNT_NAME_ENEMY_TANK;
 
-		m_monster = new BreedGraphicComponent(*CreateNewMonster(_attack, _health, _typeObject));
+		m_monster = new BreedGraphicComponent(_attack, _health, _typeObject);
 
 		int _width  = m_monster->getContentSize().width;
 		int _height = m_monster->getContentSize().height;
@@ -164,7 +159,7 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		int _health = 100;
 		std::string _typeObject = CNT_NAME_ENEMY_TURRET;
 
-		m_monster = new BreedGraphicComponent(*CreateNewMonster(_attack, _health, _typeObject));
+		m_monster = new BreedGraphicComponent(_attack, _health, _typeObject);
 
 		int _width = m_monster->getContentSize().width;
 		int _height = m_monster->getContentSize().height;
@@ -177,7 +172,7 @@ void GameObjectMonster::Spawner(GameScene& scene)
 		m_monsterComponent.push_back(m_monster);
 	}
 
-	scene.addChild(m_monsterComponent[m_monsterComponent.size() - 1]);
+	scene.addChild(m_monsterComponent[0]);
 }
 
 GameObjectMonster::~GameObjectMonster()
