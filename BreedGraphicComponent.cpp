@@ -18,9 +18,13 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 		LoadSpritesForTanks();
 		this->initWithFile(m_vecDefaultNamesMove[m_countDefaultSpriteInMove]);
 	}
+	else if (m_typeObject == CNT_NAME_ENEMY_TURRET)
+	{
+		LoadSpritesForTurrets();
+		this->initWithFile(m_vecDefaultNamesFire[m_countDefaultSpriteInFire]);
+	}
 
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
-	//physicsBody->setDynamic(false);
 	physicsBody->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
 	physicsBody->setContactTestBitmask(true);
 
@@ -88,7 +92,7 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 				if (++m_countDefaultSpriteInFire == m_vecDefaultNamesFire.size())
 				{
 					m_countDefaultSpriteInFire = 0;
-					hero.m_stateEnemy = Monster::StateEnemy::ENEMY_STATE_DEATH;
+					//hero.m_stateEnemy = Monster::StateEnemy::ENEMY_STATE_DEATH;
 				}
 				this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecDefaultNamesFire[m_countDefaultSpriteInFire]));
 			
@@ -108,9 +112,6 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 			default:
 				break;
 	}
-	
-	//this->setRotationX(0);
-	//this->setRotationY(180);
 }
 
 void BreedGraphicComponent::LoadSpritesForSoldier()
@@ -244,14 +245,23 @@ void BreedGraphicComponent::LoadSpritesForTanks()
 	m_vecDefaultNamesDeath.push_back("American_sherman_death_7.png");
 	m_vecDefaultNamesDeath.push_back("American_sherman_death_8.png");
 	m_vecDefaultNamesDeath.push_back("American_sherman_death_9.png");
-	m_vecDefaultNamesDeath.push_back("American_sherman_death_10.png");
-	m_vecDefaultNamesDeath.push_back("American_sherman_death_11.png");
-	m_vecDefaultNamesDeath.push_back("American_sherman_death_12.png");
 }
 
 void BreedGraphicComponent::LoadSpritesForTurrets()
 {
+	m_countDefaultSpriteInMove		= 0;
+	m_countDefaultSpriteInAttack	= 0;
+	m_countDefaultSpriteInFire		= 0;
+	m_countDefaultSpriteInDeath		= 0;
 
+	m_vecDefaultNamesFire.push_back("turret_1_fire_1.png");
+	m_vecDefaultNamesFire.push_back("turret_1_fire_2.png");
+	m_vecDefaultNamesFire.push_back("turret_1_fire_3.png");
+	m_vecDefaultNamesFire.push_back("turret_1_fire_4.png");
+	m_vecDefaultNamesFire.push_back("turret_1_fire_5.png");
+	m_vecDefaultNamesFire.push_back("turret_1_fire_6.png");
+	m_vecDefaultNamesFire.push_back("turret_1_fire_7.png");
+	m_vecDefaultNamesFire.push_back("turret_1_fire_8.png");
 }
 
 void BreedGraphicComponent::LoadSpritesForAirplanes()

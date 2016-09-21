@@ -9,9 +9,7 @@ const int CNT_COUNT_OBJECT = 10;
 
 GameObjectMonster::GameObjectMonster()
 {
-	//std::string s = "Soldier.png";
 
-	//m_monster = new BreedGraphicComponent(*CreateNewMonster(100, 100, s));
 }
 
 void GameObjectMonster::Update(Monster& hero, GameScene& scene)
@@ -115,7 +113,7 @@ void GameObjectMonster::Spawner(GameScene& scene)
 
 	Size _visibleSize = Director::getInstance()->getVisibleSize();
 	
-	int _randomValue  = 2; //= rand() % 3 + 1;
+	int _randomValue  = 3; //= rand() % 3 + 1;
 
 	if (_randomValue == 1)		// soldier
 	{
@@ -161,11 +159,11 @@ void GameObjectMonster::Spawner(GameScene& scene)
 
 		m_monster = new BreedGraphicComponent(_attack, _health, _typeObject);
 
-		int _width = m_monster->getContentSize().width;
+		int _width	= m_monster->getContentSize().width;
 		int _height = m_monster->getContentSize().height;
 
 		m_monster->setScale(_visibleSize.width / _width / 6,
-			_visibleSize.height / _height / 4);
+							_visibleSize.height / _height / 4);
 
 		m_monster->setPosition(300, 50);
 		m_monster->setName(_typeObject);
