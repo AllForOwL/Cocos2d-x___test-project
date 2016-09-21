@@ -23,8 +23,6 @@ BulletGraphicComponent::BulletGraphicComponent(int attack, const std::string& fi
 
 BulletGraphicComponent::BulletGraphicComponent(BulletGraphicComponent& bullet)
 {
-	this->setTag(CNT_TAG_BULLET);
-
 	auto physicBody = PhysicsBody::createBox(this->getContentSize());
 	physicBody->setContactTestBitmask(true);
 	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);

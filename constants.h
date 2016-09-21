@@ -1,15 +1,4 @@
-const int CNT_NUMBER_SPRITES_WALK	= 8;
-const int CNT_NUMBER_SPRITES_RUN	= 7;
-const int CNT_NUMBER_SPRITES_ATTACK = 4;
-const int CNT_NUMBER_SPRITES_DIE	= 4;
-const int CNT_NUMBER_SPRITES_DIZZY	= 3;
-
-const int CNT_TAG_AIRPLANE			= 0;
-const int CNT_TAG_BOY				= 1;
-const int CNT_TAG_TANK				= 2;
-const int CNT_TAG_BULLET			= 100;
-
-const float CNT_TIME_SPAWN			= 0.2;
+const float CNT_TIME_SPAWN			= 0.8;
 const float CNT_TIME_UPDATE_SCENE	= 0.1;
 
 const std::string CNT_NAME_HERO_HELL		= "Hell";

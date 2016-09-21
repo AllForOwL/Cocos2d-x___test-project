@@ -61,7 +61,7 @@ void HeroGraphicComponent::LoadSpritesForHell()
 	{
 		case Monster::StateHero::HERO_STATE_WALK:
 		{
-			if (++m_countSpriteInVectorWalk >= CNT_NUMBER_SPRITES_WALK)
+			if (++m_countSpriteInVectorWalk >= m_vecSpritesWalk.size())
 			{
 				m_countSpriteInVectorWalk = 0;
 			}
@@ -70,7 +70,7 @@ void HeroGraphicComponent::LoadSpritesForHell()
 		}
 		case Monster::StateHero::HERO_STATE_ATTACK:
 		{
-			if (++m_countSpriteInVectorAttack >= CNT_NUMBER_SPRITES_ATTACK)
+			if (++m_countSpriteInVectorAttack >= m_vecSpritesAttack.size())
 			{
 				m_countSpriteInVectorAttack = 0;
 				hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
@@ -80,7 +80,7 @@ void HeroGraphicComponent::LoadSpritesForHell()
 		}
 		case Monster::StateHero::HERO_STATE_RUN:
 		{
-			if (++m_countSpriteInVectorRun >= CNT_NUMBER_SPRITES_RUN)
+			if (++m_countSpriteInVectorRun >= m_vecSpritesRun.size())
 			{
 				m_countSpriteInVectorRun = 0;
 				//hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
