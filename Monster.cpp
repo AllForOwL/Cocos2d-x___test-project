@@ -25,6 +25,8 @@ Monster::Monster(
 	m_stateWeapon	= Monster::StateWeapon::WEAPON_STATE_REST;
 	m_stateBullet	= Monster::StateBullet::BULLET_STATE_REST;
 	m_statePhysic	= Monster::StatePhysic::PHYSIC_NOTHING;
+
+	m_lbl->setString("monster");
 }
 
 void Monster::ChangeWeapon(WeaponGraphicComponent& weapon)
@@ -41,13 +43,14 @@ void Monster::ChangeBullet(PlayerBulletGraphicComponent& bullet)
 
 void Monster::Update(GameScene& scene)
 {
+	scene.addChild(m_lbl);
 	m_inputComponentHero->Update		(*this);
 	m_graphicComponentHero->Update		(*this, scene);
 	m_graphicComponentHeroWeapon->Update(*this, scene);
 	m_botInputComponent->Update			(*this);
-	m_physicComponent->Update			(*this, scene);
 	m_objectMonster->Update				(*this, scene);
 	m_graphiComponentHeroBullet->Update (*this, scene);
+	m_physicComponent->Update			(*this, scene);
 }
 
 Monster::~Monster()

@@ -9,6 +9,8 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(int attack, const std::stri
 														: m_attack		(attack),
 														  m_typeObject	(typeObject)
 {
+	this->setTag(0);
+
 	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
 	{
 		LoadBulletNormal();
@@ -63,12 +65,18 @@ std::string BotBulletGraphicComponent::GetTypeObject() const
 
 /*virtual*/ void BotBulletGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
+	if (this->getTag() == CNT_TAG_BULLET_HIT_IN_TARGET)
+	{
+		hero.m_objectMonster->m_stateBullet = GameObjectMonster::StateBullet::STATE_HIT_IN_TARGET;
+	}
+
 	switch (hero.m_objectMonster->m_stateBullet)
 	{
 		case GameObjectMonster::StateBullet::STATE_FIRE:
 		{
 			Vec2 _position = this->getPosition();															
 			this->setPosition(--_position.x, _position.y);
+			this->setVisible(true);
 
 			break;
 		}
@@ -92,10 +100,16 @@ std::string BotBulletGraphicComponent::GetTypeObject() const
 		}
 		case GameObjectMonster::StateBullet::STATE_FIRE_BOMB:
 		{
+			break;
+		}
+		case GameObjectMonster::StateBullet::STATE_HIT_IN_TARGET:
+		{
+			hero.m_objectMonster->m_vecComponentEnemy[0]->setTag(this->GetAttack());
+			this->removeFromParentAndCleanup(true);
+			hero.m_objectMonster->m_vecComponentBullet.pop_back();
 
 			break;
 		}
-
 		default:
 			break;
 	}

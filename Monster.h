@@ -73,6 +73,8 @@ public:
 	StateWeapon			m_stateWeapon;
 	StateBullet			m_stateBullet;
 	StatePhysic			m_statePhysic;
+	cocos2d::Label* m_lbl;
+
 };
 
 #endif

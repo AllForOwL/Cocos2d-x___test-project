@@ -11,7 +11,12 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 	if (m_typeHero == CNT_NAME_HERO_HELL)
 	{
 		LoadSpritesForHell();
+		m_attack = 120;
+		m_health = 100;
 	}
+
+	//m_lblAttack = LabelProtocol::setString("hell");
+	
 
 	m_countSpriteInVectorWalk		= 0;
 	m_countSpriteInVectorAttack		= 0;
@@ -119,6 +124,21 @@ void HeroGraphicComponent::LoadSpritesForHell()
 			break;
 		}
 	}
+}
+
+/*virtual*/ int HeroGraphicComponent::GetAttack() const
+{
+	return m_attack;
+}
+
+/*virtual*/ int HeroGraphicComponent::GetHealth() const
+{
+	return m_health;
+}
+
+/*virtual*/ std::string HeroGraphicComponent::GetTypeObject() const
+{
+	return m_typeHero;
 }
 
 HeroGraphicComponent::~HeroGraphicComponent()

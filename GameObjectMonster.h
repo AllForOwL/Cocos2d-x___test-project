@@ -20,7 +20,8 @@ public:
 	{
 		STATE_FIRE,
 		STATE_FIRE_UP,
-		STATE_FIRE_BOMB
+		STATE_FIRE_BOMB,
+		STATE_HIT_IN_TARGET
 	};
 
 	GameObjectMonster();
@@ -39,7 +40,7 @@ public:
 	std::vector<GraphicComponent*>	m_vecComponentBullet;
 	GraphicComponent*				m_bullet;
 
-	StateBullet	m_stateBullet;
+	StateBullet		m_stateBullet;
 };
 
 

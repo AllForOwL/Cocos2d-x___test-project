@@ -98,7 +98,7 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 	
 /*virtual*/ void WeaponGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-
+	return;
 }
 
 int WeaponGraphicComponent::GetAttack() const

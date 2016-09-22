@@ -14,6 +14,9 @@ public:
 	HeroGraphicComponent(HeroGraphicComponent& heroGraphiComponent);
 
 	virtual void Update(Monster& hero, GameScene& scene);
+	virtual int GetAttack() const;
+	virtual int GetHealth() const;
+	virtual std::string GetTypeObject() const;
 
 	void LoadSpritesForHell();
 
@@ -32,6 +35,12 @@ public:
 	int m_countSpriteInVectorRun;
 
 	std::string m_typeHero;
+
+	int m_attack;
+	int m_health;
+
+	LabelProtocol* m_lblAttack;
+	LabelProtocol* m_lblHealth;
 };
 
 #endif

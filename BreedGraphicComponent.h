@@ -17,6 +17,7 @@ public:
 	{
 		ENEMY_STATE_FIRE,
 		ENEMY_STATE_MOVE,
+		ENEMY_STATE_WOUNDED,
 		ENEMY_STATE_DEATH,
 		ENEMY_STATE_NOTHING
 	};
@@ -34,7 +35,8 @@ public:
 	void		Fire();
 	void		Move();
 	void		Attack();
-	void		Death();
+	void		Wounded();
+	bool		Death();
 
 	int			GetAttack()   const;
 	int			GetHealth()   const;

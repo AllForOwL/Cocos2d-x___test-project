@@ -8,6 +8,7 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 											  m_health(health),
 											  m_typeObject(typeObject)
 {
+	this->setTag(0);
 	if (m_typeObject == CNT_NAME_ENEMY_SOLDIER)
 	{
 		LoadSpritesForSoldier();
@@ -30,7 +31,7 @@ BreedGraphicComponent::BreedGraphicComponent(int attack, int health, const std::
 	auto physicsBody = PhysicsBody::createBox(this->getContentSize());
 	physicsBody->setCollisionBitmask(ENEMY_COLLISION_BITMASK);
 	physicsBody->setContactTestBitmask(true);
-
+	
 	this->setPhysicsBody(physicsBody);
 }
 
@@ -61,6 +62,11 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 
 /*virtual*/ void BreedGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
+	if (this->getTag() != 0)
+	{
+		this->m_stateEnemy = StateEnemy::ENEMY_STATE_WOUNDED;
+	}
+
 	switch (this->m_stateEnemy)
 	{
 			case StateEnemy::ENEMY_STATE_FIRE:
@@ -73,9 +79,17 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 				Move();
 				break;
 			}
+			case StateEnemy::ENEMY_STATE_WOUNDED:
+			{
+				Wounded();
+				break;
+			}
 			case StateEnemy::ENEMY_STATE_DEATH:
 			{
-				Death();
+				if (Death())
+				{
+					hero.m_objectMonster->m_vecComponentEnemy.pop_back();
+				}
 				break;
 			}
 			default:
@@ -106,18 +120,34 @@ void BreedGraphicComponent::Move()
 	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecDefaultNamesMove[m_countDefaultSpriteInMove]));
 }
 
-void BreedGraphicComponent::Death()
+void BreedGraphicComponent::Wounded()
+{
+	this->m_health -= getTag();
+
+	if (m_health)
+	{
+		this->setTag(0);
+	}
+	else
+	{
+		this->m_stateEnemy = ENEMY_STATE_DEATH;
+	}
+}
+
+bool BreedGraphicComponent::Death()
 {
 	if (this->GetTypeObject() != CNT_NAME_ENEMY_TANK)
 	{
-		return;
+		return true;
 	}
 
 	if (++m_countDefaultSpriteInDeath == m_vecDefaultNamesDeath.size())
 	{
-		m_countDefaultSpriteInDeath = 0;
+		return true;
 	}
 	this->setTexture(CCTextureCache::sharedTextureCache()->addImage(m_vecDefaultNamesDeath[m_countDefaultSpriteInDeath]));
+
+	return false;
 }
 
 void BreedGraphicComponent::LoadSpritesForSoldier()
