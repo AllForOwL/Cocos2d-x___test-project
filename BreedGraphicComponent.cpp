@@ -114,7 +114,16 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 
 /*virtual*/ bool BreedGraphicComponent::Dead(int wounded)
 {
-	return true;
+	m_health -= wounded;
+
+	if (m_health < 0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 void BreedGraphicComponent::Fire()

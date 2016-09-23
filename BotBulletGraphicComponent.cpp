@@ -86,7 +86,7 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 		case GameObjectMonster::StateBullet::STATE_FIRE:
 		{
 			Vec2 _position = this->getPosition();															
-			this->setPosition(--_position.x, _position.y);
+			this->setPosition(_position.x -= CNT_SPEED_BULLET, _position.y);
 			this->setVisible(true);
 
 			break;

@@ -35,6 +35,7 @@ void PhysicComponent::Update(Monster& hero, GameScene& scene)
 			if (hero.m_graphicComponentHero->Dead(hero.m_objectMonster->m_vecComponentBullet[0]->GetAttack()))
 			{
 				hero.m_graphicComponentHero->removeFromParentAndCleanup(true);
+				hero.m_graphicComponentHeroWeapon->removeFromParentAndCleanup(true);
 				hero.m_objectMonster->m_vecComponentBullet[0]->removeFromParentAndCleanup(true);
 				m_statePhysic = StatePhysic::STATE_NOTHING;
 			}
@@ -62,7 +63,7 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 	{
 		this->m_statePhysic = StatePhysic::STATE_WOUNDED_HERO;
 
-		CCLOG("Collision");
+		CCLOG("Collision hero");
 	}
 	else if (_a->getCollisionBitmask() == BULLET_COLLISION_BITMASK && _b->getCollisionBitmask() == ENEMY_COLLISION_BITMASK ||
 			_a->getCollisionBitmask() == ENEMY_COLLISION_BITMASK && _b->getCollisionBitmask() == BULLET_COLLISION_BITMASK
@@ -70,7 +71,7 @@ bool PhysicComponent::onContactBegin(cocos2d::PhysicsContact& contact)
 	{
 		this->m_statePhysic = StatePhysic::STATE_WOUNDED_ENEMY;
 
-		CCLOG("collision");
+		CCLOG("Collision enemy");
 	}
 
 	return true;

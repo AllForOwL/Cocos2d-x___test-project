@@ -82,7 +82,7 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 			}
 			else if (m_position < Director::getInstance()->getVisibleSize())
 			{
-				++m_position.x;
+				m_position.x += CNT_SPEED_BULLET;
 			}
 			else
 			{

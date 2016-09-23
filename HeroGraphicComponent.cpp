@@ -67,7 +67,7 @@ void HeroGraphicComponent::LoadSpritesForHell()
 /*virtual*/ bool HeroGraphicComponent::Dead(int wounded)
 {
 	m_health -= wounded;
-	if (!m_health)
+	if (m_health < 0)
 	{
 		return true;
 	}

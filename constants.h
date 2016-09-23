@@ -1,8 +1,10 @@
 const float CNT_TIME_SPAWN			= 0.8;
-const float CNT_TIME_UPDATE_SCENE	= 0.1;
+const float CNT_TIME_UPDATE_SCENE	= 0.05;
+
+const int CNT_SPEED_BULLET	= 8;
 
 const int CNT_TAG_BULLET_NORMAL = 1000;
-const int CNT_TAG_ENEMY_WOUNDED			= 1001;
+const int CNT_TAG_ENEMY_WOUNDED	= 1001;
 
 const std::string CNT_NAME_HERO_HELL		= "Hell";
 
