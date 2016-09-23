@@ -17,6 +17,7 @@ public:
 	virtual int GetAttack() const;
 	virtual int GetHealth() const;
 	virtual std::string GetTypeObject() const;
+	virtual bool Dead(int wounded);
 
 	void LoadSpritesForHell();
 

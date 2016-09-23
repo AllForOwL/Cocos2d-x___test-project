@@ -11,20 +11,21 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(int attack, const std::stri
 {
 	this->setTag(0);
 
+	auto physicBody = PhysicsBody::createBox(this->getContentSize());
+	physicBody->setContactTestBitmask(true);
+	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
+
 	if (m_typeObject == CNT_NAME_BULLET_DEFAULT)
 	{
 		LoadBulletNormal();
 		this->initWithFile(m_strFilename);
+		physicBody->setTag(CNT_TAG_BULLET_NORMAL);
 	}
 	else if (m_typeObject == CNT_NAME_BOMB)
 	{
 		LoadBomb();
 		this->initWithFile(m_strFilename);
 	}
-
-	auto physicBody = PhysicsBody::createBox(this->getContentSize());
-	physicBody->setContactTestBitmask(true);
-	physicBody->setCollisionBitmask(BULLET_COLLISION_BITMASK);
 
 	this->setPhysicsBody(physicBody);
 }
@@ -53,22 +54,32 @@ BotBulletGraphicComponent::BotBulletGraphicComponent(BotBulletGraphicComponent& 
 	this->setPhysicsBody(physicBody);
 }
 
-int BotBulletGraphicComponent::GetAttack() const
+/*virtual*/int BotBulletGraphicComponent::GetAttack() const
 {
 	return m_attack;
 }
 
-std::string BotBulletGraphicComponent::GetTypeObject() const
+/*virtual*/std::string BotBulletGraphicComponent::GetTypeObject() const
 {
 	return m_typeObject;
 }
 
+/*virtual*/ int BotBulletGraphicComponent::GetHealth() const
+{
+	return 1;
+}
+
+/*virtual*/ bool BotBulletGraphicComponent::Dead(int wounded)
+{
+	return true;
+}
+
 /*virtual*/ void BotBulletGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	if (this->getTag() == CNT_TAG_BULLET_HIT_IN_TARGET)
-	{
-		hero.m_objectMonster->m_stateBullet = GameObjectMonster::StateBullet::STATE_HIT_IN_TARGET;
-	}
+//	if (this->getTag() == CNT_TAG_BULLET_HIT_IN_TARGET)
+//	{
+//		hero.m_objectMonster->m_stateBullet = GameObjectMonster::StateBullet::STATE_HIT_IN_TARGET;
+//	}
 
 	switch (hero.m_objectMonster->m_stateBullet)
 	{
@@ -104,7 +115,7 @@ std::string BotBulletGraphicComponent::GetTypeObject() const
 		}
 		case GameObjectMonster::StateBullet::STATE_HIT_IN_TARGET:
 		{
-			hero.m_objectMonster->m_vecComponentEnemy[0]->setTag(this->GetAttack());
+			hero.m_graphicComponentHero->setTag(this->GetAttack());
 			this->removeFromParentAndCleanup(true);
 			hero.m_objectMonster->m_vecComponentBullet.pop_back();
 

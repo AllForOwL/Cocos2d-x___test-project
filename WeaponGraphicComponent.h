@@ -15,8 +15,10 @@ public:
 
 	virtual void Update(Monster& hero, GameScene& scene);
 
-	int GetAttack() const;
-	std::string GetTypeObject() const;
+	virtual int GetAttack() const;
+	virtual int GetHealth() const;
+	virtual std::string GetTypeObject() const;
+	virtual bool Dead(int wounded);
 
 	~WeaponGraphicComponent();
 

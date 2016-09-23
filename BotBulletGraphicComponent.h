@@ -14,12 +14,13 @@ public:
 	BotBulletGraphicComponent(BotBulletGraphicComponent& bullet);
 
 	virtual void Update(Monster& hero, GameScene& scene);
+	virtual int GetAttack() const;
+	virtual int GetHealth() const;
+	virtual std::string GetTypeObject() const;
+	virtual bool Dead(int wounded);
 
 	void LoadBulletNormal();
 	void LoadBomb();
-
-	int GetAttack() const;
-	std::string GetTypeObject() const;
 
 	~BotBulletGraphicComponent();
 

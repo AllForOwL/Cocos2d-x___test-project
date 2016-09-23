@@ -99,8 +99,8 @@ void GameObjectMonster::Spawner(GameScene& scene)
 	}
 	else if (_randomValue == 2)	// tank
 	{
-		int _attackEnemy	= 300;
-		int _attackBullet	= 120;
+		int _attackEnemy	= 40;
+		int _attackBullet	= 20;
 		
 		int  _attackSumm = _attackEnemy + _attackBullet;
 

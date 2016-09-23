@@ -62,11 +62,11 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 
 /*virtual*/ void BreedGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
-	if (this->getTag() != 0)
+	/*if (this->getTag() != 0)
 	{
 		this->m_stateEnemy = StateEnemy::ENEMY_STATE_WOUNDED;
 	}
-
+	*/
 	switch (this->m_stateEnemy)
 	{
 			case StateEnemy::ENEMY_STATE_FIRE:
@@ -95,6 +95,26 @@ BreedGraphicComponent::BreedGraphicComponent(BreedGraphicComponent& breed)
 			default:
 				break;
 	}
+}
+
+/*virtual*/int BreedGraphicComponent::GetAttack() const
+{
+	return m_attack;
+}
+
+/*virtual*/int BreedGraphicComponent::GetHealth() const
+{
+	return m_health;
+}
+
+/*virtual*/std::string BreedGraphicComponent::GetTypeObject() const
+{
+	return m_typeObject;
+}
+
+/*virtual*/ bool BreedGraphicComponent::Dead(int wounded)
+{
+	return true;
 }
 
 void BreedGraphicComponent::Fire()
@@ -229,21 +249,6 @@ void BreedGraphicComponent::LoadSpritesForTurrets()
 void BreedGraphicComponent::LoadSpritesForAirplanes()
 {
 
-}
-
-int BreedGraphicComponent::GetAttack() const
-{
-	return m_attack;
-}
-
-int BreedGraphicComponent::GetHealth() const
-{
-	return m_health;
-}
-
-std::string BreedGraphicComponent::GetTypeObject() const
-{
-	return m_typeObject;
 }
 
 BreedGraphicComponent::~BreedGraphicComponent()

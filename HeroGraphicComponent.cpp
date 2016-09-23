@@ -8,6 +8,7 @@
 
 HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_typeHero(typeHero)
 {
+	this->setTag(0);
 	if (m_typeHero == CNT_NAME_HERO_HELL)
 	{
 		LoadSpritesForHell();
@@ -15,14 +16,17 @@ HeroGraphicComponent::HeroGraphicComponent(const std::string& typeHero) : m_type
 		m_health = 100;
 	}
 
-	//m_lblAttack = LabelProtocol::setString("hell");
-	
-
 	m_countSpriteInVectorWalk		= 0;
 	m_countSpriteInVectorAttack		= 0;
 	m_countSpriteInVectorRun		= 0;
 
 	this->initWithFile(m_vecSpritesWalk[m_countSpriteInVectorWalk]);
+
+	auto physicBodyHero = PhysicsBody::createBox(this->getContentSize());
+	physicBodyHero->setContactTestBitmask(true);
+	physicBodyHero->setCollisionBitmask(HERO_COLLISION_BITMASK);
+
+	this->setPhysicsBody(physicBodyHero);
 }
 
 void HeroGraphicComponent::LoadSpritesForHell()
@@ -58,6 +62,20 @@ void HeroGraphicComponent::LoadSpritesForHell()
 	m_vecSpritesDizzy.push_back("dizzy-0001.png");
 	m_vecSpritesDizzy.push_back("dizzy-0002.png");
 	m_vecSpritesDizzy.push_back("dizzy-0003.png");
+}
+
+/*virtual*/ bool HeroGraphicComponent::Dead(int wounded)
+{
+	m_health -= wounded;
+	if (!m_health)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+
 }
 
 /*virtual*/void HeroGraphicComponent::Update(Monster& hero, GameScene& scene)
@@ -99,6 +117,17 @@ void HeroGraphicComponent::LoadSpritesForHell()
 			hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
 			break;
 		}
+		case Monster::StateHero::HERO_STATE_WOUNDED:
+		{
+			if (!(this->m_health -= this->getTag()))
+			{
+				hero.m_stateHero = Monster::StateHero::HERO_STATE_DEATH;
+			}
+
+			this->setTag(0);
+
+			break;
+		}
 		case Monster::StateHero::HERO_STATE_CHANGE_WEAPON_BULLET:
 		{
 			std::string nameWeapon = "AK47.png";
@@ -121,6 +150,11 @@ void HeroGraphicComponent::LoadSpritesForHell()
 
 			hero.m_stateHero = Monster::StateHero::HERO_STATE_WALK;
 
+			break;
+		}
+		case Monster::StateHero::HERO_STATE_DEATH:
+		{
+			this->removeFromParentAndCleanup(true);
 			break;
 		}
 	}

@@ -14,9 +14,9 @@ class PhysicComponent
 public:
 	enum StatePhysic
 	{
-		PHYSIC_NOTHING,
-		PHYSIC_KILL_ENEMY,
-		PHYSIC_KILL_HERO
+		STATE_NOTHING,
+		STATE_WOUNDED_ENEMY,
+		STATE_WOUNDED_HERO
 	};
 
 	PhysicComponent();
@@ -31,6 +31,10 @@ private:
 	int								m_countElementInVector;
 	cocos2d::Vec2					m_positionCollision;
 	int								m_tagForDelete;
+
+	int m_TagBullet;
+	int m_TagEnemy;
+	int m_TagHero;
 };
 
 #endif

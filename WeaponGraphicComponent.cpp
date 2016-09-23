@@ -95,20 +95,29 @@ WeaponGraphicComponent::WeaponGraphicComponent(WeaponGraphicComponent& weapon)
 	}
 }
 
-	
 /*virtual*/ void WeaponGraphicComponent::Update(Monster& hero, GameScene& scene)
 {
 	return;
 }
 
-int WeaponGraphicComponent::GetAttack() const
+/*virtual*/ int WeaponGraphicComponent::GetAttack() const
 {
 	return m_attack;
 }
 
-std::string WeaponGraphicComponent::GetTypeObject() const
+/*virtual*/ int WeaponGraphicComponent::GetHealth() const
+{
+	return 1;
+}
+
+/*virtual*/ std::string WeaponGraphicComponent::GetTypeObject() const
 {
 	return m_typeObject;
+}
+
+/*virtual*/ bool WeaponGraphicComponent::Dead(int wounded)
+{
+	return true;
 }
 
 WeaponGraphicComponent::~WeaponGraphicComponent()

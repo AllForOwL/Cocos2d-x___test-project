@@ -26,6 +26,10 @@ public:
 	BreedGraphicComponent(BreedGraphicComponent& breed);
 
 	virtual void Update(Monster& hero, GameScene& scene);
+	virtual int			GetAttack()   const;
+	virtual int			GetHealth()   const;
+	virtual std::string GetTypeObject() const;
+	virtual bool Dead(int wounded);
 
 	void		LoadSpritesForSoldier();
 	void		LoadSpritesForTanks();
@@ -37,10 +41,6 @@ public:
 	void		Attack();
 	void		Wounded();
 	bool		Death();
-
-	int			GetAttack()   const;
-	int			GetHealth()   const;
-	std::string GetTypeObject() const;
 
 	~BreedGraphicComponent();
 

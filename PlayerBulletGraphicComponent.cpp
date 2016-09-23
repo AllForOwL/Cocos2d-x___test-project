@@ -51,14 +51,23 @@ PlayerBulletGraphicComponent::PlayerBulletGraphicComponent(PlayerBulletGraphicCo
 	this->setPhysicsBody(physicBody);
 }
 
-int PlayerBulletGraphicComponent::GetAttack() const
+/*virtual*/ int PlayerBulletGraphicComponent::GetAttack() const
 {
 	return m_attack;
 }
 
-std::string PlayerBulletGraphicComponent::GetTypeObject() const
+/*virtual*/ int PlayerBulletGraphicComponent::GetHealth() const
+{
+	return 1;
+}
+/*virtual*/ std::string PlayerBulletGraphicComponent::GetTypeObject() const
 {
 	return m_typeObject;
+}
+
+/*virtual*/ bool PlayerBulletGraphicComponent::Dead(int wounded)
+{
+	return true;
 }
 
 /*virtual*/ void PlayerBulletGraphicComponent::Update(Monster& hero, GameScene& scene)
